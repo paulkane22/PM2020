@@ -42,6 +42,7 @@
                 </MenuItem>
                 <MenuItem Header="View">
                     <MenuItem Header="Controls" Command="{Binding NavigateCommand}" CommandParameter="controls"/>
+                    <MenuItem Header="Stock" Command="{Binding NavigateCommand}" CommandParameter="stock"/>
                     <MenuItem Header="Projects" Command="{Binding NavigateCommand}" CommandParameter="projects"/>
                     <MenuItem Header="About" Command="{Binding ShowAboutCommand}"/>
                 </MenuItem>

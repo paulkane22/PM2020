@@ -13,8 +13,6 @@ namespace ProjectsModule
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("ContentRegion", typeof(ProjectList));
-
-
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

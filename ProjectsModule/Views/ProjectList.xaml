@@ -13,10 +13,10 @@
 
         <DataGrid x:Name="ProjectsList" Grid.Row="1" SelectionMode="Single"
                            ItemsSource="{Binding Path=Projects}" AutoGenerateColumns="False" Margin="1"
-                           IsReadOnly="True">
+                           CanUserAddRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="*" />
-                <DataGridTextColumn Header="PROJECT" Binding="{Binding Path=ProjectName}" IsReadOnly="True" Width="*" />
+                <DataGridTextColumn Header="PROJECT" Binding="{Binding Path=ProjectName}" IsReadOnly="True" Width="3*" />
                 <DataGridTextColumn Header="SYSTEM" Binding="{Binding Path=SystemId}" IsReadOnly="True" Width="*" />
                 <DataGridTextColumn Header="PRIORITY" Binding="{Binding Path=Priority}" IsReadOnly="True" Width="*" />
                 <DataGridTextColumn Header="DEADLINE" Binding="{Binding Path=Deadline}" IsReadOnly="True" Width="*" />

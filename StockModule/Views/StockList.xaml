@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="StockModule.Views.StockList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <StackPanel>
+        <Label>Hello from the stock module</Label>
+        
+            
+    </StackPanel>
+</UserControl>

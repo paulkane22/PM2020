@@ -95,12 +95,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit">
+      <Version>3.5.0</Version>
+    </PackageReference>
     <PackageReference Include="Prism.Unity" Version="7.1.0.431&#xD;" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PJK.WPF.PRISM.PM2020.ExampleControls\PJK.WPF.PRISM.PM2020.ExampleControls.csproj">
+      <Project>{45ca0706-6aa0-4a39-b285-1b0fd35bebfc}</Project>
+      <Name>PJK.WPF.PRISM.PM2020.ExampleControls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProjectsModule\ProjectsModule.csproj">
       <Project>{8d529bf3-0988-4fb4-b81e-3dcc99f01d08}</Project>
       <Name>ProjectsModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StockModule\StockModule.csproj">
+      <Project>{c42f8afb-0cb9-4c9c-8426-c9911264176e}</Project>
+      <Name>StockModule</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
