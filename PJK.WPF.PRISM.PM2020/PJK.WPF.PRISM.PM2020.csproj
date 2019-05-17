@@ -65,8 +65,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\IProject.cs" />
-    <Compile Include="Model\Project.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -98,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Unity" Version="7.1.0.431&#xD;" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectsModule\ProjectsModule.csproj">
+      <Project>{8d529bf3-0988-4fb4-b81e-3dcc99f01d08}</Project>
+      <Name>ProjectsModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

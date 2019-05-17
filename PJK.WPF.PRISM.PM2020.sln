@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PJK.WPF.PRISM.PM2020", "PJK.WPF.PRISM.PM2020\PJK.WPF.PRISM.PM2020.csproj", "{FECDD385-F618-4D7C-9D9D-5B7EDA9460F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsModule", "ProjectsModule\ProjectsModule.csproj", "{8D529BF3-0988-4FB4-B81E-3DCC99F01D08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FECDD385-F618-4D7C-9D9D-5B7EDA9460F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FECDD385-F618-4D7C-9D9D-5B7EDA9460F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FECDD385-F618-4D7C-9D9D-5B7EDA9460F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D529BF3-0988-4FB4-B81E-3DCC99F01D08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D529BF3-0988-4FB4-B81E-3DCC99F01D08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D529BF3-0988-4FB4-B81E-3DCC99F01D08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D529BF3-0988-4FB4-B81E-3DCC99F01D08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

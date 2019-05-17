@@ -17,8 +17,17 @@ namespace PJK.WPF.PRISM.PM2020
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<IProject>(new Project());
+            
         }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            base.ConfigureModuleCatalog(moduleCatalog);
+
+            moduleCatalog.AddModule<ProjectsModule.ProjectsModuleModule>();
+
+        }
+
 
     }
 }

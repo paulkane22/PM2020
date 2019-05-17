@@ -17,9 +17,6 @@ namespace PJK.WPF.PRISM.PM2020.ViewModels
         public DelegateCommand ExitSystemCommand { get; private set; }
 
 
-
-
-
         public MainWindowViewModel()
         {
             ExitSystemCommand = new DelegateCommand(OnExitSystem);
