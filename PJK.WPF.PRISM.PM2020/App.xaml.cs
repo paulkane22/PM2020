@@ -24,9 +24,13 @@ namespace PJK.WPF.PRISM.PM2020
         {
             base.ConfigureModuleCatalog(moduleCatalog);
 
-            moduleCatalog.AddModule<StockModule.StockModuleModule>();
-            moduleCatalog.AddModule<ProjectsModule.ProjectsModuleModule>();
-            moduleCatalog.AddModule<ExampleControls.ExampleControlsModule>();
+            moduleCatalog.AddModule<Module.Projects.ProjectsModule>();
+            moduleCatalog.AddModule<Module.ExampleControls.ExampleControlsModule>();
+
+
+            //moduleCatalog.AddModule<StockModule.StockModuleModule>();
+            //moduleCatalog.AddModule<ProjectsModule.ProjectsModuleModule>();
+            //moduleCatalog.AddModule<ExampleControls.ExampleControlsModule>();
         }
 
 
