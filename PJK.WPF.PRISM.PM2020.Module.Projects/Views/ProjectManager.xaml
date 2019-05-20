@@ -22,12 +22,12 @@
 
         <Label Grid.Row="0"  Margin="10">Hi From Project Manager</Label>
 
-        <Button Command="{Binding ShowAddProjectCommand}">Show Dialogue</Button>
-        
-        
-        <DataGrid x:Name="ProjectsList" Grid.Row="1" Grid.Column="0" SelectionMode="Single"
-                           ItemsSource="{Binding Path=Projects}" AutoGenerateColumns="False" Margin="10"
-                           CanUserAddRows="False" CanUserReorderColumns="False">
+        <Button Command="{Binding ShowAddProjectCommand}" Width="100" Height="25" HorizontalAlignment="Left" Margin="0,10">Add Project</Button>
+
+
+        <DataGrid x:Name="ProjectsList" Grid.Row="1" Grid.Column="0" SelectionMode="Single" 
+                           ItemsSource="{Binding Path=Projects}" AutoGenerateColumns="False" 
+                           CanUserAddRows="False" CanUserReorderColumns="False" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="30" />
                 <DataGridTextColumn Header="PROJECT" Binding="{Binding Path=ProjectName}" IsReadOnly="True" Width="3*" />
@@ -37,44 +37,44 @@
                 <DataGridTextColumn Header="STATUS" Binding="{Binding Path=StatusID}" IsReadOnly="True" Width="30" />
             </DataGrid.Columns>
         </DataGrid>
- 
+
         <wpfTool:ChildWindow   
-                Grid.Column="0" Grid.ColumnSpan="2"
-                Grid.Row="0" Grid.RowSpan="2"
-                Height="400"
-                Width="300" 
+                Grid.Column="0"
+                Grid.Row="1"
+                Height="300"
+                Width="400" 
                 Left="10" 
                 Top="10"
                 Name="chWindow"
                 Caption="Example Add Project"
-                WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}">
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
+                WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}" Grid.ColumnSpan="2">
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
 						VerticalScrollBarVisibility="Visible">
-                    <StackPanel>
-                        <Label>Add New Project</Label>
-                        <StackPanel Margin="0,0,0,2">
-                            <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
-                                <Label Content="Project"/>
-                                <TextBox Width="150" Text="20%"  Margin="2"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
-                                <Label Content="Visibility"/>
-                                <ComboBox Text="Item1" Width="150" Margin="2">
-                                    <ComboBoxItem Padding="2" IsSelected="True" Content="Visible"/>
-                                    <ComboBoxItem Padding="2" Content="Hidden"/>
-                                    <ComboBoxItem Padding="2" Content="Collapsed"/>
-                                </ComboBox>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
-                                <Label Margin="0,0,100,0" Content="Effect"/>
+                <StackPanel>
+                    <Label>Add New Project</Label>
+                    <StackPanel Margin="0,0,0,2">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
+                            <Label Content="Project"/>
+                            <TextBox Width="150" Text="20%"  Margin="2"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
+                            <Label Content="Visibility"/>
+                            <ComboBox Text="Item1" Width="150" Margin="2">
+                                <ComboBoxItem Padding="2" IsSelected="True" Content="Visible"/>
+                                <ComboBoxItem Padding="2" Content="Hidden"/>
+                                <ComboBoxItem Padding="2" Content="Collapsed"/>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
+                            <Label Margin="0,0,100,0" Content="Effect"/>
                             <Button Command="{Binding AddProjectCommand}" Width="50" Margin="2">Add</Button>
                             <Button Command="{Binding CancelAddProjectCommand}" Width="50" Margin="2">Cancel</Button>
                         </StackPanel>
-                        </StackPanel>
-
                     </StackPanel>
-                </ScrollViewer>
-            </wpfTool:ChildWindow>
+
+                </StackPanel>
+            </ScrollViewer>
+        </wpfTool:ChildWindow>
     </Grid>
 
 

@@ -3,10 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	     xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:PJK.WPF.PRISM.PM2020">
+    
+    
+    
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes\PM2020Theme.xaml"></ResourceDictionary>
+                <!-- PJK Theme -->
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes\Generic.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>-->
+
+            <!-- Office2010Blue Theme -->
+            <!--<ResourceDictionary Source="Themes/Office2010Blue/Office2010Blue.MSControls.Core.Implicit.xaml" />
+            <ResourceDictionary Source="Themes/Office2010Blue/Office2010Blue.MSControls.Toolkit.Implicit.xaml" />-->
+            <ResourceDictionary Source="Themes/WhistlerBlue.xaml" />
+
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

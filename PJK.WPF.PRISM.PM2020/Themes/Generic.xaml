@@ -3,11 +3,10 @@
                     xmlns:local="clr-namespace:PJK.WPF.PRISM.PM2020.Themes">
 
 
+
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="PM2020Theme_Brushes.xaml" />
+        <!--<ResourceDictionary Source="/DataGridThemes;component/ExpressionLight.xaml" />-->
     </ResourceDictionary.MergedDictionaries>
 
-    
-    
-    
+
 </ResourceDictionary>

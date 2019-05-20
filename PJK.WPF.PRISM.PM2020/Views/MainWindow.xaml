@@ -1,7 +1,8 @@
-﻿<Window x:Class="PJK.WPF.PRISM.PM2020.Views.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="PJK.WPF.PRISM.PM2020.Views.MainWindow"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="700" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
@@ -18,7 +19,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <GridSplitter Grid.RowSpan="3" Grid.Column="1" Background="#333333" Width="1"></GridSplitter>
+        <GridSplitter Grid.RowSpan="3" Grid.Column="1" Background="#333333" Width="1"/>
 
         <!--<ContentControl prism:RegionManager.RegionName="ToolBarRegion" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  />-->
         <ContentControl prism:RegionManager.RegionName="NavigationRegion" Grid.Row="1" Grid.Column="0" Margin="0,0,3,0"  />
@@ -35,8 +36,7 @@
                     </ItemsPanelTemplate>
                 </Menu.ItemsPanel>
                 <MenuItem Header="File">
-                    <MenuItem Header="New">
-                    </MenuItem>
+                    <MenuItem Header="New"/>
                     <Separator/>
                     <MenuItem Header="Exit" Command="{Binding ExitSystemCommand}"/>
                 </MenuItem>
@@ -51,8 +51,8 @@
         </StackPanel>
 
         <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-            <StatusBarItem>Project 2020...</StatusBarItem>
-            <StatusBarItem HorizontalAlignment="Right" IsEnabled="False">MDSAS</StatusBarItem>
+            <StatusBarItem Content="Project 2020..."/>
+            <StatusBarItem HorizontalAlignment="Right" IsEnabled="False" Content="MDSAS"/>
         </StatusBar>
 
     </Grid>
