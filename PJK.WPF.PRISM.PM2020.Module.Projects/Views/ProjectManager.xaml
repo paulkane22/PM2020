@@ -3,7 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+             xmlns:local="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects"
              prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <local:WindowOpenCloseConverter x:Key="windowOpenCloseConverter"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -11,12 +17,12 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="0" />
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0"  Margin="10">Hi From Project Manager</Label>
-        
-        
+
+        <Button Command="{Binding ShowAddProjectCommand}">Show Dialogue</Button>
         
         
         <DataGrid x:Name="ProjectsList" Grid.Row="1" Grid.Column="0" SelectionMode="Single"
@@ -31,20 +37,50 @@
                 <DataGridTextColumn Header="STATUS" Binding="{Binding Path=StatusID}" IsReadOnly="True" Width="30" />
             </DataGrid.Columns>
         </DataGrid>
+ 
+        <wpfTool:ChildWindow   
+                Grid.Column="0" Grid.ColumnSpan="2"
+                Grid.Row="0" Grid.RowSpan="2"
+                Height="400"
+                Width="300" 
+                Left="10" 
+                Top="10"
+                Name="chWindow"
+                Caption="Example Add Project"
+                WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}">
+                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
+						VerticalScrollBarVisibility="Visible">
+                    <StackPanel>
+                        <Label>Add New Project</Label>
+                        <StackPanel Margin="0,0,0,2">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
+                                <Label Content="Project"/>
+                                <TextBox Width="150" Text="20%"  Margin="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
+                                <Label Content="Visibility"/>
+                                <ComboBox Text="Item1" Width="150" Margin="2">
+                                    <ComboBoxItem Padding="2" IsSelected="True" Content="Visible"/>
+                                    <ComboBoxItem Padding="2" Content="Hidden"/>
+                                    <ComboBoxItem Padding="2" Content="Collapsed"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
+                                <Label Margin="0,0,100,0" Content="Effect"/>
+                            <Button Command="{Binding AddProjectCommand}" Width="50" Margin="2">Add</Button>
+                            <Button Command="{Binding CancelAddProjectCommand}" Width="50" Margin="2">Cancel</Button>
+                        </StackPanel>
+                        </StackPanel>
 
-        <wpfTool:ChildWindow >
-            
-        </wpfTool:ChildWindow>
-
-       
-        
-        
+                    </StackPanel>
+                </ScrollViewer>
+            </wpfTool:ChildWindow>
     </Grid>
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
 </UserControl>

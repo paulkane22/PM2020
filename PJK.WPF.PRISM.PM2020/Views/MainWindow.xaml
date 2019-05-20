@@ -4,13 +4,13 @@
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="700" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0"/>
             <ColumnDefinition Width="3"/>
-            <ColumnDefinition Width="732*"/>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="199*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,13 +21,13 @@
         <GridSplitter Grid.RowSpan="3" Grid.Column="1" Background="#333333" Width="1"></GridSplitter>
 
         <!--<ContentControl prism:RegionManager.RegionName="ToolBarRegion" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  />-->
-        <ContentControl prism:RegionManager.RegionName="NavigationRegion" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,3,0"  />
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  />
+        <ContentControl prism:RegionManager.RegionName="NavigationRegion" Grid.Row="1" Grid.Column="0" Margin="0,0,3,0"  />
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Row="1" Grid.Column="2" />
 
 
 
 
-        <StackPanel Grid.Row="0" Grid.ColumnSpan="5">
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="3">
             <Menu>
                 <Menu.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -50,7 +50,7 @@
             </Menu>
         </StackPanel>
 
-        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5">
+        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
             <StatusBarItem>Project 2020...</StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right" IsEnabled="False">MDSAS</StatusBarItem>
         </StatusBar>

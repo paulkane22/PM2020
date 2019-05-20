@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\WindowOpenCloseConverter.cs" />
     <Compile Include="Model\IProject.cs" />
     <Compile Include="Model\Project.cs" />
     <Compile Include="Model\ProjectList.cs" />
@@ -103,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="7.1.0.431&#xD;" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PJK.WPF.PRISM.PM2020.Module.ExampleControls\PJK.WPF.PRISM.PM2020.Module.ExampleControls.csproj">
+      <Project>{F34E7813-7FF3-4985-AB41-176F2D073806}</Project>
+      <Name>PJK.WPF.PRISM.PM2020.Module.ExampleControls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

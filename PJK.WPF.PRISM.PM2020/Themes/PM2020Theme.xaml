@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:PJK.WPF.PRISM.PM2020.Themes">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="PM2020Theme_Brushes.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    
+    
+    
+</ResourceDictionary>
