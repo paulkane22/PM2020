@@ -18,7 +18,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Row="0" Grid.RowSpan="3" Source="/PJK.WPF.PRISM.PM2020;component/Images/HCIS_LOGO_SPLASH_700.png" ></Image>
+            <Image Grid.Row="0" Grid.RowSpan="3" Source="/PJK.WPF.PRISM.PM2020;component/Images/pm2020.png" ></Image>
 
             <Border Grid.Row="1"  Margin="10,0,20,0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

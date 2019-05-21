@@ -15,7 +15,7 @@ namespace PJK.WPF.PRISM.PM2020.ViewModels
         public AboutWindowViewModel()
         {
             CloseWindowCommand = new DelegateCommand<Window>(OnCloseAbout);
-            Message = "Haemophilia Clinical Information Service by MDSAS";
+            Message = "Developed by MDSAS";
         }
 
 

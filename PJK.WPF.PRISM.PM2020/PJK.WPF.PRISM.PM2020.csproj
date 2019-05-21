@@ -181,5 +181,8 @@
   <ItemGroup>
     <Resource Include="Images\HCIS_LOGO_SPLASH_700.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pm2020.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
