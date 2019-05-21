@@ -10,35 +10,48 @@
         <local:WindowOpenCloseConverter x:Key="windowOpenCloseConverter"/>
     </UserControl.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="0" />
-        </Grid.ColumnDefinitions>
+    <Border BorderBrush="DarkGray" Background="LightGray" BorderThickness="1">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0" />
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0"  Margin="10">Hi From Project Manager</Label>
+            <Label Grid.Row="0" FontSize="14" FontWeight="Bold" Margin="0,0,0,10">Project Manager</Label>
 
-        <Button Command="{Binding ShowAddProjectCommand}" Width="100" Height="25" HorizontalAlignment="Left" Margin="0,10">Add Project</Button>
-
-
-        <DataGrid x:Name="ProjectsList" Grid.Row="1" Grid.Column="0" SelectionMode="Single" 
+            <Border BorderBrush="DarkGray" Background="#f1f1f1" BorderThickness="1" Grid.Row="1" Grid.Column="0" >
+                <DataGrid x:Name="ProjectsList" SelectionMode="Single" 
                            ItemsSource="{Binding Path=Projects}" AutoGenerateColumns="False" 
                            CanUserAddRows="False" CanUserReorderColumns="False" VerticalAlignment="Top">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="30" />
-                <DataGridTextColumn Header="PROJECT" Binding="{Binding Path=ProjectName}" IsReadOnly="True" Width="3*" />
-                <DataGridTextColumn Header="SYSTEM" Binding="{Binding Path=SystemId}" IsReadOnly="True" Width="30" />
-                <DataGridTextColumn Header="PRIORITY" Binding="{Binding Path=Priority}" IsReadOnly="True" Width="30" />
-                <DataGridTextColumn Header="DEADLINE" Binding="{Binding Path=Deadline}" IsReadOnly="True" Width="100" />
-                <DataGridTextColumn Header="STATUS" Binding="{Binding Path=StatusID}" IsReadOnly="True" Width="30" />
-            </DataGrid.Columns>
-        </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=Id}" IsReadOnly="True" Width="30" />
+                        <DataGridTextColumn Header="PROJECT" Binding="{Binding Path=ProjectName}" IsReadOnly="True" Width="3*" />
+                        <DataGridTextColumn Header="SYSTEM" Binding="{Binding Path=SystemId}" IsReadOnly="True" Width="30" />
+                        <DataGridTextColumn Header="PRIORITY" Binding="{Binding Path=Priority}" IsReadOnly="True" Width="30" />
+                        <DataGridTextColumn Header="DEADLINE" Binding="{Binding Path=Deadline}" IsReadOnly="True" Width="100" />
+                        <DataGridTextColumn Header="STATUS" Binding="{Binding Path=StatusID}" IsReadOnly="True" Width="30" />
+                    </DataGrid.Columns>
+                </DataGrid>
+    
+            </Border>
 
-        <wpfTool:ChildWindow   
+            <Border Grid.Row="2"  >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button  Command="{Binding ShowAddProjectCommand}" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,10">Add Project</Button>
+
+                </StackPanel>
+                
+            </Border>
+
+
+
+            
+            <wpfTool:ChildWindow   
                 Grid.Column="0"
                 Grid.Row="1"
                 Height="300"
@@ -46,36 +59,68 @@
                 Left="10" 
                 Top="10"
                 Name="chWindow"
-                Caption="Example Add Project"
+                Caption="Add New Project"
                 WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}" Grid.ColumnSpan="2">
-            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
-						VerticalScrollBarVisibility="Visible">
-                <StackPanel>
-                    <Label>Add New Project</Label>
-                    <StackPanel Margin="0,0,0,2">
-                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
-                            <Label Content="Project"/>
-                            <TextBox Width="150" Text="20%"  Margin="2"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
-                            <Label Content="Visibility"/>
-                            <ComboBox Text="Item1" Width="150" Margin="2">
-                                <ComboBoxItem Padding="2" IsSelected="True" Content="Visible"/>
-                                <ComboBoxItem Padding="2" Content="Hidden"/>
-                                <ComboBoxItem Padding="2" Content="Collapsed"/>
-                            </ComboBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
-                            <Label Margin="0,0,100,0" Content="Effect"/>
-                            <Button Command="{Binding AddProjectCommand}" Width="50" Margin="2">Add</Button>
-                            <Button Command="{Binding CancelAddProjectCommand}" Width="50" Margin="2">Cancel</Button>
-                        </StackPanel>
-                    </StackPanel>
+                <!--<ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
+						VerticalScrollBarVisibility="Visible">-->
 
-                </StackPanel>
-            </ScrollViewer>
-        </wpfTool:ChildWindow>
-    </Grid>
+                    <Border BorderBrush="DarkGray" Background="LightGray" BorderThickness="1">
+                        <Grid Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" 
+                                   FontSize="14" 
+                                   FontWeight="Bold" 
+                                   Margin="0,0,0,10">
+
+                                Add New Project
+                            </Label>
+
+                            <Border BorderBrush="DarkGray" Background="#f1f1f1" BorderThickness="1" Grid.Row="1" Grid.Column="0" >
+
+                                <StackPanel Margin="30,20,0,20">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                                        <Label Width="55" Content="Project"/>
+                                        <TextBox Width="150" Text="20%"  Margin="2"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                                    <Label Width="55" Content="Priority"/>
+                                        <ComboBox Text="Item1" Width="150" Margin="2">
+                                            <ComboBoxItem Padding="2" IsSelected="True" Content="High"/>
+                                            <ComboBoxItem Padding="2" Content="Medium"/>
+                                            <ComboBoxItem Padding="2" Content="Low"/>
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </Border>
+
+                            <Border Grid.Row="2" Margin="0,10,0,0" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Command="{Binding AddProjectCommand}" Width="100" Height="30" Margin="5">Add</Button>
+                                <Button Command="{Binding CancelAddProjectCommand}" Width="100" Height="30" Margin="2,2,0,2">Cancel</Button>
+                            </StackPanel>
+                        </Border>
+
+                        </Grid>
+
+                    </Border>
+                <!--</ScrollViewer>-->
+            </wpfTool:ChildWindow>
+        </Grid>
+
+
+    </Border>
+    
+
 
 
 

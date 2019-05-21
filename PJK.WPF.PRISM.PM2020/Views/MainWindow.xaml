@@ -10,11 +10,12 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0"/>
-            <ColumnDefinition Width="3"/>
+            <ColumnDefinition Width="0"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="0"/>
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -22,9 +23,10 @@
         <GridSplitter Grid.RowSpan="3" Grid.Column="1" Background="#333333" Width="1"/>
 
         <!--<ContentControl prism:RegionManager.RegionName="ToolBarRegion" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="3"  />-->
-        <ContentControl prism:RegionManager.RegionName="NavigationRegion" Grid.Row="1" Grid.Column="0" Margin="0,0,3,0"  />
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Row="1" Grid.Column="2" />
-
+        <ContentControl prism:RegionManager.RegionName="NavigationRegion" Grid.Row="2" Grid.Column="0" Margin="0,0,3,0"  />
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Row="2" Grid.Column="2" />
+        <Border Grid.Row="1" Grid.ColumnSpan="3"  BorderThickness="1" BorderBrush="DarkGray" Background="LightGray"></Border>
+        <Border Grid.Row="2" Grid.Column="0"  BorderThickness="1" BorderBrush="DarkGray" Background="LightGray"></Border>
 
 
 
@@ -50,7 +52,9 @@
             </Menu>
         </StackPanel>
 
-        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+
+
+        <StatusBar Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
             <StatusBarItem Content="Project 2020..."/>
             <StatusBarItem HorizontalAlignment="Right" IsEnabled="False" Content="MDSAS"/>
         </StatusBar>
