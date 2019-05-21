@@ -4,7 +4,7 @@
         xmlns:prism="http://prismlibrary.com/"
         xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="PJK.WPF.PRISM.PM2020.Views.MainWindow"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="700" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="{Binding Title}" Height="700" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/PJK.WPF.PRISM.PM2020;component/Images/HCIS_DB_48_t.png">
 
 
     <Grid>
@@ -27,8 +27,6 @@
         <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Row="2" Grid.Column="2" />
         <Border Grid.Row="1" Grid.ColumnSpan="3"  BorderThickness="1" BorderBrush="DarkGray" Background="LightGray"></Border>
         <Border Grid.Row="2" Grid.Column="0"  BorderThickness="1" BorderBrush="DarkGray" Background="LightGray"></Border>
-
-
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="3">
             <Menu>

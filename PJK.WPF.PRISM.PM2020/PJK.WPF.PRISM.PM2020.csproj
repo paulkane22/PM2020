@@ -104,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,7 +116,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\AboutWindowViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -159,6 +167,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Themes\DarkMode\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HCIS_DB_16.png" />
+    <Resource Include="Images\HCIS_DB_256.png" />
+    <Resource Include="Images\HCIS_DB_32.png" />
+    <Resource Include="Images\HCIS_DB_48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HCIS_DB_256_t.png" />
+    <Resource Include="Images\HCIS_DB_48_t.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HCIS_LOGO_SPLASH_700.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

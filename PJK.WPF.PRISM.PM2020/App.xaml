@@ -15,9 +15,11 @@
             </ResourceDictionary.MergedDictionaries>-->
 
             <!-- Office2010Blue Theme -->
-            <!--<ResourceDictionary Source="Themes/Office2010Blue/Office2010Blue.MSControls.Core.Implicit.xaml" />
-            <ResourceDictionary Source="Themes/Office2010Blue/Office2010Blue.MSControls.Toolkit.Implicit.xaml" />-->
+            <ResourceDictionary Source="Themes/Office2010Blue/Office2010Blue.MSControls.Core.Implicit.xaml" />
+            <ResourceDictionary Source="Themes/Office2010Blue/Office2010Blue.MSControls.Toolkit.Implicit.xaml" />
             <ResourceDictionary Source="Themes/WhistlerBlue.xaml" />
+            <ResourceDictionary Source="Themes/Generic.xaml" />
+
 
 
             </ResourceDictionary.MergedDictionaries>

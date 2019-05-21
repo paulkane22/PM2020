@@ -73,7 +73,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Services\IProjectDataService.cs" />
+    <Compile Include="Services\IProjectRepository.cs" />
     <Compile Include="Services\ProjectDataServices.cs" />
+    <Compile Include="Services\ProjectRepository.cs" />
     <Compile Include="ViewModels\ProjectDetailViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
     <Compile Include="Views\ProjectDetail.xaml.cs">
@@ -110,6 +112,54 @@
       <Project>{F34E7813-7FF3-4985-AB41-176F2D073806}</Project>
       <Name>PJK.WPF.PRISM.PM2020.Module.ExampleControls</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cancel.png" />
+    <Resource Include="Images\chart_bar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\accept.png" />
+    <Resource Include="Images\add.png" />
+    <Resource Include="Images\application.png" />
+    <Resource Include="Images\application_cascade.png" />
+    <Resource Include="Images\application_delete.png" />
+    <Resource Include="Images\copy.png" />
+    <Resource Include="Images\application_edit.png" />
+    <Resource Include="Images\application_error.png" />
+    <Resource Include="Images\application_form.png" />
+    <Resource Include="Images\application_form_add.png" />
+    <Resource Include="Images\application_form_delete.png" />
+    <Resource Include="Images\application_form_edit.png" />
+    <Resource Include="Images\application_form_magnify.png" />
+    <Resource Include="Images\application_get.png" />
+    <Resource Include="Images\application_go.png" />
+    <Resource Include="Images\application_home.png" />
+    <Resource Include="Images\application_key.png" />
+    <Resource Include="Images\application_lightning.png" />
+    <Resource Include="Images\application_link.png" />
+    <Resource Include="Images\application_osx.png" />
+    <Resource Include="Images\application_osx_terminal.png" />
+    <Resource Include="Images\application_put.png" />
+    <Resource Include="Images\application_side_boxes.png" />
+    <Resource Include="Images\application_side_contract.png" />
+    <Resource Include="Images\application_side_expand.png" />
+    <Resource Include="Images\application_side_list.png" />
+    <Resource Include="Images\application_side_tree.png" />
+    <Resource Include="Images\application_split.png" />
+    <Resource Include="Images\application_tile_horizontal.png" />
+    <Resource Include="Images\application_tile_vertical.png" />
+    <Resource Include="Images\application_view_columns.png" />
+    <Resource Include="Images\application_view_detail.png" />
+    <Resource Include="Images\application_view_gallery.png" />
+    <Resource Include="Images\application_view_icons.png" />
+    <Resource Include="Images\application_view_list.png" />
+    <Resource Include="Images\application_view_tile.png" />
+    <Resource Include="Images\application_xp.png" />
+    <Resource Include="Images\application_xp_terminal.png" />
+    <Resource Include="Images\cross.png" />
+    <Resource Include="Images\cursor.png" />
+    <Resource Include="Images\cut.png" />
+    <Resource Include="Images\paste.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

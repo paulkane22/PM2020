@@ -9,4 +9,9 @@
     </ResourceDictionary.MergedDictionaries>
 
 
+    <SolidColorBrush x:Key="myWindowInnerColour" Color="#FFe1e1e1"/>
+    <SolidColorBrush x:Key="myWindowWorkspaceColour" Color="#FFf1f1f1"/>
+    <Color x:Key="myButtonColor">#FFffcc66</Color>
+    
+    
 </ResourceDictionary>

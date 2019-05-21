@@ -1,5 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
+using PJK.WPF.PRISM.PM2020.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -15,21 +17,27 @@ namespace PJK.WPF.PRISM.PM2020.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-
         private readonly IRegionManager _regionManager;
-
         public DelegateCommand<string> NavigateCommand { get; private set; }
+        public DelegateCommand ShowAboutCommand { get; private set; }
         public DelegateCommand ExitSystemCommand { get; private set; }
-
-
 
         public MainWindowViewModel(IRegionManager regionManager)
         {
             NavigateCommand = new DelegateCommand<string>(OnNavigate);
+            ShowAboutCommand = new DelegateCommand(OnShowAbout);
             ExitSystemCommand = new DelegateCommand(OnExitSystem);
 
             _regionManager = regionManager;
 
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
+        }
+
+        private void OnShowAbout()
+        {
+            //This is a test to see what the about screen will look like. 
+            AboutWindow k = new AboutWindow();
+            k.ShowDialog();
         }
 
         private void OnNavigate(string destination)

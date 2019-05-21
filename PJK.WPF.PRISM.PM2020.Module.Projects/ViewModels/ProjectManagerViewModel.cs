@@ -1,4 +1,5 @@
-﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -23,9 +24,14 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         {
             if (dataService == null) throw new ArgumentNullException("dataService");
             if (eventAggregator == null) throw new ArgumentNullException("eventAggregator");
+
+            //Check if user is in design mode.
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
+
             ShowAddProjectCommand = new DelegateCommand(OnShowAddProject);
             AddProjectCommand = new DelegateCommand(OnAddProject);
             CancelAddProjectCommand = new DelegateCommand(OnCancelAddProject);
+
             this.eventAggregator = eventAggregator;
             this.Projects = new ListCollectionView(dataService.GetProjects());
         }
@@ -43,6 +49,14 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         private void OnShowAddProject()
         {
             ShowAddProject = true;
+        }
+
+
+        private Project _currentProject;
+        public Project CurrentProject
+        {
+            get { return _currentProject; }
+            set { SetProperty(ref _currentProject, value);}
         }
 
         public ICollectionView Projects { get; private set; }

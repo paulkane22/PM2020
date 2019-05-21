@@ -4,15 +4,34 @@
              xmlns:prism="http://prismlibrary.com/"
              xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects"
+             xmlns:data="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects.Model"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
         <local:WindowOpenCloseConverter x:Key="windowOpenCloseConverter"/>
+
+        <SolidColorBrush x:Key="myBorderColour" Color="#FFFFFFFF"/>
+        <SolidColorBrush x:Key="myBorderBackgroundColour" Color="#FFe1e1e1"/>
+        <SolidColorBrush x:Key="myBorderBackgroundLightColour" Color="#FFf1f1f1"/>
+        <!--<SolidColorBrush x:Key="myWindowInnerColour" Color="#FFe1e1e1"/>-->
+        <SolidColorBrush x:Key="myButtonColour" Color="#FFffcc66"/>
+
+        <DataTemplate DataType="{x:Type data:Project}">
+            <StackPanel>
+                <TextBlock Text="{Binding ProjectName}" />
+                <TextBlock Text="{Binding Priority}" />
+                <TextBlock Text="{Binding SystemId}" />
+            </StackPanel>
+        </DataTemplate>
     </UserControl.Resources>
 
-    <Border BorderBrush="DarkGray" Background="LightGray" BorderThickness="1">
-        <Grid Margin="10">
+    <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundColour}" BorderThickness="1">
+        
+        
+        
+        <Grid Margin="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -22,9 +41,7 @@
                 <ColumnDefinition Width="0" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" FontSize="14" FontWeight="Bold" Margin="0,0,0,10">Project Manager</Label>
-
-            <Border BorderBrush="DarkGray" Background="#f1f1f1" BorderThickness="1" Grid.Row="1" Grid.Column="0" >
+            <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundLightColour}" BorderThickness="0" Grid.Row="2" Grid.Column="0" Margin="0" >
                 <DataGrid x:Name="ProjectsList" SelectionMode="Single" 
                            ItemsSource="{Binding Path=Projects}" AutoGenerateColumns="False" 
                            CanUserAddRows="False" CanUserReorderColumns="False" VerticalAlignment="Top">
@@ -40,31 +57,29 @@
     
             </Border>
 
-            <Border Grid.Row="2"  >
+            <Border Grid.Row="3"  Margin="10,0,10,0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button  Command="{Binding ShowAddProjectCommand}" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,10">Add Project</Button>
-
+                    <Button Command="{Binding ShowAddProjectCommand}" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,10">Add Project</Button>
                 </StackPanel>
-                
             </Border>
 
 
 
-            
+
             <wpfTool:ChildWindow   
-                Grid.Column="0"
-                Grid.Row="1"
-                Height="300"
+                Grid.Column="0" Grid.ColumnSpan="9"
+                Grid.Row="0" Grid.RowSpan="3"
+                Height="500"
                 Width="400" 
                 Left="10" 
                 Top="10"
                 Name="chWindow"
                 Caption="Add New Project"
-                WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}" Grid.ColumnSpan="2">
-                <!--<ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
+                WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}">
+            <!--<ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
 						VerticalScrollBarVisibility="Visible">-->
 
-                    <Border BorderBrush="DarkGray" Background="LightGray" BorderThickness="1">
+                <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundColour}" BorderThickness="1">
                         <Grid Margin="10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -79,12 +94,12 @@
                             <Label Grid.Row="0" 
                                    FontSize="14" 
                                    FontWeight="Bold" 
-                                   Margin="0,0,0,10">
+                                   Margin="0,0,0,5">
 
                                 Add New Project
                             </Label>
 
-                            <Border BorderBrush="DarkGray" Background="#f1f1f1" BorderThickness="1" Grid.Row="1" Grid.Column="0" >
+                        <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundLightColour}" BorderThickness="1" Grid.Row="1" Grid.Column="0" >
 
                                 <StackPanel Margin="30,20,0,20">
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
@@ -116,8 +131,6 @@
                 <!--</ScrollViewer>-->
             </wpfTool:ChildWindow>
         </Grid>
-
-
     </Border>
     
 
