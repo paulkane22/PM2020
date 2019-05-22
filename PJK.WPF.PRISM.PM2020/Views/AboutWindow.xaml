@@ -6,7 +6,7 @@
              Width="350"
              Height="300"
             x:Name="About"
-             WindowStartupLocation="CenterScreen"  WindowStyle="None" ResizeMode="NoResize">
+             WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
 
     <Border BorderBrush="#FFCC0000" BorderThickness="1">
         <Grid>

@@ -17,6 +17,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public DelegateCommand ShowAddProjectCommand { get; private set; }
         public DelegateCommand AddProjectCommand { get; private set; }
+        public DelegateCommand<Project> EditProjectCommand { get; private set; }
         public DelegateCommand CancelAddProjectCommand { get; private set; }
 
 
@@ -25,15 +26,23 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             if (dataService == null) throw new ArgumentNullException("dataService");
             if (eventAggregator == null) throw new ArgumentNullException("eventAggregator");
 
+            this.eventAggregator = eventAggregator;
+
             //Check if user is in design mode.
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
 
             ShowAddProjectCommand = new DelegateCommand(OnShowAddProject);
             AddProjectCommand = new DelegateCommand(OnAddProject);
+            EditProjectCommand = new DelegateCommand<Project>(OnEditProject);
+
             CancelAddProjectCommand = new DelegateCommand(OnCancelAddProject);
 
-            this.eventAggregator = eventAggregator;
             this.Projects = new ListCollectionView(dataService.GetProjects());
+        }
+
+        private void OnEditProject(Project project)
+        {
+            ShowAddProject = true;
         }
 
         private void OnCancelAddProject()
@@ -48,19 +57,19 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         private void OnShowAddProject()
         {
+            SelectedProject = new Project();
             ShowAddProject = true;
         }
 
-
-        private Project _currentProject;
-        public Project CurrentProject
+        private Project _selectedProject;
+        public Project SelectedProject
         {
-            get { return _currentProject; }
-            set { SetProperty(ref _currentProject, value);}
+            get { return _selectedProject; }
+            set { SetProperty(ref _selectedProject, value);}
         }
 
         public ICollectionView Projects { get; private set; }
-
+        
         private bool _showAddProject = false;
         public bool ShowAddProject
         {
