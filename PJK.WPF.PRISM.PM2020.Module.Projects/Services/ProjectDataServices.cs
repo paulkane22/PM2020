@@ -11,6 +11,24 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
     {
         private ProjectList projects;
 
+        public void BigLoad(int number)
+        {
+            for(int a=10; a < number; a++)
+            {
+                Project k = new Project()
+                {
+                    Id = a,
+                    SystemId = 1,
+                    ProjectName = "HCIS " + a.ToString(),
+                    Priority = 1,
+                    StatusID = 1
+                };
+
+                projects.Add(k);
+            }
+        }
+
+
 
         public ProjectList GetProjects()
         {
@@ -63,6 +81,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
                         }
                 };
             }
+            BigLoad(1000);
             return this.projects;
         }
     }

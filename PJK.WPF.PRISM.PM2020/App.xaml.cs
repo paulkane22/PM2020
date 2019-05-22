@@ -1,6 +1,7 @@
 ﻿using PJK.WPF.PRISM.PM2020.Views;
 using Prism.Ioc;
 using Prism.Modularity;
+using System;
 using System.Windows;
 
 namespace PJK.WPF.PRISM.PM2020
@@ -33,6 +34,13 @@ namespace PJK.WPF.PRISM.PM2020
             //moduleCatalog.AddModule<ExampleControls.ExampleControlsModule>();
         }
 
+        private void PrismApplication_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
 
+            MessageBox.Show("Unexpected error occurred. Please inform Paul" + Environment.NewLine + e.Exception.Message, "This is not the error you are looking for");
+
+            e.Handled = true;
+
+        }
     }
 }

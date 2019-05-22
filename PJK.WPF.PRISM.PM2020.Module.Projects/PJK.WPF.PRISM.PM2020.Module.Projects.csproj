@@ -72,10 +72,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Services\IProjectDataService.cs" />
-    <Compile Include="Services\IProjectRepository.cs" />
     <Compile Include="Services\ProjectDataServices.cs" />
-    <Compile Include="Services\ProjectRepository.cs" />
+    <Compile Include="Services\ProjectWrapperService.cs" />
     <Compile Include="ViewModels\ProjectDetailViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
     <Compile Include="Views\ProjectDetail.xaml.cs">
@@ -84,10 +84,15 @@
     <Compile Include="Views\ProjectManager.xaml.cs">
       <DependentUpon>ProjectManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wrapper\ModelWrapper.cs" />
+    <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
+    <Compile Include="Wrapper\ProjectWrapper.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\PJK.WPF.PRISM.PM2020.Module.Projects.Model.Project.datasource" />
+    <None Include="Properties\DataSources\PJK.WPF.PRISM.PM2020.Module.Projects.Model.ProjectList.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	     xmlns:prism="http://prismlibrary.com/"
-             xmlns:local="clr-namespace:PJK.WPF.PRISM.PM2020">
+             xmlns:local="clr-namespace:PJK.WPF.PRISM.PM2020"
+                     DispatcherUnhandledException="PrismApplication_DispatcherUnhandledException">
     
     
     
@@ -14,15 +15,43 @@
                 <ResourceDictionary Source="Themes\Generic.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>-->
 
-            <!-- Office2010Blue Theme -->
+             <!--Office2010Blue Theme--> 
             <ResourceDictionary Source="Themes/Office2010Blue/Office2010Blue.MSControls.Core.Implicit.xaml" />
             <ResourceDictionary Source="Themes/Office2010Blue/Office2010Blue.MSControls.Toolkit.Implicit.xaml" />
             <ResourceDictionary Source="Themes/WhistlerBlue.xaml" />
             <ResourceDictionary Source="Themes/Generic.xaml" />
-
-
-
             </ResourceDictionary.MergedDictionaries>
+
+
+
+            <Style TargetType="TextBox">
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <AdornedElementPlaceholder x:Name="placeholder"/>
+                                <TextBlock FontSize="12" Background="#FF990000" Foreground="White" Text="{Binding ElementName=placeholder,
+                Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="True">
+                        <Setter Property="Background" Value="#FF990000"/>
+                        <Setter Property="Foreground" Value="#FFFFFFFF"/>
+                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},
+            Path=(Validation.Errors)[0].ErrorContent}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+
+
         </ResourceDictionary>
+
+
+
+
     </Application.Resources>
 </prism:PrismApplication>

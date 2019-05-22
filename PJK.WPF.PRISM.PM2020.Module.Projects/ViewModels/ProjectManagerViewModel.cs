@@ -1,9 +1,11 @@
 ﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 
@@ -16,8 +18,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         private readonly IEventAggregator eventAggregator;
 
         public DelegateCommand ShowAddProjectCommand { get; private set; }
-        public DelegateCommand AddProjectCommand { get; private set; }
-        public DelegateCommand<Project> EditProjectCommand { get; private set; }
+        public DelegateCommand SaveProjectCommand { get; private set; }
+        public DelegateCommand<ProjectWrapper> EditProjectCommand { get; private set; }
         public DelegateCommand CancelAddProjectCommand { get; private set; }
 
 
@@ -32,15 +34,34 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
 
             ShowAddProjectCommand = new DelegateCommand(OnShowAddProject);
-            AddProjectCommand = new DelegateCommand(OnAddProject);
-            EditProjectCommand = new DelegateCommand<Project>(OnEditProject);
+            SaveProjectCommand = new DelegateCommand(OnSaveProject, OnSaveCanExecute);
+            EditProjectCommand = new DelegateCommand<ProjectWrapper>(OnEditProject);
 
             CancelAddProjectCommand = new DelegateCommand(OnCancelAddProject);
 
-            this.Projects = new ListCollectionView(dataService.GetProjects());
+            // this.Projects = new ListCollectionView(dataService.GetProjects());
+
+            ProjectWrapperService dsProjectWrapper = new ProjectWrapperService(dataService);
+
+            this.Projects = dsProjectWrapper.ProjectWrappers;
         }
 
-        private void OnEditProject(Project project)
+        private bool OnSaveCanExecute()
+        {
+            //return true;
+            return SelectedProject != null && !SelectedProject.HasErrors;
+        }
+
+        private void OnSaveProject()
+        {
+            if (!SelectedProject.HasErrors)
+            {
+                Projects.Add(SelectedProject);
+            }
+            ShowAddProject = false;
+        }
+
+        private void OnEditProject(ProjectWrapper project)
         {
             ShowAddProject = true;
         }
@@ -50,32 +71,56 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             ShowAddProject = false;
         }
 
-        private void OnAddProject()
-        {
-            throw new NotImplementedException();
-        }
 
         private void OnShowAddProject()
         {
-            SelectedProject = new Project();
+            Project myProject = new Project();
+            myProject.ProjectName = "[New]";
+            myProject.Id = 100;
+            SelectedProject = new ProjectWrapper(myProject);
+            SelectedProject.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(SelectedProject.HasErrors))
+                {
+                    ((DelegateCommand)SaveProjectCommand).RaiseCanExecuteChanged();
+                }
+            };
+            ((DelegateCommand)SaveProjectCommand).RaiseCanExecuteChanged();
+
+
+
+
+
             ShowAddProject = true;
         }
 
-        private Project _selectedProject;
-        public Project SelectedProject
+        private ProjectWrapper  _selectedProject;
+        public ProjectWrapper SelectedProject
         {
             get { return _selectedProject; }
             set { SetProperty(ref _selectedProject, value);}
+
         }
 
-        public ICollectionView Projects { get; private set; }
-        
+        private ObservableCollection<ProjectWrapper> _projects;
+        public ObservableCollection<ProjectWrapper> Projects
+        {
+            get { return _projects; }
+            set { SetProperty(ref _projects, value); }
+        }
+
+        //public ICollectionView Projects { get; private set; }
+
         private bool _showAddProject = false;
         public bool ShowAddProject
         {
             get { return _showAddProject; }
             set { SetProperty(ref _showAddProject, value); }
         }
+
+
+
+
 
     }
 }
