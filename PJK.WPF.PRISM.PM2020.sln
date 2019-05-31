@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PJK.WPF.PRISM.PM2020.Module
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PJK.WPF.PRISM.PM2020.Module.ExampleControls", "PJK.WPF.PRISM.PM2020.Module.ExampleControls\PJK.WPF.PRISM.PM2020.Module.ExampleControls.csproj", "{F34E7813-7FF3-4985-AB41-176F2D073806}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PJK.WPF.PRISM.PM2020.DataAccess", "PJK.WPF.PRISM.PM2020.DataAccess\PJK.WPF.PRISM.PM2020.DataAccess.csproj", "{2C9C69B5-9324-4BA6-A0D0-D981E7143428}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PJK.WPF.PRISM.PM2020.Model", "PJK.WPF.PRISM.PM2020.Model\PJK.WPF.PRISM.PM2020.Model.csproj", "{4F5D2002-4324-435C-9FD5-8848C7E25DC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{F34E7813-7FF3-4985-AB41-176F2D073806}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F34E7813-7FF3-4985-AB41-176F2D073806}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F34E7813-7FF3-4985-AB41-176F2D073806}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C9C69B5-9324-4BA6-A0D0-D981E7143428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C9C69B5-9324-4BA6-A0D0-D981E7143428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C9C69B5-9324-4BA6-A0D0-D981E7143428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C9C69B5-9324-4BA6-A0D0-D981E7143428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F5D2002-4324-435C-9FD5-8848C7E25DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F5D2002-4324-435C-9FD5-8848C7E25DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F5D2002-4324-435C-9FD5-8848C7E25DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F5D2002-4324-435C-9FD5-8848C7E25DC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

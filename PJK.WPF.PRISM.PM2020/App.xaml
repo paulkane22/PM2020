@@ -24,14 +24,16 @@
 
 
 
-            <Style TargetType="TextBox">
+            <!--<Style TargetType="TextBox">
                 <Setter Property="Validation.ErrorTemplate">
                     <Setter.Value>
                         <ControlTemplate>
                             <StackPanel>
                                 <AdornedElementPlaceholder x:Name="placeholder"/>
-                                <TextBlock FontSize="12" Background="#FF990000" Foreground="White" Text="{Binding ElementName=placeholder,
+
+                                <TextBlock FontSize="12" Foreground="FF990000" Text="{Binding ElementName=placeholder,
                 Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                                
                             </StackPanel>
                         </ControlTemplate>
                     </Setter.Value>
@@ -44,7 +46,7 @@
             Path=(Validation.Errors)[0].ErrorContent}"/>
                     </Trigger>
                 </Style.Triggers>
-            </Style>
+            </Style>-->
 
 
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PJK.WPF.PRISM.PM2020.Module.Projects.Model
+namespace PJK.WPF.PRISM.PM2020.Model
 {
     public interface IProject
     {

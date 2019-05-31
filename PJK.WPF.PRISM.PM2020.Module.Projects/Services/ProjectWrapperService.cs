@@ -1,4 +1,5 @@
-﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
+﻿using PJK.WPF.PRISM.PM2020.Model;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using System;
 using System.Collections.Generic;
@@ -27,20 +28,32 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
         }
 
         #region LoadWrappers
-        private void LoadProjectWrappers()
+        private async void LoadProjectWrappers()
         {
             //sets up the list of Projects 
-            ObservableCollection<Project> projects = _dataService.GetProjects();
+            
             int count = 1;
+
+            //Task<int> task = new Task<int>(NewMethod);
+            //task.Start();
+            //count = await task; //NewMethod();
+            NewMethod();
+        }
+
+        private int NewMethod()
+        {
+            int count = 1;
+            ObservableCollection<Project> projects = _dataService.GetProjects();
             foreach (Project project in projects)
             {
                 ProjectWrapper myProjectWrapper = new ProjectWrapper(project);
                 myProjectWrapper.Id = count;
-               
                 this.ProjectWrappers.Add(myProjectWrapper);
                 count++;
 
             }
+
+            return count;
         }
 
         #endregion LoadWrappers

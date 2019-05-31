@@ -53,8 +53,8 @@
 
 
         <StatusBar Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
-            <StatusBarItem Content="Project 2020..."/>
-            <StatusBarItem HorizontalAlignment="Right" IsEnabled="False" Content="MDSAS"/>
+            <StatusBarItem Content="Project 2020..." Margin="10,0,10,0"/>
+            <StatusBarItem HorizontalAlignment="Right" IsEnabled="False" Content="MDSAS" Margin="10,0,10,0"/>
         </StatusBar>
 
     </Grid>

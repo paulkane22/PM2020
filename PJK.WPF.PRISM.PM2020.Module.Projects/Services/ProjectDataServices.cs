@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PJK.WPF.PRISM.PM2020.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
@@ -81,7 +77,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
                         }
                 };
             }
-            BigLoad(1000);
+            //BigLoad(1000);
             return this.projects;
         }
     }

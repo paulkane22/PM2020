@@ -1,4 +1,5 @@
-﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
+﻿using PJK.WPF.PRISM.PM2020.Model;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
