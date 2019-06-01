@@ -64,10 +64,6 @@
       <Project>{4F5D2002-4324-435C-9FD5-8848C7E25DC2}</Project>
       <Name>PJK.WPF.PRISM.PM2020.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PJK.WPF.PRISM.PM2020.Module.Projects\PJK.WPF.PRISM.PM2020.Module.Projects.csproj">
-      <Project>{3364D3B7-64A1-48FB-8122-C210D605B65B}</Project>
-      <Name>PJK.WPF.PRISM.PM2020.Module.Projects</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905310702225_InitialDatabase.resx">

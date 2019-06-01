@@ -1,5 +1,10 @@
-﻿using PJK.WPF.PRISM.PM2020.Model;
+﻿using PJK.WPF.PRISM.PM2020.DataAccess;
+using PJK.WPF.PRISM.PM2020.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
 {
@@ -7,23 +12,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
     {
         private ProjectList projects;
 
-        public void BigLoad(int number)
+
+        public async Task<List<Project>> GetAllAsync()
         {
-            for(int a=10; a < number; a++)
+            using (var ctx = new PM202DbContext())
             {
-                Project k = new Project()
-                {
-                    Id = a,
-                    SystemId = 1,
-                    ProjectName = "HCIS " + a.ToString(),
-                    Priority = 1,
-                    StatusID = 1
-                };
-
-                projects.Add(k);
+                return await ctx.Projects.AsNoTracking().ToListAsync();
             }
-        }
 
+        }
 
 
         public ProjectList GetProjects()
@@ -80,6 +77,27 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
             //BigLoad(1000);
             return this.projects;
         }
+
+        public void BigLoad(int number)
+        {
+            for (int a = 10; a < number; a++)
+            {
+                Project k = new Project()
+                {
+                    Id = a,
+                    SystemId = 1,
+                    ProjectName = "HCIS " + a.ToString(),
+                    Priority = 1,
+                    StatusID = 1
+                };
+
+                projects.Add(k);
+            }
+        }
+
+
+
+
     }
 
 

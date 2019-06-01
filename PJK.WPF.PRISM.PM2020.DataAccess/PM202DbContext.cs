@@ -1,5 +1,4 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 

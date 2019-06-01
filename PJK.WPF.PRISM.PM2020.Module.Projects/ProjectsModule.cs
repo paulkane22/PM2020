@@ -1,6 +1,6 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+using PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Views;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -18,6 +18,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<INavigationViewModel, NavigationViewModel>();
+            containerRegistry.Register<IProjectLookupDataService, LookupDataService>();
             containerRegistry.RegisterInstance<IProject>(new Project());
             containerRegistry.RegisterInstance<IProjectDataService>(new ProjectDataService());
         }

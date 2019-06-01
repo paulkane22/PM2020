@@ -178,7 +178,12 @@
                         <Rectangle x:Name="FocusVisual" Margin="0,-2,0,0" 
                                    Stroke="#FF000000" Fill="#FFFFFFFF" 
                                    Opacity="0" IsHitTestVisible="false"/>                        
-                        <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Cursor="{TemplateBinding Cursor}"/>
+                        <ContentPresenter Margin="{TemplateBinding Padding}" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                          Content="{TemplateBinding Content}" 
+                                          ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                          Cursor="{TemplateBinding Cursor}"/>
                         <Rectangle x:Name="RightGridLine" VerticalAlignment="Stretch" Width="1" Grid.Column="1" />
                     </Grid>
                     <ControlTemplate.Triggers>

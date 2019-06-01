@@ -1,11 +1,7 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
@@ -17,8 +13,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
         public ProjectWrapperService(IProjectDataService dataService)
         {
             _dataService = dataService;
-            this.LoadProjectWrappers();
+            // this.LoadProjectWrappers();
         }
+
 
         private ObservableCollection<ProjectWrapper> _projectWrappers = new ObservableCollection<ProjectWrapper>();
         public ObservableCollection<ProjectWrapper> ProjectWrappers
@@ -28,22 +25,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
         }
 
         #region LoadWrappers
-        private async void LoadProjectWrappers()
+        public async Task LoadProjectWrappersAsync()
         {
-            //sets up the list of Projects 
-            
-            int count = 1;
-
-            //Task<int> task = new Task<int>(NewMethod);
-            //task.Start();
-            //count = await task; //NewMethod();
-            NewMethod();
+          await  NewMethodAsync();
         }
 
-        private int NewMethod()
+        private async Task NewMethodAsync()
         {
             int count = 1;
-            ObservableCollection<Project> projects = _dataService.GetProjects();
+            System.Collections.Generic.IEnumerable<Project> projects = await _dataService.GetAllAsync();
             foreach (Project project in projects)
             {
                 ProjectWrapper myProjectWrapper = new ProjectWrapper(project);
@@ -53,7 +43,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
 
             }
 
-            return count;
+           //
         }
 
         #endregion LoadWrappers

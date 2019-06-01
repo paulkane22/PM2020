@@ -1,5 +1,4 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
@@ -8,7 +7,7 @@ using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Data;
+using System.Threading.Tasks;
 
 
 
@@ -17,6 +16,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
     public class ProjectManagerViewModel : BindableBase
     {
         private readonly IEventAggregator eventAggregator;
+        private IProjectDataService _dataService;
 
         public DelegateCommand ShowAddProjectCommand { get; private set; }
         public DelegateCommand SaveProjectCommand { get; private set; }
@@ -30,6 +30,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             if (eventAggregator == null) throw new ArgumentNullException("eventAggregator");
 
             this.eventAggregator = eventAggregator;
+            _dataService = dataService;
 
             //Check if user is in design mode.
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
@@ -37,15 +38,19 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             ShowAddProjectCommand = new DelegateCommand(OnShowAddProject);
             SaveProjectCommand = new DelegateCommand(OnSaveProject, OnSaveCanExecute);
             EditProjectCommand = new DelegateCommand<ProjectWrapper>(OnEditProject);
-
             CancelAddProjectCommand = new DelegateCommand(OnCancelAddProject);
 
             // this.Projects = new ListCollectionView(dataService.GetProjects());
 
-            ProjectWrapperService dsProjectWrapper = new ProjectWrapperService(dataService);
+        }
 
+        public async Task LoadProjectsAsync()
+        {
+            ProjectWrapperService dsProjectWrapper = new ProjectWrapperService(_dataService);
+            await dsProjectWrapper.LoadProjectWrappersAsync();
             this.Projects = dsProjectWrapper.ProjectWrappers;
         }
+
 
         private bool OnSaveCanExecute()
         {
@@ -87,10 +92,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
                 }
             };
             ((DelegateCommand)SaveProjectCommand).RaiseCanExecuteChanged();
-
-
-
-
 
             ShowAddProject = true;
         }

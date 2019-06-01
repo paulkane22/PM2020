@@ -12,6 +12,11 @@
     <SolidColorBrush x:Key="myWindowInnerColour" Color="#FFe1e1e1"/>
     <SolidColorBrush x:Key="myWindowWorkspaceColour" Color="#FFf1f1f1"/>
     <Color x:Key="myButtonColor">#FFffcc66</Color>
-    
-    
+
+    <SolidColorBrush x:Key="myBorderColour" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="myBorderBackgroundColour" Color="#FFe1e1e1"/>
+    <SolidColorBrush x:Key="myBorderBackgroundLightColour" Color="#FFf1f1f1"/>
+    <SolidColorBrush x:Key="myButtonColour" Color="#FFffcc66"/>
+
+
 </ResourceDictionary>
