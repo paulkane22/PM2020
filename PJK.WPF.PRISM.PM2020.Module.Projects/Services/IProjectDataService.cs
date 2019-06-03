@@ -7,7 +7,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
 {
     public interface IProjectDataService
     {
-        Task<List<Project>> GetAllAsync();
+        Task<Project> GetProjectByIdAsync(int projectId);
+        Task SaveAsync(Project project);
         ProjectList GetProjects();
     }
 }

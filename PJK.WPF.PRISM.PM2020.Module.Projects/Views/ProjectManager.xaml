@@ -31,7 +31,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <!--<Border Grid.Row="0" Grid.ColumnSpan="2"  Margin="0" >
@@ -46,9 +46,9 @@
                 </StackPanel>
             </Border>
 
-            <Views:ProjectManagerList Grid.Row="2" Grid.Column="0"/>
-            
-            
+            <!--<Views:ProjectManagerList DataContext="{Binding NavigationViewModel}"  Grid.Row="2" Grid.Column="0"/>-->
+            <Views:NavigationView DataContext="{Binding NavigationViewModel}"  Grid.Row="2" Grid.Column="0"/>
+            <Views:ProjectDetail  DataContext="{Binding ProjectDetailViewModel}" Grid.Row="2" Grid.Column="1"/>
             
             
             

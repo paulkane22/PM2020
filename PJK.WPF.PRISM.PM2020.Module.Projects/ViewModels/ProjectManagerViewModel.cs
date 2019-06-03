@@ -15,7 +15,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {
     public class ProjectManagerViewModel : BindableBase
     {
-        private readonly IEventAggregator eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
         private IProjectDataService _dataService;
 
         public DelegateCommand ShowAddProjectCommand { get; private set; }
@@ -24,13 +24,16 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         public DelegateCommand CancelAddProjectCommand { get; private set; }
 
 
-        public ProjectManagerViewModel(IProjectDataService dataService, IEventAggregator eventAggregator)
+        public ProjectManagerViewModel(INavigationViewModel navigationViewModel, IProjectDetailViewModel projectDetailViewModel, IProjectDataService dataService, IEventAggregator eventAggregator)
         {
             if (dataService == null) throw new ArgumentNullException("dataService");
             if (eventAggregator == null) throw new ArgumentNullException("eventAggregator");
 
-            this.eventAggregator = eventAggregator;
+            _eventAggregator = eventAggregator;
             _dataService = dataService;
+            NavigationViewModel = navigationViewModel;
+            ProjectDetailViewModel = projectDetailViewModel;
+
 
             //Check if user is in design mode.
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
@@ -46,9 +49,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public async Task LoadProjectsAsync()
         {
-            ProjectWrapperService dsProjectWrapper = new ProjectWrapperService(_dataService);
-            await dsProjectWrapper.LoadProjectWrappersAsync();
-            this.Projects = dsProjectWrapper.ProjectWrappers;
+           await  NavigationViewModel.LoadAsync();
         }
 
 
@@ -62,7 +63,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         {
             if (!SelectedProject.HasErrors)
             {
-                Projects.Add(SelectedProject);
+   //             Projects.Add(SelectedProject);
             }
             ShowAddProject = false;
         }
@@ -104,15 +105,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         }
 
-        private ObservableCollection<ProjectWrapper> _projects;
-        public ObservableCollection<ProjectWrapper> Projects
-        {
-            get { return _projects; }
-            set { SetProperty(ref _projects, value); }
-        }
-
-        //public ICollectionView Projects { get; private set; }
-
         private bool _showAddProject = false;
         public bool ShowAddProject
         {
@@ -120,9 +112,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             set { SetProperty(ref _showAddProject, value); }
         }
 
-
-
-
+        public INavigationViewModel NavigationViewModel { get; }
+        public IProjectDetailViewModel ProjectDetailViewModel { get; }
 
     }
 }

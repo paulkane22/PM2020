@@ -13,11 +13,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
         private ProjectList projects;
 
 
-        public async Task<List<Project>> GetAllAsync()
+        public async Task<Project> GetProjectByIdAsync(int projectId)
         {
             using (var ctx = new PM202DbContext())
             {
-                return await ctx.Projects.AsNoTracking().ToListAsync();
+                return await ctx.Projects.AsNoTracking().SingleAsync(f => f.Id == projectId);
             }
 
         }
@@ -95,9 +95,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
             }
         }
 
-
-
-
+        public async Task SaveAsync(Project project)
+        {
+            using (var ctx = new PM202DbContext())
+            {
+                ctx.Projects.Attach(project);
+                ctx.Entry(project).State = EntityState.Modified;
+                await ctx.SaveChangesAsync();
+            }
+        }
     }
 
 

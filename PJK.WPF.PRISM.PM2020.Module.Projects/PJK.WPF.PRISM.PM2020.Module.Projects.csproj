@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\WindowOpenCloseConverter.cs" />
+    <Compile Include="Event\AfterProjectSavedEvent.cs" />
+    <Compile Include="Event\OpenProjectDetailsViewEvent.cs" />
     <Compile Include="Model\ProjectList.cs" />
     <Compile Include="ProjectsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -77,10 +79,15 @@
     <Compile Include="Services\ProjectDataServices.cs" />
     <Compile Include="Services\ProjectWrapperService.cs" />
     <Compile Include="ViewModels\INavigationViewModel.cs" />
+    <Compile Include="ViewModels\IProjectDetailViewModel.cs" />
+    <Compile Include="ViewModels\NavigationItemViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ProjectDetailViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerListViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
+    <Compile Include="Views\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProjectDetail.xaml.cs">
       <DependentUpon>ProjectDetail.xaml</DependentUpon>
     </Compile>
@@ -93,6 +100,7 @@
     <Compile Include="Wrapper\ModelWrapper.cs" />
     <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
     <Compile Include="Wrapper\ProjectWrapper.cs" />
+    <Compile Include="Wrapper\TestValidation.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -106,6 +114,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\NavigationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProjectDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,6 +198,10 @@
     <Resource Include="Images\cursor.png" />
     <Resource Include="Images\cut.png" />
     <Resource Include="Images\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\Lookups\" />
+    <Folder Include="Services\Repositories\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

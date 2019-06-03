@@ -1,28 +1,32 @@
-﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
-using Prism.Commands;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
+using PJK.WPF.PRISM.PM2020.Model;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {
     public class ProjectManagerListViewModel : BindableBase
     {
-        public ProjectManagerListViewModel()
+        private IProjectLookupDataService _projectLookupDataService;
+
+        public ProjectManagerListViewModel(IProjectLookupDataService projectLookupDataService)
         {
-            
+            _projectLookupDataService = projectLookupDataService;
+            Projects = new ObservableCollection<LookupItem>();
         }
 
+        public async Task LoadAsync()
+        {
+            var lookup = await _projectLookupDataService.GetProjectLookupAsync();
+            Projects.Clear();
+            foreach (var item in lookup)
+            {
+                Projects.Add(item);
+            }
 
-        //private ObservableCollection<ProjectWrapper> _projects;
-        //public ObservableCollection<ProjectWrapper> Projects
-        //{
-        //    get { return _projects; }
-        //    set { SetProperty(ref _projects, value); }
-        //}
+        }
 
-
+        public ObservableCollection<LookupItem> Projects { get; }
     }
 }

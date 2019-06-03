@@ -19,6 +19,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<INavigationViewModel, NavigationViewModel>();
+            containerRegistry.Register<IProjectDetailViewModel, ProjectDetailViewModel>();
             containerRegistry.Register<IProjectLookupDataService, LookupDataService>();
             containerRegistry.RegisterInstance<IProject>(new Project());
             containerRegistry.RegisterInstance<IProjectDataService>(new ProjectDataService());
