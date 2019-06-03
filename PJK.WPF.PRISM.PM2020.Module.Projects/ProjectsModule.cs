@@ -1,5 +1,7 @@
-﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+﻿using PJK.WPF.PRISM.PM2020.DataAccess;
+using PJK.WPF.PRISM.PM2020.Model;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Views;
 using Prism.Ioc;
@@ -22,7 +24,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
             containerRegistry.Register<IProjectDetailViewModel, ProjectDetailViewModel>();
             containerRegistry.Register<IProjectLookupDataService, LookupDataService>();
             containerRegistry.RegisterInstance<IProject>(new Project());
-            containerRegistry.RegisterInstance<IProjectDataService>(new ProjectDataService());
+            containerRegistry.RegisterInstance<IProjectRepository>(new ProjectRepository(new PM202DbContext()));
         }
     }
 }

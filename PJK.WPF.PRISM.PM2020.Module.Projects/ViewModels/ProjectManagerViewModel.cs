@@ -1,22 +1,26 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
-
-
+using Prism.Ioc;
+using Prism.Modularity;
+using Prism.Regions;
+using PJK.WPF.PRISM.PM2020.DataAccess;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {
     public class ProjectManagerViewModel : BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private IProjectDataService _dataService;
+        private IProjectRepository _projectRepository;
+        private IProjectDetailViewModel _projectDetailViewModel;
+
 
         public DelegateCommand ShowAddProjectCommand { get; private set; }
         public DelegateCommand SaveProjectCommand { get; private set; }
@@ -24,15 +28,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         public DelegateCommand CancelAddProjectCommand { get; private set; }
 
 
-        public ProjectManagerViewModel(INavigationViewModel navigationViewModel, IProjectDetailViewModel projectDetailViewModel, IProjectDataService dataService, IEventAggregator eventAggregator)
+        public ProjectManagerViewModel(INavigationViewModel navigationViewModel, IProjectRepository projectRepository, IEventAggregator eventAggregator)
         {
-            if (dataService == null) throw new ArgumentNullException("dataService");
+            if (projectRepository == null) throw new ArgumentNullException("dataService");
             if (eventAggregator == null) throw new ArgumentNullException("eventAggregator");
 
             _eventAggregator = eventAggregator;
-            _dataService = dataService;
+            _projectRepository = projectRepository;
             NavigationViewModel = navigationViewModel;
-            ProjectDetailViewModel = projectDetailViewModel;
+            
 
 
             //Check if user is in design mode.
@@ -44,6 +48,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             CancelAddProjectCommand = new DelegateCommand(OnCancelAddProject);
 
             // this.Projects = new ListCollectionView(dataService.GetProjects());
+
+            _eventAggregator.GetEvent<OpenProjectDetailsViewEvent>().Subscribe(OnOpenProjectView);
 
         }
 
@@ -113,8 +119,19 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         }
 
         public INavigationViewModel NavigationViewModel { get; }
-        public IProjectDetailViewModel ProjectDetailViewModel { get; }
+        
+        
+        public IProjectDetailViewModel myProjectDetailViewModel
+        {
+            get { return _projectDetailViewModel; }
+            set { SetProperty(ref _projectDetailViewModel, value); }
+        }
 
+        private async void OnOpenProjectView(int projectId)
+        {
+            //myProjectDetailViewModel = new ProjectDetailViewModel(new PM202DbContext);
+            //await LoadAsync(projectId);
+        }
     }
 }
 

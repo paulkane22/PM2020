@@ -1,19 +1,15 @@
-﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Repositories;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
 {
     public class ProjectWrapperService
     {
 
-        private IProjectDataService _dataService;
-        public ProjectWrapperService(IProjectDataService dataService)
+        private IProjectRepository _dataService;
+        public ProjectWrapperService(IProjectRepository dataService)
         {
             _dataService = dataService;
-            // this.LoadProjectWrappers();
         }
 
 

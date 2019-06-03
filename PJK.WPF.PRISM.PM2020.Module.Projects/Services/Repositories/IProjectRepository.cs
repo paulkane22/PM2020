@@ -3,12 +3,12 @@ using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
-{
-    public interface IProjectDataService
+namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
+{ 
+    public interface IProjectRepository
     {
         Task<Project> GetProjectByIdAsync(int projectId);
-        Task SaveAsync(Project project);
+        Task SaveAsync();
         ProjectList GetProjects();
     }
 }

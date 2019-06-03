@@ -3,6 +3,7 @@ using Prism.Mvvm;
 using PJK.WPF.PRISM.PM2020.Model;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {

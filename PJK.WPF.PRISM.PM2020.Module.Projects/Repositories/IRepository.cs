@@ -22,8 +22,4 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Repositories
         void RemoveRange(IEnumerable<TEntity> entities);
     }
 
-    public interface IProjectRepository : IRepository<Project>
-    {
-        IEnumerable<Project> GetTopProject(int count);
-    }
 }

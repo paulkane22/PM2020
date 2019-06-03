@@ -6,20 +6,21 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
+namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
 {
-    class ProjectDataService :  IProjectDataService
+    class ProjectRepository : IProjectRepository
     {
         private ProjectList projects;
+        private PM202DbContext _context;
 
+        public ProjectRepository(PM202DbContext context)
+        {
+            _context = context;
+        }
 
         public async Task<Project> GetProjectByIdAsync(int projectId)
         {
-            using (var ctx = new PM202DbContext())
-            {
-                return await ctx.Projects.AsNoTracking().SingleAsync(f => f.Id == projectId);
-            }
-
+            return await _context.Projects.SingleAsync(f => f.Id == projectId);
         }
 
 
@@ -95,14 +96,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
             }
         }
 
-        public async Task SaveAsync(Project project)
+        public async Task SaveAsync()
         {
-            using (var ctx = new PM202DbContext())
-            {
-                ctx.Projects.Attach(project);
-                ctx.Entry(project).State = EntityState.Modified;
-                await ctx.SaveChangesAsync();
-            }
+            await _context.SaveChangesAsync();
+
         }
     }
 

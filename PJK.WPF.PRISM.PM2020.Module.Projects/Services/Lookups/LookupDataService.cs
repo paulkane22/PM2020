@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services
+namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups
 {
     public class LookupDataService : IProjectLookupDataService
     {

@@ -73,11 +73,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Services\IProjectDataService.cs" />
-    <Compile Include="Services\IProjectLookupDataService.cs" />
-    <Compile Include="Services\LookupDataService.cs" />
-    <Compile Include="Services\ProjectDataServices.cs" />
+    <Compile Include="Services\Lookups\IProjectLookupDataService.cs" />
+    <Compile Include="Services\Lookups\LookupDataService.cs" />
     <Compile Include="Services\ProjectWrapperService.cs" />
+    <Compile Include="Services\Repositories\IProjectRepository.cs" />
+    <Compile Include="Services\Repositories\ProjectRepository.cs" />
     <Compile Include="ViewModels\INavigationViewModel.cs" />
     <Compile Include="ViewModels\IProjectDetailViewModel.cs" />
     <Compile Include="ViewModels\NavigationItemViewModel.cs" />
@@ -199,9 +199,6 @@
     <Resource Include="Images\cut.png" />
     <Resource Include="Images\paste.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Lookups\" />
-    <Folder Include="Services\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
