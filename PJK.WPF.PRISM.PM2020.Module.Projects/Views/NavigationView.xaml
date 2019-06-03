@@ -8,8 +8,16 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
         <Label>Hello</Label>
-        <ListView ItemsSource ="{Binding Projects}"
-                  SelectedItem="{Binding SelectedProject, Mode=TwoWay}"
-                  DisplayMemberPath="DisplayMember" />
+        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource ="{Binding Projects}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                        <Button Content="{Binding DisplayMember}"
+                            Command="{Binding OpenProjectDetailViewCommand}"/>
+
+                    </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        </ScrollViewer>
     </StackPanel>
 </UserControl>

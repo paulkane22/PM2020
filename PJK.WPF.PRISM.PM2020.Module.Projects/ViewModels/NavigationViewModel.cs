@@ -25,7 +25,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             _eventAggregator = eventAggregator;
 
             _eventAggregator.GetEvent<AfterProjectSavedEvent>().Subscribe(AfterProjectSaved);
-
             Projects = new ObservableCollection<NavigationItemViewModel>();
         }
 
@@ -41,23 +40,23 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             Projects.Clear();
             foreach(var item in lookup)
             {
-                Projects.Add(new NavigationItemViewModel(item.Id, item.DisplayMember));
+                Projects.Add(new NavigationItemViewModel(item.Id, item.DisplayMember, _eventAggregator));
             }
 
         }
 
         public ObservableCollection<NavigationItemViewModel> Projects { get; }
 
-        private NavigationItemViewModel _selectedProject;
-        public NavigationItemViewModel SelectedProject
-        {
-            get { return _selectedProject; }
-            set { SetProperty(ref _selectedProject, value);
-                    if(_selectedProject != null)
-                    {
-                    _eventAggregator.GetEvent<OpenProjectDetailsViewEvent>().Publish(_selectedProject.Id);
-                    }
-            }
-        }
+        //private NavigationItemViewModel _selectedProject;
+        //public NavigationItemViewModel SelectedProject
+        //{
+        //    get { return _selectedProject; }
+        //    set { SetProperty(ref _selectedProject, value);
+        //            if(_selectedProject != null)
+        //            {
+        //            _eventAggregator.GetEvent<OpenProjectDetailsViewEvent>().Publish(_selectedProject.Id);
+        //            }
+        //    }
+        //}
     }
 }

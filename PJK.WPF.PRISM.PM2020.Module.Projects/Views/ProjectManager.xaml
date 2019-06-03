@@ -5,10 +5,16 @@
              xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              xmlns:local="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects"
              xmlns:data="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper"
+             xmlns:view="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects.Views"
+             xmlns:viewModel="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
         <local:WindowOpenCloseConverter x:Key="windowOpenCloseConverter"/>
+
+        <!--<DataTemplate DataType="{x:Type viewModel:ProjectDetailViewModel}">
+            <view:ProjectDetail/>
+        </DataTemplate>-->
         <DataTemplate DataType="{x:Type data:ProjectWrapper}">
             <Border Margin="10,10,10,0"  BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundLightColour}" BorderThickness="1">
                 <StackPanel>
@@ -49,10 +55,6 @@
             <!--<Views:ProjectManagerList DataContext="{Binding NavigationViewModel}"  Grid.Row="2" Grid.Column="0"/>-->
             <Views:NavigationView DataContext="{Binding NavigationViewModel}"  Grid.Row="2" Grid.Column="0"/>
             <Views:ProjectDetail  DataContext="{Binding ProjectDetailViewModel}" Grid.Row="2" Grid.Column="1"/>
-            
-            
-            
-            
             
 
             <Border Grid.Row="3"  Margin="10,0,10,0" >

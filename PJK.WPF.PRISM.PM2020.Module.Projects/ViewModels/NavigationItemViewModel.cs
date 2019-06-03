@@ -1,4 +1,7 @@
-﻿using Prism.Mvvm;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +12,19 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {
     public class NavigationItemViewModel : BindableBase
     {
-      
-        public NavigationItemViewModel(int id, string displayMember)
+        private IEventAggregator _eventAggregator;
+
+        public NavigationItemViewModel(int id, string displayMember, IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
+
             Id = id;
             DisplayMember = displayMember;
+
+            OpenProjectDetailViewCommand = new DelegateCommand(OnOpenProjectDetailView);
         }
+
+
 
         public int Id { get; }
 
@@ -27,6 +37,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         }
 
 
+        public DelegateCommand OpenProjectDetailViewCommand { get; }
 
+        private void OnOpenProjectDetailView()
+        {
+            _eventAggregator.GetEvent<OpenProjectDetailsViewEvent>().Publish(Id);
+        }
     }
 }

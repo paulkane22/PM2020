@@ -1,6 +1,7 @@
 ﻿using PJK.WPF.PRISM.PM2020.DataAccess;
 using PJK.WPF.PRISM.PM2020.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
         private ProjectList projects;
         private PM202DbContext _context;
 
-        public ProjectRepository(PM202DbContext context)
+        public ProjectRepository()
         {
-            _context = context;
+            _context = new PM202DbContext();
         }
 
         public async Task<Project> GetProjectByIdAsync(int projectId)
@@ -99,7 +100,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
+        }
 
+        public bool HasChanges()
+        {
+            return _context.ChangeTracker.HasChanges();
         }
     }
 

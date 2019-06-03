@@ -1,5 +1,6 @@
 ﻿using PJK.WPF.PRISM.PM2020.DataAccess;
 using PJK.WPF.PRISM.PM2020.Model;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels;
@@ -22,9 +23,13 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
         {
             containerRegistry.Register<INavigationViewModel, NavigationViewModel>();
             containerRegistry.Register<IProjectDetailViewModel, ProjectDetailViewModel>();
+            containerRegistry.Register<IMessageDialogService, MessageDialogService>();
+
             containerRegistry.Register<IProjectLookupDataService, LookupDataService>();
             containerRegistry.RegisterInstance<IProject>(new Project());
-            containerRegistry.RegisterInstance<IProjectRepository>(new ProjectRepository(new PM202DbContext()));
+            containerRegistry.RegisterInstance<IProjectRepository>(new ProjectRepository());
+            
+
         }
     }
 }

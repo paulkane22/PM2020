@@ -9,6 +9,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
     {
         Task<Project> GetProjectByIdAsync(int projectId);
         Task SaveAsync();
+        bool HasChanges();
         ProjectList GetProjects();
     }
 }
