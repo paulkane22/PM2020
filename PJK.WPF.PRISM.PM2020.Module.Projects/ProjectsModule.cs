@@ -26,6 +26,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
             containerRegistry.Register<IMessageDialogService, MessageDialogService>();
 
             containerRegistry.Register<IProjectLookupDataService, LookupDataService>();
+            containerRegistry.Register<ISystemItemLookupDataService, LookupDataService>();
             containerRegistry.RegisterInstance<IProject>(new Project());
             containerRegistry.RegisterInstance<IProjectRepository>(new ProjectRepository());
             

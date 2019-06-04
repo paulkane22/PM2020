@@ -25,22 +25,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             _eventAggregator = eventAggregator;
 
             _eventAggregator.GetEvent<AfterProjectSavedEvent>().Subscribe(AfterProjectSaved);
+            _eventAggregator.GetEvent<AfterProjectDeletedEvent>().Subscribe(AfterProjectDeleted);
+
             Projects = new ObservableCollection<NavigationItemViewModel>();
         }
 
-        private void AfterProjectSaved(AfterProjectSavedEventArgs obj)
-        {
-           var lookupItem =  Projects.SingleOrDefault(f => f.Id == obj.Id);
 
-            if (lookupItem == null)
-            {
-                Projects.Add(new NavigationItemViewModel(obj.Id, obj.DisplayMember, _eventAggregator));
-            }
-            else
-            {
-                lookupItem.DisplayMember = obj.DisplayMember;
-            }
-        }
 
         public async Task LoadAsync()
         {
@@ -54,6 +44,34 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         }
 
         public ObservableCollection<NavigationItemViewModel> Projects { get; }
+
+
+        private void AfterProjectDeleted(int projectId)
+        {
+            var project = Projects.SingleOrDefault(f => f.Id == projectId);
+            if(project != null)
+            {
+                Projects.Remove(project);
+            }
+
+        }
+
+        private void AfterProjectSaved(AfterProjectSavedEventArgs project)
+        {
+            var lookupItem = Projects.SingleOrDefault(f => f.Id == project.Id);
+
+            if (lookupItem == null)
+            {
+                Projects.Add(new NavigationItemViewModel(project.Id, project.DisplayMember, _eventAggregator));
+            }
+            else
+            {
+                lookupItem.DisplayMember = project.DisplayMember;
+            }
+        }
+
+
+
 
         //private NavigationItemViewModel _selectedProject;
         //public NavigationItemViewModel SelectedProject

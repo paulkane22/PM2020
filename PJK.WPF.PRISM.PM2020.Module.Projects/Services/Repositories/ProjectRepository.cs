@@ -109,8 +109,14 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
 
         public void Add(Project project)
         {
+            project.Deadline = new DateTime(2019, 12, 01);
              _context.Projects.Add(project);
             _context.SaveChanges();
+        }
+
+        public void Remove(Project project)
+        {
+            _context.Projects.Remove(project);
         }
     }
 

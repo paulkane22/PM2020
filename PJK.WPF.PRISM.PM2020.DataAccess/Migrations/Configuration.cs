@@ -20,6 +20,17 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess.Migrations
                 new Project { ProjectName = "Project3", SystemId = 3, Deadline = new System.DateTime(2019, 01, 01) },
                 new Project { ProjectName = "Project4", SystemId = 4, Deadline = new System.DateTime(2019, 01, 01) }
                 );
+
+            context.SystemItems.AddOrUpdate(
+                f => f.SystemName,
+                new SystemItem { SystemName = "System 1"},
+                new SystemItem { SystemName = "System 2" },
+                new SystemItem { SystemName = "System 3" },
+                new SystemItem { SystemName = "System 4" }
+               );
+
+
+
         }
     }
 }

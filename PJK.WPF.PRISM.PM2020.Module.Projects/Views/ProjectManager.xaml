@@ -24,10 +24,18 @@
                 </StackPanel>
             </Border>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:ProjectDetailViewModel}">
+            <view:ProjectDetail />
+        </DataTemplate>
+
+
+
+
     </UserControl.Resources>
 
     <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundColour}" BorderThickness="1">
-        
+
         <Grid Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -36,7 +44,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
@@ -54,8 +62,9 @@
 
             <!--<Views:ProjectManagerList DataContext="{Binding NavigationViewModel}"  Grid.Row="2" Grid.Column="0"/>-->
             <Views:NavigationView DataContext="{Binding NavigationViewModel}"  Grid.Row="2" Grid.Column="0"/>
-            <Views:ProjectDetail  DataContext="{Binding ProjectDetailViewModel}" Grid.Row="2" Grid.Column="1"/>
-            
+            <!--<Views:ProjectDetail  DataContext="{Binding ProjectDetailViewModel}" Grid.Row="2" Grid.Column="1"/>-->
+
+            <ContentControl Content="{Binding ProjectDetailViewModel}" Grid.Row="2" Grid.Column="1"/>
 
             <Border Grid.Row="3"  Margin="10,0,10,0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -73,57 +82,65 @@
                 Name="chWindow"
                 Caption="Add New Project"
                 WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}">
-            <!--<ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
+                <!--<ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
 						VerticalScrollBarVisibility="Visible">-->
 
                 <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundColour}" BorderThickness="1">
-                        <Grid Margin="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="0" />
-                            </Grid.ColumnDefinitions>
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="0" />
+                        </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" 
+                        <Label Grid.Row="0" 
                                    FontSize="14" 
                                    FontWeight="Bold" 
                                    Margin="0,0,0,5">
 
-                                Add New Project
-                            </Label>
+                            Add New Project
+                        </Label>
 
                         <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundLightColour}" BorderThickness="1" Grid.Row="1" Grid.Column="0" >
-
-                                <StackPanel Margin="30,20,0,20" DataContext="{Binding SelectedProject}">
+                            <StackPanel>
+                                <StackPanel Margin="30,20,0,20">
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
-                                    <Label HorizontalContentAlignment="Right" Width="80" Content="Project"/>
-                                    <TextBox Width="150" Text="{Binding ProjectName}"  
+                                        <Label HorizontalContentAlignment="Right" Width="80" Content="Project"/>
+                                        <TextBox Width="150" Text="{Binding SelectedProject.ProjectName}"  
                                                  Margin="2"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
-                                    <Label HorizontalContentAlignment="Right" Width="80" Content="Priority"/>
-                                    <ComboBox Text="Item" Width="150" Margin="2">
+                                        <Label HorizontalContentAlignment="Right" Width="80" Content="Priority"/>
+                                        <ComboBox Text="Item" Width="150" Margin="2">
                                             <ComboBoxItem Padding="2" IsSelected="True" Content="High" />
                                             <ComboBoxItem Padding="2" Content="Medium"/>
                                             <ComboBoxItem Padding="2" Content="Low"/>
                                         </ComboBox>
                                     </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
-                                    <Label HorizontalContentAlignment="Right"  Width="80" Content="Deadline"/>
-                                    <TextBox Width="150" Text=""  Margin="2"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
-                                    <Label HorizontalContentAlignment="Right" Width="80" Content="System"/>
-                                    <TextBox Width="150" Text=""  Margin="2"/>
-                                </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                                        <Label HorizontalContentAlignment="Right"  Width="80" Content="Deadline"/>
+                                        <TextBox Width="150" Text=""  Margin="2"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                                        <Label HorizontalContentAlignment="Right" Width="80" Content="System"/>
+                                        <ComboBox Width="150"  Margin="2" ItemsSource="{Binding SystemItems}"
+                                      DisplayMemberPath="DisplayMember"
+                                      SelectedValuePath="Id"
+                                      SelectedValue="{Binding SelectedProject.SystemId, Mode=TwoWay}"/>
+                                    </StackPanel>
+                               
+
+
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                     <Label HorizontalContentAlignment="Right" Width="80" Content="Status"/>
-                                    <ComboBox Text="Item" Width="150" Margin="2">
-                                        <ComboBoxItem Padding="2" IsSelected="True" Content="Not Started"/>
+                                        <ComboBox Text="Item" Width="150" Margin="2"
+                                      SelectedValuePath="SelectedProject.StatusId"
+                                      SelectedValue="{Binding SelectedProject.StatusId, Mode=TwoWay}">
+                                            <ComboBoxItem Padding="2" IsSelected="True" Content="Not Started"/>
                                         <ComboBoxItem Padding="2" Content="In Progress"/>
                                         <ComboBoxItem Padding="2" Content="On Hold"/>
                                         <ComboBoxItem Padding="2" Content="Quality Assurance"/>
@@ -138,23 +155,24 @@
                                              Text=""  Margin="2"/>
                                 </StackPanel>
                             </StackPanel>
-                            </Border>
+                            </StackPanel>
+                        </Border>
 
-                            <Border Grid.Row="2" Margin="0,10,0,0" >
+                        <Border Grid.Row="2" Margin="0,10,0,0" >
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <Button Command="{Binding SaveProjectCommand}" Width="100" Height="30" Margin="5">Save</Button>
                                 <Button Command="{Binding CancelAddProjectCommand}" Width="100" Height="30" Margin="2,2,0,2">Cancel</Button>
                             </StackPanel>
                         </Border>
 
-                        </Grid>
+                    </Grid>
 
-                    </Border>
+                </Border>
                 <!--</ScrollViewer>-->
             </wpfTool:ChildWindow>
         </Grid>
     </Border>
-    
+
 
 
 

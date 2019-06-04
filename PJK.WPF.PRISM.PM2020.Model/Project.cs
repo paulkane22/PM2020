@@ -13,8 +13,8 @@ namespace PJK.WPF.PRISM.PM2020.Model
         [Display(Name = "Project Name")]
         public string ProjectName { get; set; }
 
-        [Display(Name = "ID")]
-        public int SystemId { get; set; }
+        [Display(Name = "System ID")]
+        public int? SystemId { get; set; }
 
         [Display(Name = "Priority")]
         public int Priority { get; set; }
@@ -28,6 +28,11 @@ namespace PJK.WPF.PRISM.PM2020.Model
         public bool Complete { get; set; }
         [Display(Name = "Comments")]
         public string Comment { get; set; }
+
+
+        public SystemItem SystemItem { get; set; }
+
+
 
     }
 }

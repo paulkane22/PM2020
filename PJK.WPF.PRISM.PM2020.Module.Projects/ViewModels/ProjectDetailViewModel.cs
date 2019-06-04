@@ -1,9 +1,14 @@
-﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+﻿using PJK.WPF.PRISM.PM2020.Model;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
@@ -12,25 +17,64 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
     {
         IProjectRepository _projectRepository;
         private IEventAggregator _eventAggregator;
+        private IMessageDialogService _messageDialogService;
+        private ISystemItemLookupDataService _systemItemLookupDataService;
+
         private ProjectWrapper _project;
         private bool _hasChanges;
 
         public DelegateCommand SaveProjectCommand { get; private set; }
+        public DelegateCommand DeleteProjectCommand { get; private set; }
+        public ObservableCollection<LookupItem> SystemItems { get; }
 
-        public ProjectDetailViewModel(IProjectRepository projectRepository, IEventAggregator eventAggregator)
+        public ProjectDetailViewModel(IProjectRepository projectRepository, 
+            IEventAggregator eventAggregator, 
+            IMessageDialogService messageDialogService, 
+            ISystemItemLookupDataService systemItemLookupDataService)
         {
             _projectRepository = projectRepository;
             _eventAggregator = eventAggregator;
+            _messageDialogService = messageDialogService;
+            _systemItemLookupDataService = systemItemLookupDataService;
+
             SaveProjectCommand = new DelegateCommand(OnSaveProject, OnSaveCanExecute);
+            DeleteProjectCommand = new DelegateCommand(OnDeleteProject, OnDeleteCanExecute);
+
+            SystemItems = new ObservableCollection<LookupItem>();
+
+        }
+
+        private async void OnDeleteProject()
+        {
+            var result = _messageDialogService.ShowOKCancelDialog($"Do you really want to delete this project?", "Question");
+            if(result == MessageDialogResult.OK)
+            {
+                _projectRepository.Remove(Project.Model);
+                await _projectRepository.SaveAsync();
+                _eventAggregator.GetEvent<AfterProjectDeletedEvent>().Publish(Project.Id);
+            }
+
+        }
+
+        private bool OnDeleteCanExecute()
+        {
+            return true;
         }
 
         public async Task LoadAsync(int projectId)
+        {
+            await InitialiseProject(projectId);
+            await LoadSystemItemsLookupAsync();
+
+        }
+
+        private async Task InitialiseProject(int projectId)
         {
             var project = await _projectRepository.GetProjectByIdAsync(projectId);
             Project = new ProjectWrapper(project);
             Project.PropertyChanged += (s, e) =>
             {
-                if(!HasChanges)
+                if (!HasChanges)
                 {
                     HasChanges = _projectRepository.HasChanges();
                 }
@@ -43,7 +87,17 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             SaveProjectCommand.RaiseCanExecuteChanged();
         }
 
-     
+        private async Task LoadSystemItemsLookupAsync()
+        {
+            SystemItems.Clear();
+            SystemItems.Add(new NullLookupItem {DisplayMember = " - " });
+            var lookup = await _systemItemLookupDataService.GetSystemItemLookupAsync();
+            foreach (var lookupItem in lookup)
+            {
+                SystemItems.Add(lookupItem);
+            }
+        }
+
         public bool HasChanges
         {
             get { return _hasChanges; }

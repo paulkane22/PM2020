@@ -1,12 +1,14 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
@@ -19,8 +21,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         private Func<IProjectDetailViewModel> _projectDetailViewModelCreator;
         private IProjectRepository _projectRepository;
         private IProjectDetailViewModel _projectDetailViewModel;
+        private ISystemItemLookupDataService _systemItemLookupDataService;
         private Project myProject;
-
 
         public DelegateCommand ShowAddProjectCommand { get; private set; }
         public DelegateCommand CreateProjectCommand { get; private set; }
@@ -31,7 +33,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public ProjectManagerViewModel(INavigationViewModel navigationViewModel, 
                 Func<IProjectDetailViewModel> projectDetailViewModelCreator, IProjectRepository projectRepository,
-                IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
+                IEventAggregator eventAggregator, IMessageDialogService messageDialogService, 
+                ISystemItemLookupDataService systemItemLookupDataService)
         {
             //if (projectRepository == null) throw new ArgumentNullException("dataService");
             if (eventAggregator == null) throw new ArgumentNullException("eventAggregator");
@@ -40,6 +43,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             _eventAggregator = eventAggregator;
             _projectDetailViewModelCreator = projectDetailViewModelCreator;
             _projectRepository = projectRepository;
+            _systemItemLookupDataService = systemItemLookupDataService;
             NavigationViewModel = navigationViewModel;
 
             //Check if user is in design mode.
@@ -51,20 +55,31 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             EditProjectCommand = new DelegateCommand<ProjectWrapper>(OnEditProject);
             CancelAddProjectCommand = new DelegateCommand(OnCancelAddProject);
 
+            SystemItems = new ObservableCollection<LookupItem>();
+
             // this.Projects = new ListCollectionView(dataService.GetProjects());
 
             _eventAggregator.GetEvent<OpenProjectDetailsViewEvent>().Subscribe(OnOpenProjectView);
+            _eventAggregator.GetEvent<AfterProjectDeletedEvent>().Subscribe(OnAfterProjectDeleted);
 
         }
 
-        private void OnCreateProject()
-        {
-           
-        }
 
         public async Task LoadProjectsAsync()
         {
            await  NavigationViewModel.LoadAsync();
+           await LoadSystemItemsLookupAsync();
+        }
+
+
+        private async Task LoadSystemItemsLookupAsync()
+        {
+            SystemItems.Clear();
+            var lookup = await _systemItemLookupDataService.GetSystemItemLookupAsync();
+            foreach (var lookupItem in lookup)
+            {
+                SystemItems.Add(lookupItem);
+            }
         }
 
 
@@ -112,6 +127,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         {
             myProject = new Project();
             myProject.ProjectName = "[New]";
+            myProject.SystemId = 1;
             SelectedProject = new ProjectWrapper(myProject);
             SelectedProject.PropertyChanged += (s, e) =>
             {
@@ -123,6 +139,24 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             ((DelegateCommand)SaveProjectCommand).RaiseCanExecuteChanged();
 
             ShowAddProject = true;
+        }
+
+
+        private void OnAfterProjectDeleted(int obj)
+        {
+            ProjectDetailViewModel = null;
+        }
+
+        private void OnCreateProject()
+        {
+
+        }
+
+        private ObservableCollection<LookupItem> _systemItems;
+        public ObservableCollection<LookupItem> SystemItems
+        {
+            get { return _systemItems; }
+            set { SetProperty(ref _systemItems, value); }
         }
 
 

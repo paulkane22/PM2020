@@ -12,6 +12,7 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess
         }
         
         public DbSet<Project> Projects { get; set; }
+        public DbSet<SystemItem> SystemItems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

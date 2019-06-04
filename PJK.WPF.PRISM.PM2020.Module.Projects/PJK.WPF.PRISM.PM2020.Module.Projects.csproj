@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\WindowOpenCloseConverter.cs" />
+    <Compile Include="Event\AfterProjectDeletedEvent.cs" />
     <Compile Include="Event\AfterProjectSavedEvent.cs" />
     <Compile Include="Event\OpenProjectDetailsViewEvent.cs" />
     <Compile Include="Model\ProjectList.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Services\IMessageDialogService.cs" />
     <Compile Include="Services\Lookups\IProjectLookupDataService.cs" />
+    <Compile Include="Services\Lookups\ISystemItemLookupDataService.cs" />
     <Compile Include="Services\Lookups\LookupDataService.cs" />
     <Compile Include="Services\MessageDialogService.cs" />
     <Compile Include="Services\ProjectWrapperService.cs" />

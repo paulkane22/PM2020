@@ -10,7 +10,12 @@ namespace PJK.WPF.PRISM.PM2020.Model
     {
         public int Id { get; set; }
         public string DisplayMember { get; set; }
-
-
     }
+
+    public class NullLookupItem : LookupItem
+    {
+        public new int? Id { get; set; }
+    }
+
+
 }

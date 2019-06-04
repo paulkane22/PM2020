@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups
 {
-    public class LookupDataService : IProjectLookupDataService
+    public class LookupDataService : IProjectLookupDataService, ISystemItemLookupDataService
     {
 
         private PM202DbContext ctx;
@@ -25,6 +25,19 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups
                 {
                     Id = f.Id,
                     DisplayMember = f.ProjectName
+                }
+                ).ToListAsync();
+
+        }
+
+
+        public async Task<IEnumerable<LookupItem>> GetSystemItemLookupAsync()
+        {
+            return await ctx.SystemItems.AsNoTracking().Select(f =>
+                new LookupItem
+                {
+                    Id = f.Id,
+                    DisplayMember = f.SystemName
                 }
                 ).ToListAsync();
 

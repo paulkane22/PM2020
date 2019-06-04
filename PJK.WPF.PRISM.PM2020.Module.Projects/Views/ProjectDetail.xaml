@@ -10,7 +10,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
@@ -22,11 +22,24 @@
                             <Label Content="Project Name ->"/>
                             <TextBox Width="150"  Margin="2" Text="{Binding Project.ProjectName}"/>
                         </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
+                        <Label Content="System ->"/>
+                        <ComboBox Width="150"  Margin="2" ItemsSource="{Binding SystemItems}"
+                                  DisplayMemberPath="DisplayMember"
+                                  SelectedValuePath="Id"
+                                  SelectedValue="{Binding Project.SystemId, Mode=TwoWay}"
+                                  
+                                  />
+                    </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
+
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Right">
                             <Label Margin="0,0,100,0" Content="Effect"/>
                         <Button Content="Add"  Command="{Binding  SaveProjectCommand}" Width="50" Margin="2"/>
-                            <Button Content="Cancel" Width="50" Margin="2"/>
+
+                        <Button Content="Delete"  Command="{Binding  DeleteProjectCommand}" Width="50" Margin="2"/>
+                        <Button Content="Cancel" Width="50" Margin="2"/>
                     </StackPanel>
                     </StackPanel>
             </StackPanel>
