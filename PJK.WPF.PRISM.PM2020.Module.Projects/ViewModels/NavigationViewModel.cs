@@ -30,8 +30,16 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         private void AfterProjectSaved(AfterProjectSavedEventArgs obj)
         {
-           var lookupItem =  Projects.Single(f => f.Id == obj.Id);
-            lookupItem.DisplayMember = obj.DisplayMember;
+           var lookupItem =  Projects.SingleOrDefault(f => f.Id == obj.Id);
+
+            if (lookupItem == null)
+            {
+                Projects.Add(new NavigationItemViewModel(obj.Id, obj.DisplayMember, _eventAggregator));
+            }
+            else
+            {
+                lookupItem.DisplayMember = obj.DisplayMember;
+            }
         }
 
         public async Task LoadAsync()

@@ -74,6 +74,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
                     DisplayMember = Project.ProjectName
                 }
                 );
+
         }
 
         private bool OnSaveCanExecute()

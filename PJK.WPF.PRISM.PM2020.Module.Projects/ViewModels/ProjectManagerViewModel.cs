@@ -1,6 +1,7 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
 using Prism.Events;
@@ -16,17 +17,20 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         private IMessageDialogService _messageDialogService;
         private IEventAggregator _eventAggregator;
         private Func<IProjectDetailViewModel> _projectDetailViewModelCreator;
+        private IProjectRepository _projectRepository;
         private IProjectDetailViewModel _projectDetailViewModel;
+        private Project myProject;
 
 
         public DelegateCommand ShowAddProjectCommand { get; private set; }
+        public DelegateCommand CreateProjectCommand { get; private set; }
         public DelegateCommand SaveProjectCommand { get; private set; }
         public DelegateCommand<ProjectWrapper> EditProjectCommand { get; private set; }
         public DelegateCommand CancelAddProjectCommand { get; private set; }
 
 
         public ProjectManagerViewModel(INavigationViewModel navigationViewModel, 
-                Func<IProjectDetailViewModel> projectDetailViewModelCreator, 
+                Func<IProjectDetailViewModel> projectDetailViewModelCreator, IProjectRepository projectRepository,
                 IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
             //if (projectRepository == null) throw new ArgumentNullException("dataService");
@@ -35,12 +39,14 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             _messageDialogService = messageDialogService;
             _eventAggregator = eventAggregator;
             _projectDetailViewModelCreator = projectDetailViewModelCreator;
+            _projectRepository = projectRepository;
             NavigationViewModel = navigationViewModel;
 
             //Check if user is in design mode.
             if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject())) return;
 
             ShowAddProjectCommand = new DelegateCommand(OnShowAddProject);
+            CreateProjectCommand = new DelegateCommand(OnCreateProject);
             SaveProjectCommand = new DelegateCommand(OnSaveProject, OnSaveCanExecute);
             EditProjectCommand = new DelegateCommand<ProjectWrapper>(OnEditProject);
             CancelAddProjectCommand = new DelegateCommand(OnCancelAddProject);
@@ -49,6 +55,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
             _eventAggregator.GetEvent<OpenProjectDetailsViewEvent>().Subscribe(OnOpenProjectView);
 
+        }
+
+        private void OnCreateProject()
+        {
+           
         }
 
         public async Task LoadProjectsAsync()
@@ -81,6 +92,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             set { SetProperty(ref _projectDetailViewModel, value); }
         }
 
+        public bool HasChanges { get; private set; }
+
         private async void OnOpenProjectView(int projectId)
         {
             if (ProjectDetailViewModel!=null && ProjectDetailViewModel.HasChanges)
@@ -93,6 +106,23 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             }
             ProjectDetailViewModel = _projectDetailViewModelCreator();
             await ProjectDetailViewModel.LoadAsync(projectId);
+        }
+
+        private void OnShowAddProject()
+        {
+            myProject = new Project();
+            myProject.ProjectName = "[New]";
+            SelectedProject = new ProjectWrapper(myProject);
+            SelectedProject.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(SelectedProject.HasErrors))
+                {
+                    ((DelegateCommand)SaveProjectCommand).RaiseCanExecuteChanged();
+                }
+            };
+            ((DelegateCommand)SaveProjectCommand).RaiseCanExecuteChanged();
+
+            ShowAddProject = true;
         }
 
 
@@ -108,6 +138,22 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         {
             if (!SelectedProject.HasErrors)
             {
+                _projectRepository.Add(myProject);
+                HasChanges = _projectRepository.HasChanges();
+
+                _projectRepository.SaveAsync();
+               
+                _eventAggregator.GetEvent<AfterProjectSavedEvent>().Publish(
+                    new AfterProjectSavedEventArgs
+                    {
+                        Id = myProject.Id,
+                        DisplayMember = myProject.ProjectName
+                    }
+                    );
+
+
+
+
                 //             Projects.Add(SelectedProject);
             }
             ShowAddProject = false;
@@ -124,23 +170,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         }
 
 
-        private void OnShowAddProject()
-        {
-            Project myProject = new Project();
-            myProject.ProjectName = "[New]";
-            myProject.Id = 100;
-            SelectedProject = new ProjectWrapper(myProject);
-            SelectedProject.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == nameof(SelectedProject.HasErrors))
-                {
-                    ((DelegateCommand)SaveProjectCommand).RaiseCanExecuteChanged();
-                }
-            };
-            ((DelegateCommand)SaveProjectCommand).RaiseCanExecuteChanged();
 
-            ShowAddProject = true;
-        }
 
         #endregion
     }

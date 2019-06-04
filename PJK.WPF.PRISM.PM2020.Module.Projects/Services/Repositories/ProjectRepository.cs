@@ -106,6 +106,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
         {
             return _context.ChangeTracker.HasChanges();
         }
+
+        public void Add(Project project)
+        {
+             _context.Projects.Add(project);
+            _context.SaveChanges();
+        }
     }
 
 

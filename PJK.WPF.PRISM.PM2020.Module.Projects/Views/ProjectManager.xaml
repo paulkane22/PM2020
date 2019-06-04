@@ -59,7 +59,7 @@
 
             <Border Grid.Row="3"  Margin="10,0,10,0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Command="{Binding ShowAddProjectCommand}" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,10">Add Project</Button>
+                    <Button Command="{Binding ShowAddProjectCommand}" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,10">Create Project</Button>
                 </StackPanel>
             </Border>
 
