@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PJK.WPF.PRISM.PM2020.Model
 {
     public class Project : IProject
     {
+        public Project()
+        {
+            SubTasks = new Collection<ProjectSubtask>();
+        }
+
+
         [Key]
         public int Id { get; set; }
 
@@ -32,7 +40,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
 
         public SystemItem SystemItem { get; set; }
 
-
+        public ICollection<ProjectSubtask> SubTasks { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess.Migrations
 {
     using PJK.WPF.PRISM.PM2020.Model;
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<PJK.WPF.PRISM.PM2020.DataAccess.PM202DbContext>
     {
@@ -29,6 +30,10 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess.Migrations
                 new SystemItem { SystemName = "System 4" }
                );
 
+            context.SaveChanges();
+
+            context.Subtasks.AddOrUpdate(st => st.SubTask,
+                new ProjectSubtask { SubTask = "Do some work!", ProjectId = context.Projects.First().Id });
 
 
         }

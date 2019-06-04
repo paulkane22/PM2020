@@ -55,6 +55,10 @@
     <Compile Include="Migrations\201906040930327_AddedSystemList.Designer.cs">
       <DependentUpon>201906040930327_AddedSystemList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906041238096_AddedSubTasks.cs" />
+    <Compile Include="Migrations\201906041238096_AddedSubTasks.Designer.cs">
+      <DependentUpon>201906041238096_AddedSubTasks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PM202DbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +79,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906040930327_AddedSystemList.resx">
       <DependentUpon>201906040930327_AddedSystemList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906041238096_AddedSubTasks.resx">
+      <DependentUpon>201906041238096_AddedSubTasks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

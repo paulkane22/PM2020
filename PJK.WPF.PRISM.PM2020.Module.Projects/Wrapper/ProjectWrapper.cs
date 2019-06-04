@@ -58,6 +58,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper
             set { SetValue(value); }
         }
 
+        
+
+
+
         protected override IEnumerable<string> ValidateProperty(string propertyName)
         {
             switch (propertyName)

@@ -7,6 +7,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -44,6 +45,19 @@
                     </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <StackPanel Grid.Row="2">
+            <DataGrid ItemsSource = "{Binding SubTasks}"
+                      SelectedItem="{Binding SelectedSubtask, Mode=TwoWay}"
+                      AutoGenerateColumns="False" RowHeaderWidth="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="SubTasks " Width="*"
+                                        Binding="{Binding Model.SubTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="Add Subtask"  Command="{Binding AddSubtaskCommand}" Width="50" Margin="2"/>
+            <Button Content="Remove Subtask"  Command="{Binding RemoveSubtaskCommand}" Width="50" Margin="2"/>
+        </StackPanel>
+        
     </Grid>
 
 

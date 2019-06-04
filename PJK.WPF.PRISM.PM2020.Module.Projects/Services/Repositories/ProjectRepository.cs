@@ -21,7 +21,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
 
         public async Task<Project> GetProjectByIdAsync(int projectId)
         {
-            return await _context.Projects.SingleAsync(f => f.Id == projectId);
+            return await _context.Projects
+                .Include(p => p.SubTasks)
+                .SingleAsync(f => f.Id == projectId);
         }
 
 
