@@ -29,9 +29,6 @@
             <view:ProjectDetail />
         </DataTemplate>
 
-
-
-
     </UserControl.Resources>
 
     <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundColour}" BorderThickness="1">
@@ -132,29 +129,29 @@
                                       SelectedValuePath="Id"
                                       SelectedValue="{Binding SelectedProject.SystemId, Mode=TwoWay}"/>
                                     </StackPanel>
-                               
 
 
-                                <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
-                                    <Label HorizontalContentAlignment="Right" Width="80" Content="Status"/>
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                                        <Label HorizontalContentAlignment="Right" Width="80" Content="Status"/>
                                         <ComboBox Text="Item" Width="150" Margin="2"
                                       SelectedValuePath="SelectedProject.StatusId"
                                       SelectedValue="{Binding SelectedProject.StatusId, Mode=TwoWay}">
                                             <ComboBoxItem Padding="2" IsSelected="True" Content="Not Started"/>
-                                        <ComboBoxItem Padding="2" Content="In Progress"/>
-                                        <ComboBoxItem Padding="2" Content="On Hold"/>
-                                        <ComboBoxItem Padding="2" Content="Quality Assurance"/>
-                                        <ComboBoxItem Padding="2" Content="Awaiting Live"/>
-                                        <ComboBoxItem Padding="2" Content="Complete"/>
-                                    </ComboBox>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
-                                    <Label HorizontalContentAlignment="Right" Width="80" Content="Comments"/>
-                                    <TextBox Width="300" Height="180" TextWrapping="Wrap"
+                                            <ComboBoxItem Padding="2" Content="In Progress"/>
+                                            <ComboBoxItem Padding="2" Content="On Hold"/>
+                                            <ComboBoxItem Padding="2" Content="Quality Assurance"/>
+                                            <ComboBoxItem Padding="2" Content="Awaiting Live"/>
+                                            <ComboBoxItem Padding="2" Content="Complete"/>
+                                        </ComboBox>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                                        <Label HorizontalContentAlignment="Right" Width="80" Content="Comments"/>
+                                        <TextBox Width="300" Height="180" TextWrapping="Wrap"
                                              AcceptsReturn="True"
                                              Text=""  Margin="2"/>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
                             </StackPanel>
                         </Border>
 
@@ -173,12 +170,6 @@
         </Grid>
     </Border>
 
-
-
-
-
-
-
-
-
 </UserControl>
+    
+    

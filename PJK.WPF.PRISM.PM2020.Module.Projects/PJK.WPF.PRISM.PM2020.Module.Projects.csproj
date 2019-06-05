@@ -55,8 +55,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\WindowOpenCloseConverter.cs" />
+    <Compile Include="Event\AfterCollectionSavedEvent.cs" />
+    <Compile Include="Event\AfterDetailClosedEvent.cs" />
+    <Compile Include="Event\AfterDetailDeletedEvent.cs" />
+    <Compile Include="Event\AfterDetailSavedEvent.cs" />
     <Compile Include="Event\AfterProjectDeletedEvent.cs" />
     <Compile Include="Event\AfterProjectSavedEvent.cs" />
+    <Compile Include="Event\OpenDetailViewEvent.cs" />
     <Compile Include="Event\OpenProjectDetailsViewEvent.cs" />
     <Compile Include="Model\ProjectList.cs" />
     <Compile Include="ProjectsModule.cs" />
@@ -82,13 +87,17 @@
     <Compile Include="Services\ProjectWrapperService.cs" />
     <Compile Include="Services\Repositories\IProjectRepository.cs" />
     <Compile Include="Services\Repositories\ProjectRepository.cs" />
+    <Compile Include="ViewModels\IDetailViewModel.cs" />
     <Compile Include="ViewModels\INavigationViewModel.cs" />
     <Compile Include="ViewModels\IProjectDetailViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NavigationItemViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ProjectDetailViewModel.cs" />
-    <Compile Include="ViewModels\ProjectManagerListViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
+    <Compile Include="Views\Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NavigationView.xaml.cs">
       <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
@@ -97,9 +106,6 @@
     </Compile>
     <Compile Include="Views\ProjectManager.xaml.cs">
       <DependentUpon>ProjectManager.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ProjectManagerList.xaml.cs">
-      <DependentUpon>ProjectManagerList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wrapper\ModelWrapper.cs" />
     <Compile Include="Wrapper\NotifyDataErrorInfoBase.cs" />
@@ -119,6 +125,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -128,10 +138,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProjectManager.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ProjectManagerList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

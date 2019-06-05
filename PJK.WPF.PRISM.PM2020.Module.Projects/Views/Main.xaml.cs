@@ -3,11 +3,11 @@
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.Views
 {
     /// <summary>
-    /// Interaction logic for ProjectManagerList
+    /// Interaction logic for Main
     /// </summary>
-    public partial class ProjectManagerList : UserControl
+    public partial class Main : UserControl
     {
-        public ProjectManagerList()
+        public Main()
         {
             InitializeComponent();
         }

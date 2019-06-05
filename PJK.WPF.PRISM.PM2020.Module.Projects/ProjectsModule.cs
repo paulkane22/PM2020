@@ -16,7 +16,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
         public void OnInitialized(IContainerProvider containerProvider)
         {
             var regionManager = containerProvider.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion("ContentRegion", typeof(ProjectManager));
+            //regionManager.RegisterViewWithRegion("ContentRegion", typeof(ProjectManager));
+            regionManager.RegisterViewWithRegion("ContentRegion", typeof(Main));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

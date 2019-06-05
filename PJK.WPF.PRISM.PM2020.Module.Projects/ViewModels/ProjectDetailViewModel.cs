@@ -170,9 +170,25 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             return SelectedSubtask != null;
         }
 
-        private void OnAddSubtask()
+        private async void OnAddSubtask()
         {
-            throw new NotImplementedException();
+            ProjectSubtask newSubtask = new ProjectSubtask();
+            newSubtask.SubTask = "To Do";
+            Project.Model.SubTasks.Add(newSubtask);
+            await _projectRepository.SaveAsync();
+            HasChanges = _projectRepository.HasChanges();
+            SaveProjectCommand.RaiseCanExecuteChanged();
+
+            InitialiseSubtasksAsync(Project.Model.SubTasks);
+
+            _eventAggregator.GetEvent<AfterProjectSavedEvent>().Publish(
+               new AfterProjectSavedEventArgs
+               {
+                   Id = Project.Id,
+                   DisplayMember = Project.ProjectName
+               }
+               );
+
         }
 
         private void OnRemoveSubtask()

@@ -129,7 +129,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             myProject.ProjectName = "[New]";
             myProject.SystemId = 1;
             SelectedProject = new ProjectWrapper(myProject);
-            SelectedProject.PropertyChanged += (s, e) =>
+             SelectedProject.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName == nameof(SelectedProject.HasErrors))
                 {
