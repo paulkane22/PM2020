@@ -48,7 +48,7 @@ namespace PJK.WPF.PRISM.PM2020.ViewModels
                     Navigate("ControlsDemo");
                     break;
                 case "projects":
-                    Navigate("ProjectManager");
+                    Navigate("Main");
                     break;
                 case "stock":
                     Navigate("StockList");

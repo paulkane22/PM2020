@@ -22,15 +22,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<INavigationViewModel, NavigationViewModel>();
-            containerRegistry.Register<IProjectDetailViewModel, ProjectDetailViewModel>();
+            containerRegistry.Register<INavigationViewModel, ProjectNavigatorViewModel>();
+            //containerRegistry.Register<INavigationViewModel, NavigationViewModel>();
+            //containerRegistry.Register<IProjectDetailViewModel, ProjectDetailViewModel>();
             containerRegistry.Register<IMessageDialogService, MessageDialogService>();
 
             containerRegistry.Register<IProjectLookupDataService, LookupDataService>();
             containerRegistry.Register<ISystemItemLookupDataService, LookupDataService>();
             containerRegistry.RegisterInstance<IProject>(new Project());
-            containerRegistry.RegisterInstance<IProjectRepository>(new ProjectRepository());
-            
+            containerRegistry.RegisterInstance<IProjectRepository>(new ProjectRepository(new PM202DbContext()));
 
         }
     }

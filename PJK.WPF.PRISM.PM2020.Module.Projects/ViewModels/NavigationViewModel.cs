@@ -30,8 +30,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             Projects = new ObservableCollection<NavigationItemViewModel>();
         }
 
-
-
         public async Task LoadAsync()
         {
             var lookup = await _projectLookupDataService.GetProjectLookupAsync();
@@ -69,20 +67,5 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
                 lookupItem.DisplayMember = project.DisplayMember;
             }
         }
-
-
-
-
-        //private NavigationItemViewModel _selectedProject;
-        //public NavigationItemViewModel SelectedProject
-        //{
-        //    get { return _selectedProject; }
-        //    set { SetProperty(ref _selectedProject, value);
-        //            if(_selectedProject != null)
-        //            {
-        //            _eventAggregator.GetEvent<OpenProjectDetailsViewEvent>().Publish(_selectedProject.Id);
-        //            }
-        //    }
-        //}
     }
 }

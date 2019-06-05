@@ -29,7 +29,6 @@
                                   DisplayMemberPath="DisplayMember"
                                   SelectedValuePath="Id"
                                   SelectedValue="{Binding Project.SystemId, Mode=TwoWay}"
-                                  
                                   />
                     </StackPanel>
 

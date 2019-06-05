@@ -9,8 +9,14 @@
 
     <UserControl.Resources>
         <local:WindowOpenCloseConverter x:Key="windowOpenCloseConverter"/>
-
-
+        <DataTemplate DataType="{x:Type viewModel:ProjectNavigatorViewModel}">
+            <views:ProjectNavigator/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NavigationViewModel}">
+            <views:NavigationView/>
+        </DataTemplate>
+        
+        
     </UserControl.Resources>
 
     <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundColour}" BorderThickness="1">
@@ -22,8 +28,8 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0" />
             </Grid.ColumnDefinitions>
 
 
@@ -33,9 +39,10 @@
                 </StackPanel>
             </Border>
 
-            <views:NavigationView DataContext="{Binding NavigationViewModel}"  Grid.Row="2" Grid.Column="0"/>
-            <ContentControl Content="{Binding ProjectDetailViewModel}" Grid.Row="2" Grid.Column="1"/>
-
+            <ContentControl Content="{Binding NavigationViewModel}" Margin="10" Grid.Row="2" Grid.Column="0"/>
+            <ContentControl Content="{Binding ProjectDetailViewModel}" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1"/>
+        
+        
         </Grid>
     </Border>
 </UserControl>

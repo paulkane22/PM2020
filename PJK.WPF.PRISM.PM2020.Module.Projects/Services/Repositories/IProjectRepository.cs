@@ -5,13 +5,7 @@ using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
 { 
-    public interface IProjectRepository
+    public interface IProjectRepository : IGenericRepository<Project>
     {
-        Task<Project> GetProjectByIdAsync(int projectId);
-        Task SaveAsync();
-        bool HasChanges();
-        ProjectList GetProjects();
-        void Add(Project project);
-        void Remove(Project model);
     }
 }

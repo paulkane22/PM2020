@@ -17,7 +17,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Views
         {
             InitializeComponent();
             _viewModel = (ProjectManagerViewModel)this.DataContext;
-
             this.Loaded += ProjectManager_Loaded;
         }
 

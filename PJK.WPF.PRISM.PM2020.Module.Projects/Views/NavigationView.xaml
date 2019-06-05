@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              >
     <StackPanel>
-        <Label>Hello</Label>
+        <Label>Hello from navigation view</Label>
         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
         <ItemsControl ItemsSource ="{Binding Projects}">
             <ItemsControl.ItemTemplate>

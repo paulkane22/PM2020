@@ -25,9 +25,9 @@
             </Border>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModel:ProjectDetailViewModel}">
+        <!--<DataTemplate DataType="{x:Type viewModel:ProjectDetailViewModel}">
             <view:ProjectDetail />
-        </DataTemplate>
+        </DataTemplate>-->
 
     </UserControl.Resources>
 
