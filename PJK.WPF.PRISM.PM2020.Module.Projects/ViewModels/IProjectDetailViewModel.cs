@@ -2,9 +2,7 @@
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {
-    public interface IProjectDetailViewModel
+    public interface IProjectDetailViewModel : IDetailViewModel
     {
-        Task LoadAsync(int projectId);
-        bool HasChanges { get; }
     }
 }

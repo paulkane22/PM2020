@@ -15,8 +15,10 @@
         <DataTemplate DataType="{x:Type viewModel:NavigationViewModel}">
             <views:NavigationView/>
         </DataTemplate>
-        
-        
+        <DataTemplate DataType="{x:Type viewModel:ProjectDetailViewModel}">
+            <views:ProjectDetail/>
+        </DataTemplate>
+
     </UserControl.Resources>
 
     <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundColour}" BorderThickness="1">
@@ -29,7 +31,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
 
