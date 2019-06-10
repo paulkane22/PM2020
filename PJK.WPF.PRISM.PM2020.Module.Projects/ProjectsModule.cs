@@ -23,6 +23,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<INavigationViewModel, ProjectNavigatorViewModel>();
+            containerRegistry.Register<IRibbonViewModel, RibbonMainViewModel>();
             //containerRegistry.Register<INavigationViewModel, NavigationViewModel>();
             containerRegistry.Register<IProjectDetailViewModel, ProjectDetailViewModel>();
             containerRegistry.Register<IMessageDialogService, MessageDialogService>();

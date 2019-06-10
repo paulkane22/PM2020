@@ -46,7 +46,7 @@
                     <MenuItem Header="Projects" Command="{Binding NavigateCommand}" CommandParameter="projects"/>
                     <MenuItem Header="About" Command="{Binding ShowAboutCommand}"/>
                 </MenuItem>
-                <MenuItem Header="Help" IsEnabled="False" HorizontalAlignment="Right" />
+                <!--<MenuItem Header="Help" IsEnabled="False" HorizontalAlignment="Right" />-->
             </Menu>
         </StackPanel>
 

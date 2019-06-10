@@ -30,7 +30,7 @@ prism:ViewModelLocator.AutoWireViewModel="True">
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Priority"/>
-                            <ComboBox Text="Item" Width="150" Margin="2">
+                            <ComboBox Text="Item" Width="150" Margin="2" >
                                 <ComboBoxItem Padding="2" IsSelected="True" Content="High" />
                                 <ComboBoxItem Padding="2" Content="Medium"/>
                                 <ComboBoxItem Padding="2" Content="Low"/>
@@ -45,7 +45,7 @@ prism:ViewModelLocator.AutoWireViewModel="True">
                             <ComboBox Width="150" Margin="2" ItemsSource="{Binding SystemItems}"
                                 DisplayMemberPath="DisplayMember"
                                 SelectedValuePath="Id"
-                                SelectedValue="{Binding SelectedProject.SystemId, Mode=TwoWay}"/>
+                               />
                          </StackPanel>
 
 
@@ -53,8 +53,7 @@ prism:ViewModelLocator.AutoWireViewModel="True">
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Status"/>
                             <ComboBox Text="Item" Width="150" Margin="2"
-                                    SelectedValuePath="SelectedProject.StatusId"
-                                    SelectedValue="{Binding SelectedProject.StatusId, Mode=TwoWay}">
+                                    SelectedValuePath="SelectedProject.StatusId">
                                 <ComboBoxItem Padding="2" IsSelected="True" Content="Not Started"/>
                                 <ComboBoxItem Padding="2" Content="In Progress"/>
                                 <ComboBoxItem Padding="2" Content="On Hold"/>

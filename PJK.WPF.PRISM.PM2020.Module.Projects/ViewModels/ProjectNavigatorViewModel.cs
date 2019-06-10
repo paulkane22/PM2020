@@ -55,12 +55,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             get { return _selectedProject; }
             set { SetProperty(ref _selectedProject, value);
 
-                if(_selectedProject !=null)
-                {
-                    _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs
-                                                                                { Id = _selectedProject.Id
-                                                                                });
-                }
+                //if(_selectedProject !=null)
+                //{
+                //    _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs
+                //                                                                { Id = _selectedProject.Id
+                //                                                                });
+                //}
             }
         }
 

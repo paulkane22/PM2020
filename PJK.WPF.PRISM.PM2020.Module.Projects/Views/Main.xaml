@@ -19,6 +19,9 @@
         <DataTemplate DataType="{x:Type viewModel:ProjectDetailViewModel}">
             <views:ProjectDetail/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RibbonMainViewModel}">
+            <views:RibbonMain/>
+        </DataTemplate>
 
     </UserControl.Resources>
 
@@ -36,17 +39,13 @@
             </Grid.ColumnDefinitions>
 
 
-            <Border Grid.Row="1"  Margin="0" >
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label Margin="10,10,0,0" FontSize="14" FontWeight="Bold" Content="Manage Projects"/>
-                </StackPanel>
+            <Border Grid.Row="1"  Grid.ColumnSpan="2"  Margin="0" >
+                <!--<ContentControl Content="{Binding RibbonViewModel}" Margin="10" />-->
+                <views:RibbonMain/>
             </Border>
 
-            <ContentControl Content="{Binding NavigationViewModel}" Margin="10" Grid.Row="2" Grid.Column="0"/>
+            <ContentControl Content="{Binding NavigationViewModel}" Margin="0" Grid.Row="2" Grid.Column="0"/>
             <!--<ContentControl Content="{Binding ProjectDetailViewModel}" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1"/>-->
-
-
-
 
             <wpfTool:ChildWindow Grid.RowSpan="4" Grid.ColumnSpan="2"
                 Height="500"

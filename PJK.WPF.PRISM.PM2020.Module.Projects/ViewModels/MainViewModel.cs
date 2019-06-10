@@ -13,17 +13,20 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         private IMessageDialogService _messageDialogService;
         private IDetailViewModel _projectDetailViewModel;
         private INavigationViewModel _navigationViewModel;
+        private IRibbonViewModel _ribbonViewModel;
 
         private bool _hasChanges;
         private bool _showAddProject = false;
 
 
-        public MainViewModel(INavigationViewModel navigationViewModel, IProjectDetailViewModel projectDetailViewModel, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
+        public MainViewModel(INavigationViewModel navigationViewModel, IProjectDetailViewModel projectDetailViewModel, IRibbonViewModel ribbonViewModel , IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
             _navigationViewModel = navigationViewModel;
             _projectDetailViewModel = projectDetailViewModel;
+            _ribbonViewModel = new RibbonMainViewModel();
             _messageDialogService = messageDialogService;
             _eventAggregator = eventAggregator;
+            
 
             _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
         }
