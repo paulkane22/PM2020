@@ -19,7 +19,7 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
             <StackPanel>
                 <DataGrid ItemsSource = "{Binding Projects}"  AutoGenerateColumns="False" RowHeaderWidth="0"
-                      SelectedItem="{Binding SelectedProject, Mode=TwoWay}"  
+                      SelectedItem="{Binding SelectedProject, Mode=TwoWay}" IsReadOnly="True" 
                       >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Width="50" Binding="{Binding Id}" />

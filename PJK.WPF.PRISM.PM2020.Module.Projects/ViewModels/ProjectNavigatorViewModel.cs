@@ -28,13 +28,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         }
 
-        private async void CreateProject()
+        private void CreateProject()
         {
-            _projectRepository.Add(new Project { ProjectName = "[new]", Deadline = new System.DateTime(2019,10,10) });
-            await _projectRepository.SaveAsync();
-            await LoadAsync();
-        }
+            //_projectRepository.Add(new Project { ProjectName = "[new]", Deadline = new System.DateTime(2019, 10, 10) });
+            //await _projectRepository.SaveAsync();
+            //await LoadAsync();
 
+            _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs {Id = 1 });
+
+        }
 
         public async Task LoadAsync()
         {
@@ -61,5 +63,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
                 }
             }
         }
+
     }
 }

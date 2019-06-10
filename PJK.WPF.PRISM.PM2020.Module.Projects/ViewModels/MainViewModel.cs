@@ -1,6 +1,8 @@
-﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using Prism.Events;
 using Prism.Mvvm;
+using System;
 using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
@@ -13,6 +15,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         private INavigationViewModel _navigationViewModel;
 
         private bool _hasChanges;
+        private bool _showAddProject = false;
 
 
         public MainViewModel(INavigationViewModel navigationViewModel, IProjectDetailViewModel projectDetailViewModel, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
@@ -20,9 +23,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             _navigationViewModel = navigationViewModel;
             _projectDetailViewModel = projectDetailViewModel;
             _messageDialogService = messageDialogService;
+            _eventAggregator = eventAggregator;
 
+            _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
         }
 
+        private void OnOpenDetailView(OpenDetailViewEventArgs args)
+        {
+            ShowAddProject = true;
+        }
 
         public IDetailViewModel ProjectDetailViewModel
         {
@@ -46,6 +55,13 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         public async Task LoadAsync()
         {
             await NavigationViewModel.LoadAsync();
+        }
+
+
+        public bool ShowAddProject
+        {
+            get { return _showAddProject; }
+            set { SetProperty(ref _showAddProject, value); }
         }
 
     }

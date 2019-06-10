@@ -5,6 +5,7 @@
              xmlns:prism="http://prismlibrary.com/"             
              xmlns:views="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects.Views"
              xmlns:viewModel="clr-namespace:PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels"             
+             xmlns:wpfTool="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
     <UserControl.Resources>
@@ -31,7 +32,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0" />
             </Grid.ColumnDefinitions>
 
 
@@ -42,9 +43,21 @@
             </Border>
 
             <ContentControl Content="{Binding NavigationViewModel}" Margin="10" Grid.Row="2" Grid.Column="0"/>
-            <ContentControl Content="{Binding ProjectDetailViewModel}" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1"/>
-        
-        
+            <!--<ContentControl Content="{Binding ProjectDetailViewModel}" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1"/>-->
+
+
+
+
+            <wpfTool:ChildWindow Grid.RowSpan="4" Grid.ColumnSpan="2"
+                Height="500"
+                Width="500" 
+                Left="10" 
+                Top="10"
+                Name="chWindow"
+                Caption="Add New Project"
+                WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}">
+                <ContentControl Content="{Binding ProjectDetailViewModel}"/>
+            </wpfTool:ChildWindow>
         </Grid>
     </Border>
 </UserControl>
