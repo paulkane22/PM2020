@@ -10,7 +10,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
         int Id { get; set; }
         int Priority { get; set; }
         string ProjectName { get; set; }
-        int StatusID { get; set; }
+        int StatusId { get; set; }
         int? SystemId { get; set; }
     }
 }

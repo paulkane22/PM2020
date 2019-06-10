@@ -16,7 +16,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="{0} is required bro")]
+        [Required(ErrorMessage ="{0} is required")]
         [StringLength(20)]
         [Display(Name = "Project Name")]
         public string ProjectName { get; set; }
@@ -31,7 +31,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
         public DateTime Deadline { get; set; }
 
         [Display(Name = "Status")]
-        public int StatusID { get; set; }
+        public int StatusId { get; set; }
         [Display(Name = "Complete")]
         public bool Complete { get; set; }
         [Display(Name = "Comments")]

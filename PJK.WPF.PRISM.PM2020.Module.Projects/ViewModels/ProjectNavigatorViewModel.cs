@@ -1,4 +1,5 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
@@ -11,9 +12,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {
     public class ProjectNavigatorViewModel : BindableBase, INavigationViewModel
     {
-        private readonly IEventAggregator _eventAggregator;
+        private IEventAggregator _eventAggregator;
         private IProjectRepository _projectRepository;
-        private NavigationItemViewModel _selectedProject;
+        private ProjectWrapper _selectedProject;
 
         public DelegateCommand CreateProjectCommand { get; private set; }
 
@@ -22,7 +23,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             _eventAggregator = eventAggregator;
             _projectRepository = projectRepository;
 
-            Projects = new ObservableCollection<NavigationItemViewModel>();
+            Projects = new ObservableCollection<ProjectWrapper>();
             CreateProjectCommand = new DelegateCommand(CreateProject);
 
         }
@@ -41,16 +42,24 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             Projects.Clear();
             foreach (var item in lookup)
             {
-                Projects.Add(new NavigationItemViewModel(item.Id, item.ProjectName, _eventAggregator));
+                Projects.Add(new ProjectWrapper(item));
             }
         }
 
-        public ObservableCollection<NavigationItemViewModel> Projects { get; set; }
+        public ObservableCollection<ProjectWrapper> Projects { get; set; }
 
-        public NavigationItemViewModel SelectedProject
+        public ProjectWrapper SelectedProject
         {
             get { return _selectedProject; }
-            set { SetProperty(ref _selectedProject, value); }
+            set { SetProperty(ref _selectedProject, value);
+
+                if(_selectedProject !=null)
+                {
+                    _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs
+                                                                                { Id = _selectedProject.Id
+                                                                                });
+                }
+            }
         }
     }
 }

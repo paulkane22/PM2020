@@ -11,17 +11,13 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories
 {
     public class ProjectRepository : GenericRepository<Project, PM202DbContext>, IProjectRepository
     {
-        private ProjectList projects;
-        private PM202DbContext _context;
-
         public ProjectRepository(PM202DbContext context) :base(context)
         {
         }
 
         public override async Task<Project> GetByIdAsync(int projectId)
         {
-            return await _context.Projects
-                .Include(p => p.SubTasks)
+            return await Context.Projects
                 .SingleAsync(f => f.Id == projectId);
         }
 

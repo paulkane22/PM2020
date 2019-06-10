@@ -30,7 +30,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects
             containerRegistry.Register<IProjectLookupDataService, LookupDataService>();
             containerRegistry.Register<ISystemItemLookupDataService, LookupDataService>();
             containerRegistry.RegisterInstance<IProject>(new Project());
-            containerRegistry.RegisterInstance<IProjectRepository>(new ProjectRepository(new PM202DbContext()));
+            containerRegistry.Register<IProjectRepository, ProjectRepository>();
 
         }
     }

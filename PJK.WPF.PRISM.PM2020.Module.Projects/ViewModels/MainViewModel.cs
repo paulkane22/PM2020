@@ -1,13 +1,6 @@
-﻿
-using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
-using Prism.Commands;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using Prism.Events;
 using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
@@ -16,7 +9,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
     {
         private IEventAggregator _eventAggregator;
         private IMessageDialogService _messageDialogService;
-        private IProjectDetailViewModel _projectDetailViewModel;
+        private IDetailViewModel _projectDetailViewModel;
         private INavigationViewModel _navigationViewModel;
 
         private bool _hasChanges;
@@ -31,7 +24,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         }
 
 
-        public IProjectDetailViewModel ProjectDetailViewModel
+        public IDetailViewModel ProjectDetailViewModel
         {
             get { return _projectDetailViewModel; }
             set { SetProperty(ref _projectDetailViewModel, value); }

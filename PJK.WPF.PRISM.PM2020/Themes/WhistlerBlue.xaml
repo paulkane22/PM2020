@@ -166,7 +166,7 @@
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="BorderThickness" Value="1" />
         <!--Padding hack-->
-        <Setter Property="Padding" Value="2,10,2,10" />
+        <Setter Property="Padding" Value="2,3,2,3" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:DataGridCell}">

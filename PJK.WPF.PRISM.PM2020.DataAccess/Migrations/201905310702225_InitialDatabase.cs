@@ -16,7 +16,7 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess.Migrations
                         SystemId = c.Int(nullable: false),
                         Priority = c.Int(nullable: false),
                         Deadline = c.DateTime(nullable: false),
-                        StatusID = c.Int(nullable: false),
+                        StatusId = c.Int(nullable: false),
                         Complete = c.Boolean(nullable: false),
                         Comment = c.String(),
                     })
