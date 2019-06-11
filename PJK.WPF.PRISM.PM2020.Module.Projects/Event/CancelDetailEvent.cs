@@ -2,7 +2,7 @@
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.Event
 {
-    public class AfterDetailSavedEvent : PubSubEvent
+    public class CancelDetailEvent : PubSubEvent
     {
     }
 }

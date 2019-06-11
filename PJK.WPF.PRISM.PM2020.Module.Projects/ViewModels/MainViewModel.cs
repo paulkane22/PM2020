@@ -22,23 +22,49 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         public MainViewModel(INavigationViewModel navigationViewModel, IProjectDetailViewModel projectDetailViewModel, IRibbonViewModel ribbonViewModel , IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
             _navigationViewModel = navigationViewModel;
-            _projectDetailViewModel = projectDetailViewModel;
+            ProjectDetailViewModel = projectDetailViewModel;
             _ribbonViewModel = ribbonViewModel;
             _messageDialogService = messageDialogService;
             _eventAggregator = eventAggregator;
 
             _eventAggregator.GetEvent<AddDetailEvent>().Subscribe(OnAddDetail);
-            _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
+            _eventAggregator.GetEvent<CancelDetailEvent>().Subscribe(OnCancelAddProject);
+            _eventAggregator.GetEvent<AfterDetailSavedEvent>().Subscribe(OnAfterDetailSaved);
+
+
         }
 
-        private void OnAddDetail()
+        private void OnAfterDetailSaved()
         {
+            ShowAddProject = false;
+        }
+
+        private void OnCancelAddProject()
+        {
+            ShowAddProject = false;
+        }
+
+        private async void OnAddDetail()
+        {
+            await _projectDetailViewModel.LoadAsync(0);
             ShowAddProject = true;
         }
 
-        private void OnOpenDetailView(OpenDetailViewEventArgs args)
+        public async Task LoadAsync()
         {
-            ShowAddProject = true;
+            await NavigationViewModel.LoadAsync();
+        }
+
+        public bool ShowAddProject
+        {
+            get { return _showAddProject; }
+            set { SetProperty(ref _showAddProject, value); }
+        }
+
+        public bool HasChanges
+        {
+            get { return _hasChanges; }
+            set { SetProperty(ref _hasChanges, value); }
         }
 
         public IDetailViewModel ProjectDetailViewModel
@@ -52,25 +78,5 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             get { return _navigationViewModel; }
             set { SetProperty(ref _navigationViewModel, value); }
         }
-
-
-        public bool HasChanges
-        {
-            get { return _hasChanges; }
-            set { SetProperty(ref _hasChanges, value); }
-        }
-
-        public async Task LoadAsync()
-        {
-            await NavigationViewModel.LoadAsync();
-        }
-
-
-        public bool ShowAddProject
-        {
-            get { return _showAddProject; }
-            set { SetProperty(ref _showAddProject, value); }
-        }
-
     }
 }

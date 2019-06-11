@@ -41,14 +41,15 @@
             <views:RibbonMain Grid.Row="1" Grid.ColumnSpan="2"/>
 
             <ContentControl Content="{Binding NavigationViewModel}" Margin="0" Grid.Row="2" Grid.Column="0"/>
-            <ContentControl Content="{Binding ProjectDetailViewModel}" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1"/>
-            
+            <!--<ContentControl Content="{Binding ProjectDetailViewModel}" Margin="0" Grid.Row="2" Grid.Column="1"/>-->
+
             <wpfTool:ChildWindow Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="2"
                 Left="10" 
                 Top="10"
                 Name="chWindow"
                 IsModal="True"
                 Caption="Add New Project"
+                WindowStartupLocation="Center"
                 WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}">
                 <ContentControl Content="{Binding ProjectDetailViewModel}"/>
             </wpfTool:ChildWindow>

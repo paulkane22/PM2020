@@ -2,11 +2,11 @@
 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 xmlns:prism="http://prismlibrary.com/"
-prism:ViewModelLocator.AutoWireViewModel="True">
+prism:ViewModelLocator.AutoWireViewModel="False">
 
 
     <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundColour}" BorderThickness="1">
-        <Grid Margin="10">
+        <Grid Margin="10" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -22,11 +22,11 @@ prism:ViewModelLocator.AutoWireViewModel="True">
             </Label>
 
             <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundLightColour}" BorderThickness="1" Grid.Row="1" Grid.Column="0" >
-                <StackPanel>
+                <StackPanel DataContext="{Binding SelectedProject}">
                     <StackPanel Margin="30,20,0,20">
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Project"/>
-                            <TextBox Width="150" Text="{Binding SelectedProject.ProjectName}" Margin="2"/>
+                            <TextBox Width="150" Text="{Binding ProjectName}" Margin="2"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Priority"/>
@@ -44,12 +44,8 @@ prism:ViewModelLocator.AutoWireViewModel="True">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="System"/>
                             <ComboBox Width="150" Margin="2" ItemsSource="{Binding SystemItems}"
                                 DisplayMemberPath="DisplayMember"
-                                SelectedValuePath="Id"
-                               />
+                                SelectedValuePath="Id" />
                          </StackPanel>
-
-
-
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Status"/>
                             <ComboBox Text="Item" Width="150" Margin="2"
@@ -63,6 +59,11 @@ prism:ViewModelLocator.AutoWireViewModel="True">
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                            <Label HorizontalContentAlignment="Right" Width="80" Content="Complete"/>
+                            <CheckBox  VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Comments"/>
                             <TextBox Width="300" Height="180" TextWrapping="Wrap"
                                 AcceptsReturn="True"
@@ -74,18 +75,11 @@ prism:ViewModelLocator.AutoWireViewModel="True">
 
             <Border Grid.Row="2" Margin="0,10,0,0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Command="{Binding SaveProjectCommand}" Width="100" Height="30" Margin="5">Save</Button>
-                    <Button Command="{Binding CancelAddProjectCommand}" Width="100" Height="30" Margin="2,2,0,2">Cancel</Button>
+                    <Button Command="{Binding SaveDetailCommand}" Width="100" Height="30" Margin="5">Save</Button>
+                    <Button Command="{Binding CancelCommand}" Width="100" Height="30" Margin="2,2,0,2">Cancel</Button>
                 </StackPanel>
             </Border>
-
         </Grid>
-
     </Border>
-
-
-
-
-
 
 </UserControl>

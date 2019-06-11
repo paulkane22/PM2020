@@ -15,10 +15,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
     {
         private IEventAggregator _eventAggregator;
         private IProjectRepository _projectRepository;
-        private ProjectWrapper _selectedProject;
-
-        public DelegateCommand CreateProjectCommand { get; private set; }
-
 
         public ProjectNavigatorViewModel(IProjectRepository projectRepository, IEventAggregator eventAggregator)
         {
@@ -26,27 +22,20 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             _projectRepository = projectRepository;
 
             Projects = new ObservableCollection<ProjectWrapper>();
-            CreateProjectCommand = new DelegateCommand(CreateProject);
-
 
             _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetail);
+            _eventAggregator.GetEvent<RefreshListEvent>().Subscribe(OnRefreshList);
+        }
 
+        private async void OnRefreshList()
+        {
+            await LoadAsync();
         }
 
         private void OnEditDetail(EditDetailEventArgs args)
         {
-            if(_selectedProject != null)
-            _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs { Id = _selectedProject.Id });
-        }
-
-        private void CreateProject()
-        {
-            //_projectRepository.Add(new Project { ProjectName = "[new]", Deadline = new System.DateTime(2019, 10, 10) });
-            //await _projectRepository.SaveAsync();
-            //await LoadAsync();
-
-            _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs {Id = 1 });
-
+            //if(_selectedProject != null)
+            //_eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs { Id = _selectedProject.Id });
         }
 
         public async Task LoadAsync()
@@ -61,19 +50,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public ObservableCollection<ProjectWrapper> Projects { get; set; }
 
-        public ProjectWrapper SelectedProject
-        {
-            get { return _selectedProject; }
-            set { SetProperty(ref _selectedProject, value);
-
-                //if(_selectedProject !=null)
-                //{
-                //    _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs
-                //                                                                { Id = _selectedProject.Id
-                //                                                                });
-                //}
-            }
-        }
+        //public ProjectWrapper SelectedProject
+        //{
+        //    get { return _selectedProject; }
+        //    set { SetProperty(ref _selectedProject, value);}
+        //}
 
     }
 }

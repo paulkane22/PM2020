@@ -17,6 +17,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public DelegateCommand AddProjectCommand { get; private set; }
         public DelegateCommand EditProjectCommand { get; private set; }
+        public DelegateCommand RefreshListCommand { get; private set; }
 
 
         public RibbonMainViewModel(IEventAggregator eventAggregator)
@@ -25,6 +26,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             
             AddProjectCommand = new DelegateCommand(OnAddProjectExecute);
             EditProjectCommand = new DelegateCommand(OnEditProjectExecute);
+            RefreshListCommand = new DelegateCommand(OnRefreshExecute);
+        }
+
+        private void OnRefreshExecute()
+        {
+            _eventAggregator.GetEvent<RefreshListEvent>().Publish();
         }
 
         private void OnAddProjectExecute()
