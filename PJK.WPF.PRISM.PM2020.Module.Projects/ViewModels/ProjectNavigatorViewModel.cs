@@ -5,6 +5,7 @@ using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -18,6 +19,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public DelegateCommand CreateProjectCommand { get; private set; }
 
+
         public ProjectNavigatorViewModel(IProjectRepository projectRepository, IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
@@ -26,6 +28,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             Projects = new ObservableCollection<ProjectWrapper>();
             CreateProjectCommand = new DelegateCommand(CreateProject);
 
+
+            _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetail);
+
+        }
+
+        private void OnEditDetail(EditDetailEventArgs args)
+        {
+            if(_selectedProject != null)
+            _eventAggregator.GetEvent<OpenDetailViewEvent>().Publish(new OpenDetailViewEventArgs { Id = _selectedProject.Id });
         }
 
         private void CreateProject()

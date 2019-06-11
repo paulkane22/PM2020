@@ -23,12 +23,17 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         {
             _navigationViewModel = navigationViewModel;
             _projectDetailViewModel = projectDetailViewModel;
-            _ribbonViewModel = new RibbonMainViewModel();
+            _ribbonViewModel = ribbonViewModel;
             _messageDialogService = messageDialogService;
             _eventAggregator = eventAggregator;
-            
 
+            _eventAggregator.GetEvent<AddDetailEvent>().Subscribe(OnAddDetail);
             _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
+        }
+
+        private void OnAddDetail()
+        {
+            ShowAddProject = true;
         }
 
         private void OnOpenDetailView(OpenDetailViewEventArgs args)

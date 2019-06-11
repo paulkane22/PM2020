@@ -7,60 +7,51 @@
              >
 
     <StackPanel>
-        <ribbon:Ribbon x:Name="RibbonMainx"  SelectedIndex="0">
-  
+        <ribbon:Ribbon x:Name="RibbonMainx"  SelectedIndex="0" ShowQuickAccessToolBarOnTop="False" >
+
             <ribbon:Ribbon.HelpPaneContent>
-                <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/help.png" />
+                <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/information.png" />
             </ribbon:Ribbon.HelpPaneContent>
 
-            <ribbon:Ribbon.QuickAccessToolBar>
-            <ribbon:RibbonQuickAccessToolBar >
-                <ribbon:RibbonButton x:Name ="Save" SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Save.png" />
-                <ribbon:RibbonSplitButton x:Name="Undo" SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Undo.png" >
-                    <ribbon:RibbonSplitMenuItem Header="undo 1"/>
-                    <ribbon:RibbonSplitMenuItem Header="undo 2"/>
-                    <ribbon:RibbonSplitMenuItem Header="undo 3"/>
-                </ribbon:RibbonSplitButton>
-                <ribbon:RibbonSplitButton x:Name="Redo" SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Redo.png" >
-                    <ribbon:RibbonSplitMenuItem Header="redo 1"/>
-                    <ribbon:RibbonSplitMenuItem Header="redo 2"/>
-                    <ribbon:RibbonSplitMenuItem Header="redo 3"/>
-                </ribbon:RibbonSplitButton>
-            </ribbon:RibbonQuickAccessToolBar>
-            </ribbon:Ribbon.QuickAccessToolBar>
-
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu Visibility="Collapsed" />
+            </ribbon:Ribbon.ApplicationMenu>
 
             <!-- Ribbon Tab #1: Home -->
-            <ribbon:RibbonTab Header="Home" KeyTip="H" >
+            <ribbon:RibbonTab Header="Projects" KeyTip="P" >
                 <!-- Home  group-->
-                <ribbon:RibbonGroup x:Name="ClipboardGroup" Header="Project">
-                    <ribbon:RibbonMenuButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Paste.png"  Label="Paste" KeyTip="V">
-                        <ribbon:RibbonMenuItem ImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Paste.png"  Header="Keep Text Only" KeyTip="T"/>
-                        <ribbon:RibbonMenuItem ImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Paste.png"  Header="Paste Special..." KeyTip="S"/>
-                    </ribbon:RibbonMenuButton>
-                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Cut.png"  Label="Cut" KeyTip="X" />
-                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Copy.png"  Label="Copy" KeyTip="C" />
-                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Cut.png"  Label="Cut" KeyTip="X" />
-                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Copy.png"  Label="Copy" KeyTip="C" />
-                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Format.png"  Label="Format Painter" KeyTip="FP" />
-                </ribbon:RibbonGroup>
-                <!-- Employee And Payroll group-->
-                <ribbon:RibbonGroup x:Name="Employee" Header="Employee And Payroll">
-                    <ribbon:RibbonMenuButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/User.png"  Label="Employee" KeyTip="V">
-                        <ribbon:RibbonMenuItem ImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/User.png"  Header="Keep Text Only" KeyTip="T"/>
-                        <ribbon:RibbonMenuItem ImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/User.png"  Header="Paste Special..." KeyTip="S"/>
-                    </ribbon:RibbonMenuButton>
-                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Save.png"  Label="Save" KeyTip="X" />
-                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/Add.png"  Label="Add" KeyTip="C" />
+                <ribbon:RibbonGroup x:Name="ProjectGroup" Header="Manage Projects">
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/new-document.png"  
+                                         Label="Add" 
+                                         Command="{Binding AddProjectCommand}"/>
+                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/edit.png"  
+                                         Label="Edit" 
+                                         Command="{Binding EditProjectCommand}"/>
+                    <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/delete-symbol-option.png"  
+                                         Label="Delete" 
+                                         Command="{Binding DeleteProjectCommand}"/>
                 </ribbon:RibbonGroup>
 
+
             </ribbon:RibbonTab>
-            <!-- Ribbon Tab #2: -->
-            <ribbon:RibbonTab Header="Insert" KeyTip="I">
+            <ribbon:RibbonTab Header="Resources" KeyTip="R">
+                <!-- Resources  group-->
+                <ribbon:RibbonGroup x:Name="ResourcesGroup" Header="Manage Resources">
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/history.png"  
+                                         Label="Schedule" 
+                                         Command="{Binding SelectDetailCommand}"/>
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/triangular-warning-sign.png"  
+                                         Label="Assess" 
+                                         Command="{Binding SelectDetailCommand}"/>
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/document-with-irregular-line.png"  
+                                         Label="Assign" 
+                                         Command="{Binding SelectDetailCommand}"/>
+                </ribbon:RibbonGroup>
+
+
+
             </ribbon:RibbonTab>
-            <!-- Ribbon Tab #3: -->
-            <ribbon:RibbonTab Header="PageLayout" KeyTip="L">
-            </ribbon:RibbonTab>
+
 
         </ribbon:Ribbon>
 

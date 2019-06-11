@@ -35,24 +35,19 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="0" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-
-            <Border Grid.Row="1"  Grid.ColumnSpan="2"  Margin="0" >
-                <!--<ContentControl Content="{Binding RibbonViewModel}" Margin="10" />-->
-                <views:RibbonMain/>
-            </Border>
+            <views:RibbonMain Grid.Row="1" Grid.ColumnSpan="2"/>
 
             <ContentControl Content="{Binding NavigationViewModel}" Margin="0" Grid.Row="2" Grid.Column="0"/>
-            <!--<ContentControl Content="{Binding ProjectDetailViewModel}" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1"/>-->
-
-            <wpfTool:ChildWindow Grid.RowSpan="4" Grid.ColumnSpan="2"
-                Height="500"
-                Width="500" 
+            <ContentControl Content="{Binding ProjectDetailViewModel}" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1"/>
+            
+            <wpfTool:ChildWindow Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="2"
                 Left="10" 
                 Top="10"
                 Name="chWindow"
+                IsModal="True"
                 Caption="Add New Project"
                 WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}">
                 <ContentControl Content="{Binding ProjectDetailViewModel}"/>

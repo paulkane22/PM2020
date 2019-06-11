@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -8,9 +10,31 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {
     public class RibbonMainViewModel : BindableBase, IRibbonViewModel
     {
-        public RibbonMainViewModel()
+        private IEventAggregator _eventAggregator;
+
+
+
+
+        public DelegateCommand AddProjectCommand { get; private set; }
+        public DelegateCommand EditProjectCommand { get; private set; }
+
+
+        public RibbonMainViewModel(IEventAggregator eventAggregator)
         {
-            int a = 1;
+            _eventAggregator = eventAggregator;
+            
+            AddProjectCommand = new DelegateCommand(OnAddProjectExecute);
+            EditProjectCommand = new DelegateCommand(OnEditProjectExecute);
+        }
+
+        private void OnAddProjectExecute()
+        {
+            _eventAggregator.GetEvent<AddDetailEvent>().Publish();
+        }
+
+        private void OnEditProjectExecute()
+        {
+            _eventAggregator.GetEvent<EditDetailEvent>().Publish(new EditDetailEventArgs { Id = 0 });
         }
     }
 }

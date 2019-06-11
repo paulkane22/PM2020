@@ -56,14 +56,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\WindowOpenCloseConverter.cs" />
+    <Compile Include="Event\AddDetailEvent.cs" />
     <Compile Include="Event\AfterCollectionSavedEvent.cs" />
     <Compile Include="Event\AfterDetailClosedEvent.cs" />
     <Compile Include="Event\AfterDetailDeletedEvent.cs" />
     <Compile Include="Event\AfterDetailSavedEvent.cs" />
     <Compile Include="Event\AfterProjectDeletedEvent.cs" />
     <Compile Include="Event\AfterProjectSavedEvent.cs" />
+    <Compile Include="Event\EditDetailEvent.cs" />
     <Compile Include="Event\OpenDetailViewEvent.cs" />
     <Compile Include="Event\OpenProjectDetailsViewEvent.cs" />
+    <Compile Include="Event\SelectDetailEvent.cs" />
     <Compile Include="Model\ProjectList.cs" />
     <Compile Include="ProjectsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -184,38 +187,52 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\accept.png" />
-    <Resource Include="Images\add.png" />
+    <Resource Include="Images\new-document.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\help.png" />
+    <Resource Include="Images\text-document.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Undo.png" />
+    <Resource Include="Images\undo-navigational-arrow-in-a-circle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Redo.png" />
+    <Resource Include="Images\triangular-warning-sign.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Save.png" />
+    <Resource Include="Images\redo-navigational-arrow-in-a-circle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Paste.png" />
+    <Resource Include="Images\refresh-navigational-arrows-interface-symbol-inside-a-circle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Cut.png" />
+    <Resource Include="Images\information.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Copy.png" />
+    <Resource Include="Images\history.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Format.png" />
+    <Resource Include="Images\floppy-disk-digital-data-storage-or-save-interface-symbol.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\User.png" />
+    <Resource Include="Images\document-with-irregular-line.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\aAdd.png" />
+    <Resource Include="Images\copy-documents-option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clipboard-paste-option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\delete-symbol-option.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\equalizer-tool-on-open-window.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
