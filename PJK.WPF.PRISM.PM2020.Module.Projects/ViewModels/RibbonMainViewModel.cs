@@ -17,6 +17,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public DelegateCommand AddProjectCommand { get; private set; }
         public DelegateCommand EditProjectCommand { get; private set; }
+        public DelegateCommand DeleteProjectCommand { get; private set; }
         public DelegateCommand RefreshListCommand { get; private set; }
 
 
@@ -26,7 +27,13 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             
             AddProjectCommand = new DelegateCommand(OnAddProjectExecute);
             EditProjectCommand = new DelegateCommand(OnEditProjectExecute);
+            DeleteProjectCommand = new DelegateCommand(OnDeleteProjectExecute);
             RefreshListCommand = new DelegateCommand(OnRefreshExecute);
+        }
+
+        private void OnDeleteProjectExecute()
+        {
+            _eventAggregator.GetEvent<DeleteDetailEvent>().Publish();
         }
 
         private void OnRefreshExecute()

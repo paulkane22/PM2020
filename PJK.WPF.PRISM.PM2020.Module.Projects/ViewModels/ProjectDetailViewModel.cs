@@ -43,16 +43,19 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             if(!InEditMode)
             {
                 _projectRepository.Add(SelectedProject.Model);
-                await _projectRepository.SaveAsync();
-                
+          
             }
+
+            await _projectRepository.SaveAsync();
+            HasChanges = _projectRepository.HasChanges();
+
             _eventAggregator.GetEvent<AfterDetailSavedEvent>().Publish();
             _eventAggregator.GetEvent<RefreshListEvent>().Publish();
         }
 
         private bool SaveDetailCanExecute()
         {
-            return SelectedProject.HasErrors;
+            return SelectedProject != null && !SelectedProject.HasErrors && (HasChanges || !InEditMode);
         }
 
         private void OnCancelExecute()
@@ -79,12 +82,31 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
                 var lookup = await _projectRepository.GetByIdAsync(id);
                 SelectedProject = new ProjectWrapper(lookup);
             }
+
+            SelectedProject.PropertyChanged += (s, e) =>
+            {
+                if(!HasChanges)
+                {
+                    HasChanges = _projectRepository.HasChanges();
+                }
+
+
+                if (e.PropertyName == nameof(SelectedProject.HasErrors))
+                {
+                    SaveDetailCommand.RaiseCanExecuteChanged();
+                }
+            };
+
+
+            SaveDetailCommand.RaiseCanExecuteChanged();
         }
 
         public bool HasChanges
         {
             get { return _hasChanges; }
-            set { SetProperty(ref _hasChanges, value); }
+            set { SetProperty(ref _hasChanges, value);
+                SaveDetailCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool InEditMode

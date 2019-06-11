@@ -13,13 +13,18 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Views
         public ProjectNavigator()
         {
             InitializeComponent();
+            
             _viewModel = (ProjectNavigatorViewModel)this.DataContext;
             this.Loaded += ProjectNavigator_Loaded;
         }
 
         private async void ProjectNavigator_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            await _viewModel.LoadAsync();
+            if(_viewModel != null)
+            {
+                await _viewModel.LoadAsync();
+            }
+
         }
     }
 }

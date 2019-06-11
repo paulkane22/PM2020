@@ -33,7 +33,7 @@
                 </ribbon:RibbonGroup>
 
 
-                <ribbon:RibbonGroup x:Name="ProjectGroup2" Header="Project List">
+                <ribbon:RibbonGroup x:Name="ProjectGroup2" Header="">
                     <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Projects;component/Images/refresh-navigational-arrows-interface-symbol-inside-a-circle.png"  
                                          Label="Refresh" 
                                          Command="{Binding RefreshListCommand}"/>

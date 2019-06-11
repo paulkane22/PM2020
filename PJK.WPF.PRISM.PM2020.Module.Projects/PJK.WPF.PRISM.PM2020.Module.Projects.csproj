@@ -64,6 +64,7 @@
     <Compile Include="Event\AfterProjectDeletedEvent.cs" />
     <Compile Include="Event\AfterProjectSavedEvent.cs" />
     <Compile Include="Event\CancelDetailEvent.cs" />
+    <Compile Include="Event\DeleteDetailEvent.cs" />
     <Compile Include="Event\EditDetailEvent.cs" />
     <Compile Include="Event\OpenDetailViewEvent.cs" />
     <Compile Include="Event\OpenProjectDetailsViewEvent.cs" />

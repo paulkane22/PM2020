@@ -15,6 +15,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
     {
         private IEventAggregator _eventAggregator;
         private IProjectRepository _projectRepository;
+        private ProjectWrapper _selectedProject;
+
+        private DelegateCommand GridDoubleClickCommand;
 
         public ProjectNavigatorViewModel(IProjectRepository projectRepository, IEventAggregator eventAggregator)
         {
@@ -23,8 +26,27 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
             Projects = new ObservableCollection<ProjectWrapper>();
 
+            GridDoubleClickCommand = new DelegateCommand(OnGridDoubleClick);
+
             _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetail);
+            _eventAggregator.GetEvent<DeleteDetailEvent>().Subscribe(OnDeleteDetail);
             _eventAggregator.GetEvent<RefreshListEvent>().Subscribe(OnRefreshList);
+        }
+
+        private async void OnDeleteDetail()
+        {
+            if(SelectedProject != null)
+            {
+                _projectRepository.Remove(SelectedProject.Model);
+                await _projectRepository.SaveAsync();
+                OnRefreshList();
+            }
+
+        }
+
+        private void OnGridDoubleClick()
+        {
+            throw new NotImplementedException();
         }
 
         private async void OnRefreshList()
@@ -50,11 +72,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public ObservableCollection<ProjectWrapper> Projects { get; set; }
 
-        //public ProjectWrapper SelectedProject
-        //{
-        //    get { return _selectedProject; }
-        //    set { SetProperty(ref _selectedProject, value);}
-        //}
+        public ProjectWrapper SelectedProject
+        {
+            get { return _selectedProject; }
+            set { SetProperty(ref _selectedProject, value); }
+        }
 
     }
 }
