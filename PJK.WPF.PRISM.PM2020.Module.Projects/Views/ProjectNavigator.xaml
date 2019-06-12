@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="PJK.WPF.PRISM.PM2020.Module.Projects.Views.ProjectNavigator"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:interactivity="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="False">
 
@@ -12,6 +13,12 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <interactivity:Interaction.Triggers>
+            <interactivity:EventTrigger EventName="Loaded">
+                <interactivity:InvokeCommandAction Command="{Binding LoadDataCommand}"/>
+            </interactivity:EventTrigger>
+        </interactivity:Interaction.Triggers>
+        
 
         <!--<Button Content="Add Project" Width="100" Height="35" Grid.Row="0" Command="{Binding CreateProjectCommand}" 
                VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,3,0,3"/>-->

@@ -1,5 +1,5 @@
-﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
@@ -15,44 +15,43 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
     {
         private IEventAggregator _eventAggregator;
         private IProjectRepository _projectRepository;
+        private IMessageDialogService _messageDialogService;
         private ProjectWrapper _selectedProject;
 
-        private DelegateCommand GridDoubleClickCommand;
+        public DelegateCommand LoadDataCommand { get; private set; }
 
-        public ProjectNavigatorViewModel(IProjectRepository projectRepository, IEventAggregator eventAggregator)
+        public ProjectNavigatorViewModel(IProjectRepository projectRepository, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
             _eventAggregator = eventAggregator;
             _projectRepository = projectRepository;
+            _messageDialogService = messageDialogService;
 
             Projects = new ObservableCollection<ProjectWrapper>();
 
-            GridDoubleClickCommand = new DelegateCommand(OnGridDoubleClick);
-
             _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetail);
-            _eventAggregator.GetEvent<DeleteDetailEvent>().Subscribe(OnDeleteDetail);
+            _eventAggregator.GetEvent<DeleteDetailEvent>().Subscribe(OnDeleteDetailExecute);
             _eventAggregator.GetEvent<RefreshListEvent>().Subscribe(OnRefreshList);
+
+            LoadDataCommand = new DelegateCommand(OnLoadDataExecute);
+
         }
 
-        private async void OnDeleteDetail()
+        private async void OnLoadDataExecute()
         {
-            if(SelectedProject != null)
+            await LoadAsync();
+        }
+
+        private async void OnDeleteDetailExecute()
+        {
+            var value = _messageDialogService.ShowOKCancelDialog($"Do you really wish to delete {SelectedProject.ProjectName}?", "Delete Project?");
+            if(SelectedProject != null && value == MessageDialogResult.OK)
             {
                 _projectRepository.Remove(SelectedProject.Model);
                 await _projectRepository.SaveAsync();
                 OnRefreshList();
             }
-
         }
 
-        private void OnGridDoubleClick()
-        {
-            throw new NotImplementedException();
-        }
-
-        private async void OnRefreshList()
-        {
-            await LoadAsync();
-        }
 
         private void OnEditDetail(EditDetailEventArgs args)
         {
@@ -78,5 +77,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             set { SetProperty(ref _selectedProject, value); }
         }
 
+
+
+
+        private async void OnRefreshList()
+        {
+            await LoadAsync();
+        }
     }
 }

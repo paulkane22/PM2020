@@ -1,10 +1,8 @@
-﻿using PJK.WPF.PRISM.PM2020.Model;
-using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+﻿using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups;
 using Prism.Events;
 using Prism.Mvvm;
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,12 +16,14 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         private IProjectLookupDataService _projectLookupDataService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IMessageDialogService _messageDialogService;
 
-        public NavigationViewModel(IProjectLookupDataService projectLookupDataService, IEventAggregator eventAggregator)
+        public NavigationViewModel(IProjectLookupDataService projectLookupDataService, IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
             _projectLookupDataService = projectLookupDataService;
             _eventAggregator = eventAggregator;
-
+            _messageDialogService = messageDialogService;
+            
             _eventAggregator.GetEvent<AfterProjectSavedEvent>().Subscribe(AfterProjectSaved);
             _eventAggregator.GetEvent<AfterProjectDeletedEvent>().Subscribe(AfterProjectDeleted);
 
