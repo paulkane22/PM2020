@@ -67,9 +67,21 @@ prism:ViewModelLocator.AutoWireViewModel="False">
 
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Comments"/>
-                            <TextBox Width="300" Height="180" TextWrapping="Wrap"
+                            <TextBox Width="300" Height="50" TextWrapping="Wrap"
                                 AcceptsReturn="True"
                                 Text="" Margin="2"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                            <Label HorizontalContentAlignment="Right" Width="80" Content="Subtasks"/>
+                            <DataGrid Width="300" 
+                                ItemsSource="{Binding SelectedProject.Model.Subtasks}"
+                                SelectedItem="{Binding SelectedSubtask, Mode=TwoWay}"
+                                AutoGenerateColumns="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="290" Header="Subtask" Binding="{Binding SubTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </StackPanel>
                     </StackPanel>
                 </StackPanel>

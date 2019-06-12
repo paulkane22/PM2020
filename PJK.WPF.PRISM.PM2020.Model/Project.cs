@@ -9,7 +9,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
     {
         public Project()
         {
-            SubTasks = new Collection<ProjectSubtask>();
+            Subtasks = new Collection<ProjectSubtask>();
         }
 
 
@@ -40,7 +40,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
 
         public SystemItem SystemItem { get; set; }
 
-        public ICollection<ProjectSubtask> SubTasks { get; set; }
+        public ICollection<ProjectSubtask> Subtasks { get; set; }
 
     }
 }

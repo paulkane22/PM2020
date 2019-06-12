@@ -6,7 +6,11 @@ using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
@@ -21,10 +25,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         private bool _hasChanges;
         private bool _inEditMode;
         private string _title = "Add New Project";
+        private SubTaskWrapper _selectedSubtask;
 
         public DelegateCommand CancelCommand { get; private set; }
         public DelegateCommand SaveDetailCommand { get; private set; }
-
+        public DelegateCommand AddSubtaskCommand { get; private set; }
+        public DelegateCommand RemoveSubtaskCommand { get; private set; }
 
         public ProjectDetailViewModel(
             IProjectRepository projectRepository, 
@@ -37,10 +43,29 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
             CancelCommand = new DelegateCommand(OnCancelExecute);
             SaveDetailCommand = new DelegateCommand(OnSaveDetailExecute, SaveDetailCanExecute);
+            AddSubtaskCommand = new DelegateCommand(OnAddSubtaskExecute);
+            RemoveSubtaskCommand = new DelegateCommand(OnRemoveSubtaskExecute, OnRemoveSubtaskCanExecute);
 
             _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
 
             SystemItems = new ObservableCollection<LookupItem>();
+            Subtasks = new ObservableCollection<SubTaskWrapper>();
+
+        }
+
+        private bool OnRemoveSubtaskCanExecute()
+        {
+            return SelectedSubtask != null;
+        }
+
+        private void OnRemoveSubtaskExecute()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnAddSubtaskExecute()
+        {
+            throw new NotImplementedException();
         }
 
         private async void OnSaveDetailExecute()
@@ -64,7 +89,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         private bool SaveDetailCanExecute()
         {
-            return SelectedProject != null && !SelectedProject.HasErrors && (HasChanges || !InEditMode);
+            return SelectedProject != null 
+                && !SelectedProject.HasErrors 
+                && Subtasks.All(pn=> !pn.HasErrors)
+                && (HasChanges || !InEditMode);
         }
 
         private void OnCancelExecute()
@@ -82,9 +110,42 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         public async Task LoadAsync(int id)
         {
             await LoadSelectedProjectAsync(id);
+
+            InitialiseProjectSubtasks(_selectedProject.Model.Subtasks);
+
             await LoadSystemItemsLookupAsync();
             SaveDetailCommand.RaiseCanExecuteChanged();
         }
+
+        private void InitialiseProjectSubtasks(ICollection<ProjectSubtask> subtasks)
+        {
+            foreach (var wrapper in Subtasks)
+            {
+                wrapper.PropertyChanged -= Wrapper_PropertyChanged;
+            }
+
+            Subtasks.Clear();
+            foreach (var projectSubtask in subtasks)
+            {
+                var wrapper = new SubTaskWrapper(projectSubtask);
+                Subtasks.Add(wrapper);
+                wrapper.PropertyChanged += Wrapper_PropertyChanged;
+         
+            }
+        }
+
+        private void Wrapper_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+           if(!HasChanges)
+            {
+                HasChanges = _projectRepository.HasChanges();
+            }
+           if(e.PropertyName == nameof(SubTaskWrapper.HasErrors))
+            {
+                SaveDetailCommand.RaiseCanExecuteChanged();
+            }
+        }
+
 
         private async Task LoadSelectedProjectAsync(int id)
         {
@@ -155,6 +216,17 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         }
 
 
+ 
+        public SubTaskWrapper SelectedSubtask
+        {
+            get { return _selectedSubtask; }
+            set {
+                SetProperty(ref _selectedSubtask, value);
+                RemoveSubtaskCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        
         public string Title
         {
             get { return _title; }
@@ -171,6 +243,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         }
 
         public ObservableCollection<LookupItem> SystemItems { get; }
+        public ObservableCollection<SubTaskWrapper> Subtasks { get; }
 
         private void CreateNewDetail()
         {
