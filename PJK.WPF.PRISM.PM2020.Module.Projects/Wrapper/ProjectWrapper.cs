@@ -15,7 +15,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper
             set { SetValue(value); }
         }
 
-
         public string ProjectName
         {
             get { return GetValue<string>(); }

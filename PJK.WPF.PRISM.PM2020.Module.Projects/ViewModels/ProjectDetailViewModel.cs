@@ -1,41 +1,46 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
-using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 {
     public class ProjectDetailViewModel : BindableBase, IProjectDetailViewModel
     {
-        private readonly IEventAggregator _eventAggregator;
+        private IEventAggregator _eventAggregator;
         private IProjectRepository _projectRepository;
+        private ISystemItemLookupDataService _systemItemLookupDataService;
         private ProjectWrapper _selectedProject;
         private int _id = 0;
         private bool _hasChanges;
         private bool _inEditMode;
+        private string _title = "Add New Project";
 
         public DelegateCommand CancelCommand { get; private set; }
         public DelegateCommand SaveDetailCommand { get; private set; }
 
 
-        public ProjectDetailViewModel(IProjectRepository projectRepository, IEventAggregator eventAggregator)
+        public ProjectDetailViewModel(
+            IProjectRepository projectRepository, 
+            IEventAggregator eventAggregator, 
+            ISystemItemLookupDataService systemItemLookupDataService)
         {
             _eventAggregator = eventAggregator;
             _projectRepository = projectRepository;
+            _systemItemLookupDataService = systemItemLookupDataService;
 
             CancelCommand = new DelegateCommand(OnCancelExecute);
             SaveDetailCommand = new DelegateCommand(OnSaveDetailExecute, SaveDetailCanExecute);
 
-            if (SelectedProject == null)
-            {
-               // CreateNewDetail();
-            }
             _eventAggregator.GetEvent<OpenDetailViewEvent>().Subscribe(OnOpenDetailView);
+
+            SystemItems = new ObservableCollection<LookupItem>();
         }
 
         private async void OnSaveDetailExecute()
@@ -43,11 +48,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             if(!InEditMode)
             {
                 _projectRepository.Add(SelectedProject.Model);
-          
+            }
+            else
+            {
+                
             }
 
             await _projectRepository.SaveAsync();
             HasChanges = _projectRepository.HasChanges();
+            InEditMode = false;
 
             _eventAggregator.GetEvent<AfterDetailSavedEvent>().Publish();
             _eventAggregator.GetEvent<RefreshListEvent>().Publish();
@@ -72,7 +81,14 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public async Task LoadAsync(int id)
         {
-            if(id == 0)
+            await LoadSelectedProjectAsync(id);
+            await LoadSystemItemsLookupAsync();
+            SaveDetailCommand.RaiseCanExecuteChanged();
+        }
+
+        private async Task LoadSelectedProjectAsync(int id)
+        {
+            if (id == 0)
             {
                 CreateNewDetail();
                 int Id = SelectedProject.Id;
@@ -85,20 +101,27 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
             SelectedProject.PropertyChanged += (s, e) =>
             {
-                if(!HasChanges)
+                if (!HasChanges)
                 {
                     HasChanges = _projectRepository.HasChanges();
                 }
-
-
                 if (e.PropertyName == nameof(SelectedProject.HasErrors))
                 {
                     SaveDetailCommand.RaiseCanExecuteChanged();
                 }
             };
+        }
 
-
-            SaveDetailCommand.RaiseCanExecuteChanged();
+        private async Task LoadSystemItemsLookupAsync()
+        {
+            //LOAD SYSTEM LIST FOR DROPDOWN.
+            SystemItems.Clear();
+            SystemItems.Add(new NullLookupItem {DisplayMember = " - "});
+            var lookup = await _systemItemLookupDataService.GetSystemItemLookupAsync();
+            foreach (var lookupItem in lookup)
+            {
+                SystemItems.Add(lookupItem);
+            }
         }
 
         public bool HasChanges
@@ -112,7 +135,17 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         public bool InEditMode
         {
             get { return _inEditMode; }
-            set { SetProperty(ref _inEditMode, value); }
+            set {
+                SetProperty(ref _inEditMode, value);
+                if (value == true)
+                {
+                    Title = "Edit Project";
+                }
+                else
+                {
+                    Title = "Add New Project";
+                }
+            }
         }
 
         public int Id
@@ -121,12 +154,23 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             set { SetProperty(ref _id, value); }
         }
 
+
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title , value); }
+        }
+
+
+
+
         public ProjectWrapper SelectedProject
         {
             get { return _selectedProject; }
             set { SetProperty(ref _selectedProject, value); }
         }
 
+        public ObservableCollection<LookupItem> SystemItems { get; }
 
         private void CreateNewDetail()
         {

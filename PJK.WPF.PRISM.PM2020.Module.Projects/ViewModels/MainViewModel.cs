@@ -2,6 +2,7 @@
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using Prism.Events;
 using Prism.Mvvm;
+using System;
 using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
@@ -28,10 +29,23 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             ProjectDetailViewModel = projectDetailViewModel;
 
             _eventAggregator.GetEvent<AddDetailEvent>().Subscribe(OnAddDetailExecute);
-            _eventAggregator.GetEvent<CancelDetailEvent>().Subscribe(OnCancelAddProject);
+            _eventAggregator.GetEvent<CancelDetailEvent>().Subscribe(OnCancelAddDetail);
+            _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetailExecute);
+
             _eventAggregator.GetEvent<AfterDetailSavedEvent>().Subscribe(OnAfterDetailSaved);
 
 
+        }
+
+        private async void OnEditDetailExecute(EditDetailEventArgs args)
+        {
+            int myId = _navigationViewModel.SelectedDetailId;
+            if(myId > 0)
+            {
+                await _projectDetailViewModel.LoadAsync(myId);
+                _projectDetailViewModel.InEditMode = true;
+                ShowAddProject = true;
+            }
         }
 
         private void OnAfterDetailSaved()
@@ -39,7 +53,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             ShowAddProject = false;
         }
 
-        private void OnCancelAddProject()
+        private void OnCancelAddDetail()
         {
             ShowAddProject = false;
         }

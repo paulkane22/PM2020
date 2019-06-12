@@ -48,7 +48,7 @@
                 Top="10"
                 Name="chWindow"
                 IsModal="True"
-                Caption="Add New Project"
+                Caption="PROJECT"
                 WindowStartupLocation="Center"
                 WindowState="{Binding ShowAddProject, Converter={StaticResource windowOpenCloseConverter}}">
                 <ContentControl Content="{Binding ProjectDetailViewModel}"/>

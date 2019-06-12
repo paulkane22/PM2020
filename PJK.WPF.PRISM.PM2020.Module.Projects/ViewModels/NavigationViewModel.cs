@@ -43,6 +43,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         public ObservableCollection<NavigationItemViewModel> Projects { get; }
 
+        private int _selectedDetailId;
+        public int SelectedDetailId
+        {
+            get { return _selectedDetailId; }
+            set { SetProperty(ref _selectedDetailId, value); }
+        }
 
         private void AfterProjectDeleted(int projectId)
         {

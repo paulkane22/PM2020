@@ -7,5 +7,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         Task LoadAsync(int id);
         bool HasChanges { get; }
         int Id { get; }
+        bool InEditMode { get; set; }
     }
 }

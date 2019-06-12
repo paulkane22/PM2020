@@ -43,12 +43,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
         private async void OnDeleteDetailExecute()
         {
-            var value = _messageDialogService.ShowOKCancelDialog($"Do you really wish to delete {SelectedProject.ProjectName}?", "Delete Project?");
-            if(SelectedProject != null && value == MessageDialogResult.OK)
+            if (SelectedProject != null)
             {
-                _projectRepository.Remove(SelectedProject.Model);
-                await _projectRepository.SaveAsync();
-                OnRefreshList();
+                var value = _messageDialogService.ShowOKCancelDialog($"Do you really wish to delete {SelectedProject.ProjectName}?", "Delete Project?");
+                if (value == MessageDialogResult.OK)
+                {
+                    _projectRepository.Remove(SelectedProject.Model);
+                    await _projectRepository.SaveAsync();
+                    OnRefreshList();
+                }
             }
         }
 
@@ -77,9 +80,22 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             set { SetProperty(ref _selectedProject, value); }
         }
 
+        public int SelectedDetailId
+        {
 
+            get {
+                if (_selectedProject != null)
+                {
+                    return _selectedProject.Id;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
 
-
+        }
+                
         private async void OnRefreshList()
         {
             await LoadAsync();

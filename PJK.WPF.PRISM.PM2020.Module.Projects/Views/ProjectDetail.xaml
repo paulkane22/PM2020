@@ -17,16 +17,16 @@ prism:ViewModelLocator.AutoWireViewModel="False">
                 <ColumnDefinition Width="0" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" FontSize="14"  FontWeight="Bold" Margin="0,0,0,5">
-                Add New Project
+            <Label Grid.Row="0" FontSize="14"  FontWeight="Bold" Margin="0,0,0,5" Content="{Binding Title}">
+                
             </Label>
 
             <Border BorderBrush="{StaticResource myBorderColour}" Background="{StaticResource myBorderBackgroundLightColour}" BorderThickness="1" Grid.Row="1" Grid.Column="0" >
-                <StackPanel DataContext="{Binding SelectedProject}">
+                <StackPanel>
                     <StackPanel Margin="30,20,0,20">
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Project"/>
-                            <TextBox Width="150" Text="{Binding ProjectName}" Margin="2"/>
+                            <TextBox Width="150" Text="{Binding  SelectedProject.ProjectName, Mode=TwoWay}" Margin="2"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Priority"/>
@@ -42,9 +42,11 @@ prism:ViewModelLocator.AutoWireViewModel="False">
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="System"/>
-                            <ComboBox Width="150" Margin="2" ItemsSource="{Binding SystemItems}"
+                            <ComboBox Width="150" Margin="2" 
+                                ItemsSource="{Binding SystemItems}"
                                 DisplayMemberPath="DisplayMember"
-                                SelectedValuePath="Id" />
+                                SelectedValuePath="Id" 
+                                SelectedValue="{Binding SelectedProject.SystemId, Mode=TwoWay}"/>
                          </StackPanel>
                         <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <Label HorizontalContentAlignment="Right" Width="80" Content="Status"/>
