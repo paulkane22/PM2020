@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PJK.WPF.PRISM.PM2020.DataAc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PJK.WPF.PRISM.PM2020.Model", "PJK.WPF.PRISM.PM2020.Model\PJK.WPF.PRISM.PM2020.Model.csproj", "{4F5D2002-4324-435C-9FD5-8848C7E25DC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PJK.WPF.PRISM.PM2020.Module.Mana", "PJK.WPF.PRISM.PM2020.Module.Mana\PJK.WPF.PRISM.PM2020.Module.Mana.csproj", "{D54F0088-683E-42D0-BE6A-FAD7CFD635F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4F5D2002-4324-435C-9FD5-8848C7E25DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F5D2002-4324-435C-9FD5-8848C7E25DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F5D2002-4324-435C-9FD5-8848C7E25DC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D54F0088-683E-42D0-BE6A-FAD7CFD635F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D54F0088-683E-42D0-BE6A-FAD7CFD635F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D54F0088-683E-42D0-BE6A-FAD7CFD635F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D54F0088-683E-42D0-BE6A-FAD7CFD635F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

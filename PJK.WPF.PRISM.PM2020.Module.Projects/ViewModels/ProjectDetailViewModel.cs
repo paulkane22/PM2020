@@ -1,5 +1,6 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Event;
+using PJK.WPF.PRISM.PM2020.Module.Projects.Services;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Lookups;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Projects.Wrapper;
@@ -18,9 +19,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
     public class ProjectDetailViewModel : BindableBase, IProjectDetailViewModel
     {
         private IEventAggregator _eventAggregator;
+        private IMessageDialogService _messageDialogService;
         private IProjectRepository _projectRepository;
         private ISystemItemLookupDataService _systemItemLookupDataService;
         private ProjectWrapper _selectedProject;
+
         private int _id = 0;
         private bool _hasChanges;
         private bool _inEditMode;
@@ -35,9 +38,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         public ProjectDetailViewModel(
             IProjectRepository projectRepository, 
             IEventAggregator eventAggregator, 
-            ISystemItemLookupDataService systemItemLookupDataService)
+            ISystemItemLookupDataService systemItemLookupDataService, 
+            IMessageDialogService messageDialogService)
         {
             _eventAggregator = eventAggregator;
+            _messageDialogService = messageDialogService;
             _projectRepository = projectRepository;
             _systemItemLookupDataService = systemItemLookupDataService;
 
@@ -76,12 +81,23 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             }
             else
             {
-                
             }
 
             await _projectRepository.SaveAsync();
             HasChanges = _projectRepository.HasChanges();
+            
+            
+            
+            
+            
+            //TODO - FIX CACHING ISSUE
+            var localRefreshProject = _projectRepository.GetByIdAsync(SelectedProject.Id);
+            //SelectedProject = 
+
+
             InEditMode = false;
+
+
 
             _eventAggregator.GetEvent<AfterDetailSavedEvent>().Publish();
             _eventAggregator.GetEvent<RefreshListEvent>().Publish();

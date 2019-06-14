@@ -21,9 +21,6 @@
                 <ResourceDictionary Source="Themes/WhistlerBlue.xaml" />
             <ResourceDictionary Source="Themes/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
-
-
             <!--<Style TargetType="TextBox">
                 <Setter Property="Validation.ErrorTemplate">
                     <Setter.Value>
@@ -47,13 +44,6 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>-->
-
-
-
         </ResourceDictionary>
-
-
-
-
     </Application.Resources>
 </prism:PrismApplication>

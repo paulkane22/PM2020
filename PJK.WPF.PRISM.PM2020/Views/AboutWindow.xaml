@@ -18,7 +18,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Row="0" Grid.RowSpan="3" Source="/PJK.WPF.PRISM.PM2020;component/Images/pm2020.png" ></Image>
+            <Image Grid.Row="0" Source="/PJK.WPF.PRISM.PM2020;component/Images/manaLogo_noText_128.png" Margin="82,38,83,23" />
 
             <Border Grid.Row="1"  Margin="10,0,20,0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -32,7 +32,7 @@
                 </StackPanel>
             </Border>
         </Grid>
-    
+
     </Border>
-    
+
 </Window>

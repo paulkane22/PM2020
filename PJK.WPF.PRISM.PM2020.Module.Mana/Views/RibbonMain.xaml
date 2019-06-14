@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="PJK.WPF.PRISM.PM2020.Module.Mana.Views.RibbonMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"            
+             xmlns:ribbon="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" 
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    
+     <StackPanel>
+        <ribbon:Ribbon x:Name="RibbonMainx"  SelectedIndex="0" ShowQuickAccessToolBarOnTop="False" Margin="0, -20, 0, 0" >
+
+            <ribbon:Ribbon.HelpPaneContent>
+                <ribbon:RibbonButton SmallImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/information.png" />
+            </ribbon:Ribbon.HelpPaneContent>
+
+            <ribbon:Ribbon.ApplicationMenu>
+                <ribbon:RibbonApplicationMenu Visibility="Collapsed" />
+            </ribbon:Ribbon.ApplicationMenu>
+
+            <!-- Ribbon Tab #1: Home -->
+            <ribbon:RibbonTab Header="Projects" KeyTip="P" >
+                <!-- Home  group-->
+                <ribbon:RibbonGroup x:Name="ProjectGroupProject" Header="Projects">
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/new-document.png"  
+                                         Label="Add" 
+                                         Command="{Binding AddProjectCommand}"/>
+                    
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/edit.png"  
+                                         Label="Edit" 
+                                         Command="{Binding EditProjectCommand}"/>
+                </ribbon:RibbonGroup>
+                <ribbon:RibbonGroup x:Name="ProjectGroupDelete" Header="">
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/delete-symbol-option.png"  
+                                         Label="Delete" 
+                                         Command="{Binding DeleteProjectCommand}"/>
+                </ribbon:RibbonGroup>
+
+
+                <ribbon:RibbonGroup x:Name="ProjectGroupRefresh" Header="List">
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/refresh-navigational-arrows-interface-symbol-inside-a-circle.png"  
+                                         Label="Refresh" 
+                                         Command="{Binding RefreshListCommand}"/>
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/023-priority.png"  
+                                         Label="Reload" 
+                                         Command="{Binding RefreshListCommand}"/>
+                </ribbon:RibbonGroup>
+
+            </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="Resources" KeyTip="R" Visibility="Collapsed" >
+                <!-- Resources  group-->
+                <ribbon:RibbonGroup x:Name="ResourcesGroupResources" Header="Manage Resources">
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/history.png"  
+                                         Label="Schedule" 
+                                         Command="{Binding SelectDetailCommand}"/>
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/triangular-warning-sign.png"  
+                                         Label="Assess" 
+                                         Command="{Binding SelectDetailCommand}"/>
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/document-with-irregular-line.png"  
+                                         Label="Assign" 
+                                         Command="{Binding SelectDetailCommand}"/>
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+
+            <ribbon:RibbonTab Header="Help" KeyTip="H">
+                <!-- Resources  group-->
+                <ribbon:RibbonGroup x:Name="HelpGroupHelp" Header="">
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/043-contract.png"  
+                                         Label="About" 
+                                         Command="{Binding ShowAboutCommand}"/>
+                    <ribbon:RibbonButton LargeImageSource="/PJK.WPF.PRISM.PM2020.Module.Mana;component/Images/information.png"  
+                                         Label="Help" 
+                                         Command="{Binding ShowHelpCommand}"/>
+                </ribbon:RibbonGroup>
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
+    </StackPanel>
+    
+</UserControl>

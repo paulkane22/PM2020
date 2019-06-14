@@ -25,19 +25,17 @@ namespace PJK.WPF.PRISM.PM2020
         {
             base.ConfigureModuleCatalog(moduleCatalog);
 
-            moduleCatalog.AddModule<Module.Projects.ProjectsModule>();
+            //moduleCatalog.AddModule<Module.Projects.ProjectsModule>();
+            moduleCatalog.AddModule<Module.Mana.ManaModule>();
             moduleCatalog.AddModule<Module.ExampleControls.ExampleControlsModule>();
 
 
-            //moduleCatalog.AddModule<StockModule.StockModuleModule>();
-            //moduleCatalog.AddModule<ProjectsModule.ProjectsModuleModule>();
-            //moduleCatalog.AddModule<ExampleControls.ExampleControlsModule>();
         }
 
         private void PrismApplication_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
 
-            MessageBox.Show("Unexpected error occurred. Please inform Paul" + Environment.NewLine + e.Exception.Message, "This is not the error you are looking for");
+            MessageBox.Show("Unexpected error occurred. Please inform Paul Kane " + Environment.NewLine + e.Exception.Message, "This is not the error you are looking for");
 
             e.Handled = true;
 

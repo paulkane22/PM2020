@@ -34,7 +34,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
 
             _eventAggregator.GetEvent<AfterDetailSavedEvent>().Subscribe(OnAfterDetailSaved);
 
-
         }
 
         private async void OnEditDetailExecute(EditDetailEventArgs args)

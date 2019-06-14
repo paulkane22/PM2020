@@ -161,6 +161,10 @@
       <Project>{f34e7813-7ff3-4985-ab41-176f2d073806}</Project>
       <Name>PJK.WPF.PRISM.PM2020.Module.ExampleControls</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PJK.WPF.PRISM.PM2020.Module.Mana\PJK.WPF.PRISM.PM2020.Module.Mana.csproj">
+      <Project>{d54f0088-683e-42d0-be6a-fad7cfd635f7}</Project>
+      <Name>PJK.WPF.PRISM.PM2020.Module.Mana</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PJK.WPF.PRISM.PM2020.Module.Projects\PJK.WPF.PRISM.PM2020.Module.Projects.csproj">
       <Project>{3364d3b7-64a1-48fb-8122-c210d605b65b}</Project>
       <Name>PJK.WPF.PRISM.PM2020.Module.Projects</Name>
@@ -170,20 +174,13 @@
     <Folder Include="Themes\DarkMode\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\HCIS_DB_16.png" />
-    <Resource Include="Images\HCIS_DB_256.png" />
-    <Resource Include="Images\HCIS_DB_32.png" />
-    <Resource Include="Images\HCIS_DB_48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\HCIS_DB_256_t.png" />
-    <Resource Include="Images\HCIS_DB_48_t.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\HCIS_LOGO_SPLASH_700.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\pm2020.png" />
+    <Resource Include="Images\manaLogo500.png" />
+    <Resource Include="Images\manaLogo_noText_128.png" />
+    <Resource Include="Images\manaLogo_noText_16.png" />
+    <Resource Include="Images\manaLogo_noText_32.png" />
+    <Resource Include="Images\manaLogo_noText_48.png" />
+    <Resource Include="Images\manaLogo_noText_500.png" />
+    <Resource Include="Images\manaLogo_noText_64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

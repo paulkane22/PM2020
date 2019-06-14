@@ -17,6 +17,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         private IProjectRepository _projectRepository;
         private IMessageDialogService _messageDialogService;
         private ProjectWrapper _selectedProject;
+        private ObservableCollection<ProjectWrapper> _projects;
+
 
         public DelegateCommand LoadDataCommand { get; private set; }
 
@@ -72,7 +74,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
             }
         }
 
-        public ObservableCollection<ProjectWrapper> Projects { get; set; }
+
+        public ObservableCollection<ProjectWrapper> Projects
+        {
+            get { return _projects; }
+            set { SetProperty(ref _projects, value); }
+        }
+
+
+
 
         public ProjectWrapper SelectedProject
         {
@@ -98,6 +108,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
                 
         private async void OnRefreshList()
         {
+            //Projects.Clear();
             await LoadAsync();
         }
     }
