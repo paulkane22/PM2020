@@ -38,6 +38,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
         public string Comment { get; set; }
 
 
+        public int? SystemItemId { get; set; }
         public SystemItem SystemItem { get; set; }
 
         public ICollection<ProjectSubtask> Subtasks { get; set; }

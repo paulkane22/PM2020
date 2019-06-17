@@ -30,6 +30,16 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess.Migrations
                 new SystemItem { SystemName = "System 4" }
                );
 
+            context.ComboLookups.AddOrUpdate(
+                f => f.ComboName,
+                new ComboLookup { ComboName = "High", ComboGroupId=1, ComboOrder =1 },
+                new ComboLookup { ComboName = "Medium", ComboGroupId = 1, ComboOrder = 2 },
+                new ComboLookup { ComboName = "Low", ComboGroupId = 1, ComboOrder = 3 },
+                new ComboLookup { ComboName = "System 1", ComboGroupId = 2, ComboOrder = 1 },
+                new ComboLookup { ComboName = "System 2", ComboGroupId = 2, ComboOrder = 2 }
+               );
+
+
             context.SaveChanges();
 
             context.Subtasks.AddOrUpdate(st => st.SubTask,

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Mana.Services.Lookups
 {
-    public class LookupDataService : IProjectLookupDataService, ISystemItemLookupDataService
+    public class LookupDataService : IProjectLookupDataService, ISystemItemLookupDataService, ILookupDataService
     {
 
         private PM202DbContext ctx;
@@ -42,6 +42,27 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Services.Lookups
                 ).ToListAsync();
         }
 
+        public async Task<IEnumerable<LookupItem>> GetComboLookupAsync(ComboGroups groupId = ComboGroups.Priority)
+        {
+            return await ctx.ComboLookups.AsNoTracking().Where(f=> f.ComboGroupId == (int)groupId).OrderBy(f=>f.ComboOrder).Select               
+                (f =>
+                new LookupItem
+                {
+                    Id = f.Id,
+                    DisplayMember = f.ComboName
+                }
+                ).ToListAsync();
+        }
+
+
+    }
+
+
+    public enum ComboGroups {
+
+        Priority = 1, 
+        System = 2, 
+        Status = 3
 
     }
 }

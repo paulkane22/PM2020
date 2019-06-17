@@ -5,6 +5,7 @@ using PJK.WPF.PRISM.PM2020.DataAccess;
 using PJK.WPF.PRISM.PM2020.Model;
 using PJK.WPF.PRISM.PM2020.Module.Mana.Event;
 using PJK.WPF.PRISM.PM2020.Module.Mana.Services;
+using PJK.WPF.PRISM.PM2020.Module.Mana.Services.Lookups;
 using PJK.WPF.PRISM.PM2020.Module.Mana.Services.Repositories;
 using PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers;
 using Prism.Commands;
@@ -19,11 +20,16 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         private IEventAggregator _eventAggregator;
         private IMessageDialogService _messageDialogService;
         private IProjectRepository _projectRepository;
-        
+        private LookupDataService _lookupDataService;
+
         private NavigationListViewModel _navigationListViewModel;
         private ProjectDetailViewModel _projectDetailViewModel;
         private ObservableCollection<ProjectWrapper> _projects;
         private ProjectWrapper _selectedProject;
+        
+
+
+
         private bool _showPopup;
         private bool _hasChanges;
         private bool _inEditMode;
@@ -40,6 +46,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             _eventAggregator = eventAggregator;
             _messageDialogService = messageDialogService;
             _projectRepository = new ProjectRepository(new PM202DbContext());
+            _lookupDataService = new LookupDataService();
 
             _projects = new ObservableCollection<ProjectWrapper>();
             _navigationListViewModel = new NavigationListViewModel();
@@ -54,6 +61,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetailExecute);
             _eventAggregator.GetEvent<AddDetailEvent>().Subscribe(OnAddDetailExecute);
             _eventAggregator.GetEvent<DeleteDetailEvent>().Subscribe(OnDeleteDetailExecute);
+
+            ComboPriority = new ObservableCollection<LookupItem>();
+            ComboStatus = new ObservableCollection<LookupItem>();
+            ComboSystemList = new ObservableCollection<LookupItem>();
         }
 
         private void OnEditDetailExecute()
@@ -118,6 +129,46 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             {
                 Projects.Add(new ProjectWrapper(item));
             }
+
+            await LoadPriorityLookupAsync();
+
+            await LoadStatusLookupAsync();
+
+            await LoadSystemListLookupAsync();
+
+        }
+
+        private async Task LoadSystemListLookupAsync()
+        {
+            ComboSystemList.Clear();
+            ComboSystemList.Add(new NullLookupItem { DisplayMember = " - " });
+            var combolookup = await _lookupDataService.GetSystemItemLookupAsync();
+            foreach (var item in combolookup)
+            {
+                ComboSystemList.Add(item);
+            }
+        }
+
+        private async Task LoadStatusLookupAsync()
+        {
+            ComboStatus.Clear();
+            ComboStatus.Add(new NullLookupItem { DisplayMember = " - " });
+            var combolookup1 = await _lookupDataService.GetComboLookupAsync(ComboGroups.Status);
+            foreach (var item in combolookup1)
+            {
+                ComboStatus.Add(item);
+            }
+        }
+
+        private async Task LoadPriorityLookupAsync()
+        {
+            ComboPriority.Clear();
+            ComboPriority.Add(new NullLookupItem { DisplayMember = " - " });
+            var combolookup = await _lookupDataService.GetComboLookupAsync(ComboGroups.Priority);
+            foreach (var item in combolookup)
+            {
+                ComboPriority.Add(item);
+            }
         }
 
         private async Task LoadDetailByIdAsync(int id)
@@ -145,6 +196,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             get { return _projects; }
             set { SetProperty(ref _projects, value); }
         }
+        public ObservableCollection<LookupItem> ComboPriority { get; }
+        public ObservableCollection<LookupItem> ComboStatus { get; }
+        public ObservableCollection<LookupItem> ComboSystemList { get; }
 
         public ProjectWrapper SelectedProject
         {
@@ -195,5 +249,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
                 SetProperty(ref _inEditMode, value);
             }
         }
+
+
     }
 }

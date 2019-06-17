@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComboLookup.cs" />
     <Compile Include="IProject.cs" />
     <Compile Include="LookupItem.cs" />
     <Compile Include="Project.cs" />

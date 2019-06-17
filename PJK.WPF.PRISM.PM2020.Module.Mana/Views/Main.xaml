@@ -105,15 +105,17 @@
                                 <StackPanel Margin="30,20,0,20">
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Project"/>
-                                        <TextBox Width="150" Text="{Binding  SelectedProject.ProjectName, Mode=TwoWay}" Margin="2"/>
+                                        <TextBox Width="300" Text="{Binding  SelectedProject.ProjectName, Mode=TwoWay}" Margin="2"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Priority"/>
-                                        <ComboBox Text="Item" Width="150" Margin="2" >
-                                            <ComboBoxItem Padding="2" IsSelected="True" Content="High" />
-                                            <ComboBoxItem Padding="2" Content="Medium"/>
-                                            <ComboBoxItem Padding="2" Content="Low"/>
-                                        </ComboBox>
+                                        <ComboBox Text="Item" Width="150" Margin="2" 
+                                                  ItemsSource="{Binding ComboPriority}" 
+                                                  DisplayMemberPath="DisplayMember"
+                                                  SelectedValuePath="Id"
+                                                  SelectedValue="{Binding SelectedProject.Priority, Mode=TwoWay}"
+                                                  />
+
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Deadline"/>
@@ -122,22 +124,19 @@
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="System"/>
                                         <ComboBox Width="150" Margin="2" 
-                                ItemsSource="{Binding SystemItems}"
-                                DisplayMemberPath="DisplayMember"
-                                SelectedValuePath="Id" 
-                                SelectedValue="{Binding SelectedProject.SystemId, Mode=TwoWay}"/>
+                                                ItemsSource="{Binding ComboSystemList}"
+                                                DisplayMemberPath="DisplayMember"
+                                                SelectedValuePath="Id" 
+                                                SelectedValue="{Binding SelectedProject.SystemId, Mode=TwoWay}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Status"/>
-                                        <ComboBox Text="Item" Width="150" Margin="2"
-                                    SelectedValuePath="SelectedProject.StatusId">
-                                            <ComboBoxItem Padding="2" IsSelected="True" Content="Not Started"/>
-                                            <ComboBoxItem Padding="2" Content="In Progress"/>
-                                            <ComboBoxItem Padding="2" Content="On Hold"/>
-                                            <ComboBoxItem Padding="2" Content="Quality Assurance"/>
-                                            <ComboBoxItem Padding="2" Content="Awaiting Live"/>
-                                            <ComboBoxItem Padding="2" Content="Complete"/>
-                                        </ComboBox>
+                                        <ComboBox Text="Item" Width="150" Margin="2" 
+                                                  ItemsSource="{Binding ComboStatus}" 
+                                                  DisplayMemberPath="DisplayMember"
+                                                  SelectedValuePath="Id"
+                                                  SelectedValue="{Binding SelectedProject.StatusId, Mode=TwoWay}"
+                                                  />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Complete"/>

@@ -63,6 +63,14 @@
     <Compile Include="Migrations\201906100917555_rename StatusId.Designer.cs">
       <DependentUpon>201906100917555_rename StatusId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906160806596_1.cs" />
+    <Compile Include="Migrations\201906160806596_1.Designer.cs">
+      <DependentUpon>201906160806596_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906160937177_AddOrderToComboLookups.cs" />
+    <Compile Include="Migrations\201906160937177_AddOrderToComboLookups.Designer.cs">
+      <DependentUpon>201906160937177_AddOrderToComboLookups.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PM202DbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +97,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906100917555_rename StatusId.resx">
       <DependentUpon>201906100917555_rename StatusId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906160806596_1.resx">
+      <DependentUpon>201906160806596_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906160937177_AddOrderToComboLookups.resx">
+      <DependentUpon>201906160937177_AddOrderToComboLookups.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

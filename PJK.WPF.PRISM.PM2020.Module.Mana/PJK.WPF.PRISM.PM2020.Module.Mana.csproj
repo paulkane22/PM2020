@@ -74,6 +74,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Services\IMessageDialogService.cs" />
+    <Compile Include="Services\Lookups\ILookupDataService.cs" />
     <Compile Include="Services\Lookups\IProjectLookupDataService.cs" />
     <Compile Include="Services\Lookups\ISystemItemLookupDataService.cs" />
     <Compile Include="Services\Lookups\LookupDataService.cs" />
