@@ -1,5 +1,6 @@
 ﻿using PJK.WPF.PRISM.PM2020.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers
@@ -70,6 +71,13 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers
                     }
                     break;
             }
+        }
+
+
+       
+        public IEnumerable ErrorMessages
+        {
+            get { return this.GetAllPropertiesWithErrors(); }
         }
     }
 }

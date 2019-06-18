@@ -18,16 +18,19 @@ namespace PJK.WPF.PRISM.PM2020.Model
 
         [Required(ErrorMessage ="{0} is required")]
         [StringLength(20)]
-        [Display(Name = "Project Name")]
+        [Display(Name = "Project Name 1")]
         public string ProjectName { get; set; }
 
         [Display(Name = "System ID")]
+        [Required(ErrorMessage = "{0} is required")]
         public int? SystemId { get; set; }
 
         [Display(Name = "Priority")]
+        [Required(ErrorMessage = "{0} is required")]
         public int Priority { get; set; }
 
         [Display(Name = "Deadline")]
+        [Required(ErrorMessage = "{0} is required")]
         public DateTime Deadline { get; set; }
 
         [Display(Name = "Status")]
@@ -35,6 +38,8 @@ namespace PJK.WPF.PRISM.PM2020.Model
         [Display(Name = "Complete")]
         public bool Complete { get; set; }
         [Display(Name = "Comments")]
+        [Required(ErrorMessage = "{0} is required")]
+        [StringLength(5)]
         public string Comment { get; set; }
 
 

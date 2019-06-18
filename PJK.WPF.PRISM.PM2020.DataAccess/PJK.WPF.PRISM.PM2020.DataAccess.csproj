@@ -71,6 +71,14 @@
     <Compile Include="Migrations\201906160937177_AddOrderToComboLookups.Designer.cs">
       <DependentUpon>201906160937177_AddOrderToComboLookups.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906180546315_UpdateProjectValidation.cs" />
+    <Compile Include="Migrations\201906180546315_UpdateProjectValidation.Designer.cs">
+      <DependentUpon>201906180546315_UpdateProjectValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906180631455_UpdateValidationTest.cs" />
+    <Compile Include="Migrations\201906180631455_UpdateValidationTest.Designer.cs">
+      <DependentUpon>201906180631455_UpdateValidationTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PM202DbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +111,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906160937177_AddOrderToComboLookups.resx">
       <DependentUpon>201906160937177_AddOrderToComboLookups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906180546315_UpdateProjectValidation.resx">
+      <DependentUpon>201906180546315_UpdateProjectValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906180631455_UpdateValidationTest.resx">
+      <DependentUpon>201906180631455_UpdateValidationTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

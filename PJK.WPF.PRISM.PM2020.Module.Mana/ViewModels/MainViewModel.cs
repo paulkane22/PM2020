@@ -27,9 +27,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         private ObservableCollection<ProjectWrapper> _projects;
         private ProjectWrapper _selectedProject;
         
-
-
-
         private bool _showPopup;
         private bool _hasChanges;
         private bool _inEditMode;
@@ -51,7 +48,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             _projects = new ObservableCollection<ProjectWrapper>();
             _navigationListViewModel = new NavigationListViewModel();
             _projectDetailViewModel = new ProjectDetailViewModel();
-
 
             EditDetailCommand = new DelegateCommand(OnEditDetailExecute);
             DeleteDetailCommand = new DelegateCommand(OnDeleteDetailExecute);
@@ -109,9 +105,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
 
         private bool CanSaveDetailExecute()
         {
-            return true;
-           // return SelectedProject != null;
-                 //&& !SelectedProject.HasErrors;
+            // return true;
+            return SelectedProject != null 
+                 && !SelectedProject.HasErrors;
         }
 
         private void OnCancelPopup()
@@ -131,9 +127,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             }
 
             await LoadPriorityLookupAsync();
-
             await LoadStatusLookupAsync();
-
             await LoadSystemListLookupAsync();
 
         }
@@ -196,6 +190,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             get { return _projects; }
             set { SetProperty(ref _projects, value); }
         }
+
         public ObservableCollection<LookupItem> ComboPriority { get; }
         public ObservableCollection<LookupItem> ComboStatus { get; }
         public ObservableCollection<LookupItem> ComboSystemList { get; }
@@ -203,7 +198,17 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         public ProjectWrapper SelectedProject
         {
             get { return _selectedProject; }
-            set { SetProperty(ref _selectedProject, value); }
+            set {
+                SetProperty(ref _selectedProject, value);
+                if(SelectedProject != null)
+                {
+                    SelectedProject.PropertyChanged += (s, e) =>
+                    {
+                        SaveDetailCommand.RaiseCanExecuteChanged();
+                    };
+                }
+                SaveDetailCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool ShowPopup

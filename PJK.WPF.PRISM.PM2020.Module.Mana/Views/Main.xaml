@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <local:WindowOpenCloseConverter x:Key="windowOpenCloseConverter"/>
-        <DataTemplate DataType="{x:Type viewModel:NavigationListViewModel}">
+        <DataTemplate x:Key="navigationKey" DataType="{x:Type viewModel:NavigationListViewModel}">
             <views:NavigationList/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:ProjectDetailViewModel}">
@@ -105,7 +105,7 @@
                                 <StackPanel Margin="30,20,0,20">
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Project"/>
-                                        <TextBox Width="300" Text="{Binding  SelectedProject.ProjectName, Mode=TwoWay}" Margin="2"/>
+                                        <TextBox Width="300" Text="{Binding  SelectedProject.ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Priority"/>
@@ -113,13 +113,13 @@
                                                   ItemsSource="{Binding ComboPriority}" 
                                                   DisplayMemberPath="DisplayMember"
                                                   SelectedValuePath="Id"
-                                                  SelectedValue="{Binding SelectedProject.Priority, Mode=TwoWay}"
+                                                  SelectedValue="{Binding SelectedProject.Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                   />
 
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Deadline"/>
-                                        <TextBox Width="150" Text="" Margin="2"/>
+                                        <TextBox Width="150" Text="{Binding SelectedProject.Deadline, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="System"/>
@@ -127,7 +127,7 @@
                                                 ItemsSource="{Binding ComboSystemList}"
                                                 DisplayMemberPath="DisplayMember"
                                                 SelectedValuePath="Id" 
-                                                SelectedValue="{Binding SelectedProject.SystemId, Mode=TwoWay}"/>
+                                                SelectedValue="{Binding SelectedProject.SystemId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Status"/>
@@ -135,7 +135,7 @@
                                                   ItemsSource="{Binding ComboStatus}" 
                                                   DisplayMemberPath="DisplayMember"
                                                   SelectedValuePath="Id"
-                                                  SelectedValue="{Binding SelectedProject.StatusId, Mode=TwoWay}"
+                                                  SelectedValue="{Binding SelectedProject.StatusId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                   />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
@@ -145,21 +145,19 @@
 
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Comments"/>
-                                        <TextBox Width="300" Height="50" TextWrapping="Wrap"
-                                AcceptsReturn="True"
-                                Text="" Margin="2"/>
+                                        <TextBox Width="150" Text="{Binding SelectedProject.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" 
+                                        AcceptsReturn="True"
+                                        />
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
-                                        <Label HorizontalContentAlignment="Right" Width="80" Content="Subtasks"/>
-                                        <DataGrid Width="300" 
-                                ItemsSource="{Binding SelectedProject.Model.Subtasks}"
-                                SelectedItem="{Binding SelectedSubtask, Mode=TwoWay}"
-                                AutoGenerateColumns="False">
-                                            <DataGrid.Columns>
-                                                <DataGridTextColumn Width="290" Header="Subtask" Binding="{Binding SubTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                            </DataGrid.Columns>
-                                        </DataGrid>
+                                        <Label HorizontalContentAlignment="Right" Width="80" Content="Errors"/>
+
+                                        <ListView HorizontalAlignment="Stretch" Grid.Column="2" Padding="5" Background="Red" Foreground="White" 
+                                              ItemsSource="{Binding ErrorMessages}">
+                                        </ListView>
+
+
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>

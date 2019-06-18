@@ -16,10 +16,10 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess.Migrations
 
             context.Projects.AddOrUpdate(
                 f => f.ProjectName,
-                new Project { ProjectName = "Project1", SystemId = 1, Deadline = new System.DateTime(2019, 01, 01) },
-                new Project { ProjectName = "Project2", SystemId = 2, Deadline = new System.DateTime(2019, 01, 01) },
-                new Project { ProjectName = "Project3", SystemId = 3, Deadline = new System.DateTime(2019, 01, 01) },
-                new Project { ProjectName = "Project4", SystemId = 4, Deadline = new System.DateTime(2019, 01, 01) }
+                new Project { ProjectName = "Project1", SystemId = 1, Deadline = new System.DateTime(2019, 01, 01), Comment ="1" },
+                new Project { ProjectName = "Project2", SystemId = 2, Deadline = new System.DateTime(2019, 01, 01), Comment = "2" },
+                new Project { ProjectName = "Project3", SystemId = 3, Deadline = new System.DateTime(2019, 01, 01), Comment = "3" },
+                new Project { ProjectName = "Project4", SystemId = 4, Deadline = new System.DateTime(2019, 01, 01), Comment = "4" }
                 );
 
             context.SystemItems.AddOrUpdate(

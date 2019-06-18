@@ -18,9 +18,28 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers
 
         public IEnumerable GetErrors(string propertyName)
         {
-            return _errorsByPropertyName.ContainsKey(propertyName)
-              ? _errorsByPropertyName[propertyName]
-              : null;
+            if (propertyName != null)
+            {
+                return _errorsByPropertyName.ContainsKey(propertyName)
+                  ? _errorsByPropertyName[propertyName]
+                  : null;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable GetAllPropertiesWithErrors()
+        {
+            if (_errorsByPropertyName.Count > 0)
+            {
+                return _errorsByPropertyName.Values.ToList();
+            }
+            else
+            {
+                return null;
+            }
         }
 
         protected virtual void OnErrorsChanged(string propertyName)
