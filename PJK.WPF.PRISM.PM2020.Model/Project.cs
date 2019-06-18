@@ -38,7 +38,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
         [Display(Name = "Complete")]
         public bool Complete { get; set; }
         [Display(Name = "Comments")]
-        [Required(ErrorMessage = "{0} is required")]
+        [Required(ErrorMessage = "{0} are required")]
         [StringLength(5)]
         public string Comment { get; set; }
 

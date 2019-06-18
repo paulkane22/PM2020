@@ -79,6 +79,10 @@
     <Compile Include="Migrations\201906180631455_UpdateValidationTest.Designer.cs">
       <DependentUpon>201906180631455_UpdateValidationTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906181605555_UpdateComboToHaveID.cs" />
+    <Compile Include="Migrations\201906181605555_UpdateComboToHaveID.Designer.cs">
+      <DependentUpon>201906181605555_UpdateComboToHaveID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PM202DbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906180631455_UpdateValidationTest.resx">
       <DependentUpon>201906180631455_UpdateValidationTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906181605555_UpdateComboToHaveID.resx">
+      <DependentUpon>201906181605555_UpdateComboToHaveID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

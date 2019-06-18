@@ -34,7 +34,20 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers
         {
             if (_errorsByPropertyName.Count > 0)
             {
-                return _errorsByPropertyName.Values.ToList();
+                List<string> myErrorList = new List<string>();
+                               
+                foreach(KeyValuePair <string, List<string>> PropNameError in _errorsByPropertyName)
+                {
+                    foreach(string k in PropNameError.Value)
+                    {
+                        myErrorList.Add(PropNameError.Key + " -> " + k);
+                    }
+
+                }
+
+                    return myErrorList;
+
+                    //return _errorsByPropertyName.Keys.ToList();
             }
             else
             {
@@ -46,6 +59,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             RaisePropertyChanged(nameof(HasErrors));
+            if(_errorsByPropertyName.Count > 0)
+            {
+                ErrorMessages = GetAllPropertiesWithErrors();
+            }
             //base.OnPropertyChanged(nameof(HasErrors));
         }
 
@@ -69,6 +86,14 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers
                 _errorsByPropertyName.Remove(propertyName);
                 OnErrorsChanged(propertyName);
             }
+        }
+
+
+        private IEnumerable _errorMessages;
+        public IEnumerable ErrorMessages
+        {
+            get { return _errorMessages; }
+            set { SetProperty(ref _errorMessages, value); }
         }
     }
 }

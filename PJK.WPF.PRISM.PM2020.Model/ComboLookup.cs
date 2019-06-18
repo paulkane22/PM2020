@@ -16,6 +16,9 @@ namespace PJK.WPF.PRISM.PM2020.Model
         [Required]
         public int ComboOrder { get; set; }
 
+        [Required]
+        public int ComboId { get; set; }
+
 
     }
 }

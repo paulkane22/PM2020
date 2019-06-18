@@ -182,5 +182,15 @@
     <Resource Include="Images\manaLogo_noText_500.png" />
     <Resource Include="Images\manaLogo_noText_64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\mana_logo_128.png" />
+    <Resource Include="Images\mana_logo_16.png" />
+    <Resource Include="Images\mana_logo_32.png" />
+    <Resource Include="Images\mana_logo_500.png" />
+    <Resource Include="Images\mana_logo_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\mana_logo_48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

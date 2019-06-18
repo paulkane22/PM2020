@@ -54,6 +54,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\NegatableBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\WindowOpenCloseConverter.cs" />
     <Compile Include="Event\AddDetailEvent.cs" />
     <Compile Include="Event\DeleteDetailEvent.cs" />

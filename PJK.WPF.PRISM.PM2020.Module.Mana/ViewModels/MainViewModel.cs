@@ -57,10 +57,25 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetailExecute);
             _eventAggregator.GetEvent<AddDetailEvent>().Subscribe(OnAddDetailExecute);
             _eventAggregator.GetEvent<DeleteDetailEvent>().Subscribe(OnDeleteDetailExecute);
+            _eventAggregator.GetEvent<RefreshListEvent>().Subscribe(OnRefreshList);
+
+
+
+            _eventAggregator.GetEvent<RefreshListEvent>().Publish();
 
             ComboPriority = new ObservableCollection<LookupItem>();
             ComboStatus = new ObservableCollection<LookupItem>();
             ComboSystemList = new ObservableCollection<LookupItem>();
+        }
+
+        private async void OnRefreshList()
+        {
+            var lookup = await _projectRepository.GetAllAsync();
+            Projects.Clear();
+            foreach (var item in lookup)
+            {
+                Projects.Add(new ProjectWrapper(item));
+            }
         }
 
         private void OnEditDetailExecute()
@@ -77,7 +92,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         {
             if (SelectedProject != null)
             {
-                var value = _messageDialogService.ShowOKCancelDialog($"Do you really wish to delete {SelectedProject.ProjectName}?", "Delete Project?");
+                var value = _messageDialogService.ShowOKCancelDialog($"Do you really wish to delete the project {SelectedProject.ProjectName}?", "Delete Project?");
                 if (value == MessageDialogResult.OK)
                 {
                     _projectRepository.Remove(SelectedProject.Model);
@@ -89,7 +104,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
 
         private async void OnSaveDetailExecute()
         {
-            if(SelectedProject != null)
+            if(SelectedProject != null && !SelectedProject.HasErrors)
             {
                 // Projects.Add(SelectedProject);
                 if (!InEditMode)
@@ -106,8 +121,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         private bool CanSaveDetailExecute()
         {
             // return true;
-            return SelectedProject != null 
-                 && !SelectedProject.HasErrors;
+            return SelectedProject != null && !SelectedProject.HasErrors;
         }
 
         private void OnCancelPopup()
@@ -176,6 +190,8 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
                 var lookup = await _projectRepository.GetByIdAsync(id);
                 SelectedProject = new ProjectWrapper(lookup);
             }
+
+            SaveDetailCommand.RaiseCanExecuteChanged();
         }
 
 
@@ -206,6 +222,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
                     {
                         SaveDetailCommand.RaiseCanExecuteChanged();
                     };
+                    if(SelectedProject.Comment == null)
+                    {
+                        SelectedProject.Comment = "";
+                    }
                 }
                 SaveDetailCommand.RaiseCanExecuteChanged();
             }
@@ -226,7 +246,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         private async void OnAddDetailExecute()
         {
             await  LoadDetailByIdAsync(0);
+            
             ShowPopup = true;
+            SaveDetailCommand.RaiseCanExecuteChanged();
         }
 
         private Project CreateNewDetail()
@@ -235,12 +257,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             {
                 Id = 0,
                 ProjectName = "<New Project 1>",
-                SystemId = 0,
-                Priority = 0,
+                SystemId = 1,
+                Priority = 1,
                 Deadline = System.DateTime.Now,
-                StatusId = 0,
+                StatusId = 1,
                 Complete = false,
-                Comment = ""
+                Comment = "-"
             };
 
             return myProject;

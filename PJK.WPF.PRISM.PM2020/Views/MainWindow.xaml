@@ -7,7 +7,7 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="700" Width="1000" ResizeMode="CanResize" 
         WindowStartupLocation="CenterScreen" 
-        Icon="/PJK.WPF.PRISM.PM2020;component/Images/manaLogo_noText_48.png">
+        Icon="/PJK.WPF.PRISM.PM2020;component/Images/mana_logo_48.png">
 
 
     <Grid>
@@ -47,6 +47,7 @@
                     <MenuItem Header="Controls" Command="{Binding NavigateCommand}" CommandParameter="controls"/>
                     <MenuItem Header="Stock" Command="{Binding NavigateCommand}" CommandParameter="stock"/>
                     <MenuItem Header="Projects" Command="{Binding NavigateCommand}" CommandParameter="projects"/>
+                    <MenuItem Header="Projects Old" Command="{Binding NavigateCommand}" CommandParameter="projectsOld"/>
                     <MenuItem Header="About" Command="{Binding ShowAboutCommand}"/>
                 </MenuItem>
                 <!--<MenuItem Header="Help" IsEnabled="False" HorizontalAlignment="Right" />-->

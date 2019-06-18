@@ -25,11 +25,9 @@ namespace PJK.WPF.PRISM.PM2020
         {
             base.ConfigureModuleCatalog(moduleCatalog);
 
-            //moduleCatalog.AddModule<Module.Projects.ProjectsModule>();
             moduleCatalog.AddModule<Module.Mana.ManaModule>();
             moduleCatalog.AddModule<Module.ExampleControls.ExampleControlsModule>();
-
-
+           // moduleCatalog.AddModule<Module.Projects.ProjectsModule>();
         }
 
         private void PrismApplication_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

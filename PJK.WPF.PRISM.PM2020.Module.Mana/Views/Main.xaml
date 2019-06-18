@@ -10,6 +10,10 @@
 
     <UserControl.Resources>
         <local:WindowOpenCloseConverter x:Key="windowOpenCloseConverter"/>
+        <local:NegatableBooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <local:NegatableBooleanToVisibilityConverter x:Key="NegativeBoolToVisibilityConverter" Negate="True"/>
+
+
         <DataTemplate x:Key="navigationKey" DataType="{x:Type viewModel:NavigationListViewModel}">
             <views:NavigationList/>
         </DataTemplate>
@@ -140,24 +144,25 @@
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Complete"/>
-                                        <CheckBox  VerticalAlignment="Center" />
+                                        <CheckBox  VerticalAlignment="Center" 
+                                                   IsChecked="{Binding SelectedProject.Complete, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Comments"/>
-                                        <TextBox Width="150" Text="{Binding SelectedProject.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2" 
+                                        <TextBox Width="150" Text="{Binding SelectedProject.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged 
+                                            ,TargetNullValue=''}" Margin="2" 
                                         AcceptsReturn="True"
                                         />
                                     </StackPanel>
 
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left"
+                                                Visibility="{Binding SelectedProject.HasErrors, Converter={StaticResource BoolToVisibilityConverter}}">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Errors"/>
 
-                                        <ListView HorizontalAlignment="Stretch" Grid.Column="2" Padding="5" Background="Red" Foreground="White" 
-                                              ItemsSource="{Binding ErrorMessages}">
+                                        <ListView HorizontalAlignment="Stretch" Grid.Column="2" Padding="5" Background="DarkRed" Foreground="White"                                              
+                                              ItemsSource="{Binding SelectedProject.ErrorMessages}">
                                         </ListView>
-
-
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>

@@ -9,6 +9,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers
     {
         public ProjectWrapper(Project model) : base(model)
         {
+           
         }
 
         public int Id
@@ -73,11 +74,5 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Wrappers
             }
         }
 
-
-       
-        public IEnumerable ErrorMessages
-        {
-            get { return this.GetAllPropertiesWithErrors(); }
-        }
     }
 }

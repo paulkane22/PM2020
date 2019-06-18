@@ -48,7 +48,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Services.Lookups
                 (f =>
                 new LookupItem
                 {
-                    Id = f.Id,
+                    Id = f.ComboId,
                     DisplayMember = f.ComboName
                 }
                 ).ToListAsync();
