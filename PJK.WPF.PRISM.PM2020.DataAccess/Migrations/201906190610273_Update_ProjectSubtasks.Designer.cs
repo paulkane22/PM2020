@@ -7,13 +7,13 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UpdateValidationTest : IMigrationMetadata
+    public sealed partial class Update_ProjectSubtasks : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateValidationTest));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Update_ProjectSubtasks));
         
         string IMigrationMetadata.Id
         {
-            get { return "201906180631455_UpdateValidationTest"; }
+            get { return "201906190610273_Update_ProjectSubtasks"; }
         }
         
         string IMigrationMetadata.Source

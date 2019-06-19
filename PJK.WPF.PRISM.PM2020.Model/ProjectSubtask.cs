@@ -14,7 +14,7 @@ namespace PJK.WPF.PRISM.PM2020.Model
 
         [Required]
         [StringLength(50)]
-        public string SubTask { get; set; }
+        public string Subtask { get; set; }
 
         public int ProjectId { get; set; }
 

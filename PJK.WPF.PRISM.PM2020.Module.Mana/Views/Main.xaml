@@ -42,9 +42,9 @@
             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
                 <StackPanel>
                     <DataGrid ItemsSource = "{Binding Projects, UpdateSourceTrigger=PropertyChanged}"  AutoGenerateColumns="False" RowHeaderWidth="0"
-                      SelectedItem="{Binding SelectedProject, Mode=TwoWay}" IsReadOnly="True">
+                      SelectedItem="{Binding SelectedProject, Mode=TwoWay}" IsReadOnly="True" IsSynchronizedWithCurrentItem="True">
                         <DataGrid.InputBindings>
-                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding GridDoubleClickCommand}"/>
+                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding EditDetailCommand}"/>
                         </DataGrid.InputBindings>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
@@ -58,13 +58,8 @@
                             <DataGridTextColumn Header="Project" Width="200" Binding="{Binding ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <DataGridTextColumn Header="Priority" Width="50" Binding="{Binding Priority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <DataGridTextColumn Header="System" Width="50" Binding="{Binding SystemId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <DataGridTemplateColumn Header="Deadline" Width="100">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding Deadline}" BorderThickness="0"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Deadline" Width="50" Binding="{Binding Deadline, StringFormat=dd/MM/yyyy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
                             <DataGridTextColumn Header="Status" Width="75" Binding="{Binding StatusId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <DataGridCheckBoxColumn Header="Complete" Width="60" Binding="{Binding Complete, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -156,6 +151,19 @@
                                         />
                                     </StackPanel>
 
+
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
+                                        <Label HorizontalContentAlignment="Right" Width="80" Content="Subtasks"/>
+                                        <DataGrid Width="300" 
+                                                ItemsSource="{Binding SelectedProject.Model.Subtasks}"
+                                                SelectedItem="{Binding SelectedSubtask, Mode=TwoWay}"
+                                                AutoGenerateColumns="False">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Width="290" Header="Subtask" Binding="{Binding SubTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left"
                                                 Visibility="{Binding SelectedProject.HasErrors, Converter={StaticResource BoolToVisibilityConverter}}">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Errors"/>
@@ -170,8 +178,8 @@
 
                         <Border Grid.Row="2" Margin="0,10,0,0" >
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Command="{Binding SaveDetailCommand}" Width="100" Height="30" Margin="5">Save</Button>
-                                <Button Command="{Binding CancelPopupCommand}" Width="100" Height="30" Margin="2,2,0,2">Cancel</Button>
+                                <Button Command="{Binding SaveDetailCommand}" IsDefault="True" Width="100" Height="30" Margin="5">Save</Button>
+                                <Button Command="{Binding CancelPopupCommand}" IsCancel="True" Width="100" Height="30" Margin="2,2,0,2">Cancel</Button>
                             </StackPanel>
                         </Border>
                     </Grid>

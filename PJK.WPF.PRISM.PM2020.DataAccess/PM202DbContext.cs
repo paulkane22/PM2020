@@ -12,9 +12,8 @@ namespace PJK.WPF.PRISM.PM2020.DataAccess
         }
         
         public DbSet<Project> Projects { get; set; }
+        public DbSet<ProjectSubtask> ProjectSubtasks { get; set; }
         public DbSet<SystemItem> SystemItems { get; set; }
-
-        public DbSet<ProjectSubtask> Subtasks { get; set; }
         public DbSet<ComboLookup> ComboLookups { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

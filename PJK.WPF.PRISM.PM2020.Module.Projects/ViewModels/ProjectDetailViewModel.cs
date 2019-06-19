@@ -127,7 +127,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Projects.ViewModels
         {
             await LoadSelectedProjectAsync(id);
 
-            InitialiseProjectSubtasks(_selectedProject.Model.Subtasks);
+            InitialiseProjectSubtasks(_selectedProject.Model.ProjectSubtasks);
 
             await LoadSystemItemsLookupAsync();
             SaveDetailCommand.RaiseCanExecuteChanged();

@@ -30,12 +30,15 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         private bool _showPopup;
         private bool _hasChanges;
         private bool _inEditMode;
+        private ProjectSubtaskWrapper _SelectedProjectSubtask;
 
         public DelegateCommand EditDetailCommand { get; private set; }
         public DelegateCommand DeleteDetailCommand { get; private set; }
         public DelegateCommand SaveDetailCommand { get; private set; }
         public DelegateCommand CancelPopupCommand { get; private set; }
-        
+        public DelegateCommand AddProjectSubtaskCommand { get; private set; }
+        public DelegateCommand RemoveProjectSubtaskCommand { get; private set; }
+
 
         public MainViewModel(IEventAggregator eventAggregator, IMessageDialogService messageDialogService)
         {
@@ -53,19 +56,36 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             DeleteDetailCommand = new DelegateCommand(OnDeleteDetailExecute);
             SaveDetailCommand = new DelegateCommand(OnSaveDetailExecute, CanSaveDetailExecute);
             CancelPopupCommand = new DelegateCommand(OnCancelPopup);
+            AddProjectSubtaskCommand = new DelegateCommand(OnAddProjectSubtask);
+            RemoveProjectSubtaskCommand = new DelegateCommand(OnRemoveProjectSubtaskExecute, CanRemoveSubtaskExecute);
+
 
             _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetailExecute);
             _eventAggregator.GetEvent<AddDetailEvent>().Subscribe(OnAddDetailExecute);
             _eventAggregator.GetEvent<DeleteDetailEvent>().Subscribe(OnDeleteDetailExecute);
             _eventAggregator.GetEvent<RefreshListEvent>().Subscribe(OnRefreshList);
 
-
-
-            _eventAggregator.GetEvent<RefreshListEvent>().Publish();
-
             ComboPriority = new ObservableCollection<LookupItem>();
             ComboStatus = new ObservableCollection<LookupItem>();
             ComboSystemList = new ObservableCollection<LookupItem>();
+            ProjectSubtasks = new ObservableCollection<ProjectSubtaskWrapper>();
+
+            
+        }
+
+        private void OnAddProjectSubtask()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnRemoveProjectSubtaskExecute()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanRemoveSubtaskExecute()
+        {
+            return _SelectedProjectSubtask != null;
         }
 
         private async void OnRefreshList()
@@ -144,6 +164,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             await LoadStatusLookupAsync();
             await LoadSystemListLookupAsync();
 
+
+
+
         }
 
         private async Task LoadSystemListLookupAsync()
@@ -210,6 +233,21 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         public ObservableCollection<LookupItem> ComboPriority { get; }
         public ObservableCollection<LookupItem> ComboStatus { get; }
         public ObservableCollection<LookupItem> ComboSystemList { get; }
+        public ObservableCollection<ProjectSubtaskWrapper> ProjectSubtasks { get; }
+
+
+
+        public ProjectSubtaskWrapper PropertyName
+        {
+            get { return _SelectedProjectSubtask; }
+            set {
+                SetProperty(ref _SelectedProjectSubtask, value);
+                RemoveProjectSubtaskCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+
+
 
         public ProjectWrapper SelectedProject
         {

@@ -47,41 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201905310702225_InitialDatabase.cs" />
-    <Compile Include="Migrations\201905310702225_InitialDatabase.Designer.cs">
-      <DependentUpon>201905310702225_InitialDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906040930327_AddedSystemList.cs" />
-    <Compile Include="Migrations\201906040930327_AddedSystemList.Designer.cs">
-      <DependentUpon>201906040930327_AddedSystemList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906041238096_AddedSubTasks.cs" />
-    <Compile Include="Migrations\201906041238096_AddedSubTasks.Designer.cs">
-      <DependentUpon>201906041238096_AddedSubTasks.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906100917555_rename StatusId.cs" />
-    <Compile Include="Migrations\201906100917555_rename StatusId.Designer.cs">
-      <DependentUpon>201906100917555_rename StatusId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906160806596_1.cs" />
-    <Compile Include="Migrations\201906160806596_1.Designer.cs">
-      <DependentUpon>201906160806596_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906160937177_AddOrderToComboLookups.cs" />
-    <Compile Include="Migrations\201906160937177_AddOrderToComboLookups.Designer.cs">
-      <DependentUpon>201906160937177_AddOrderToComboLookups.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906180546315_UpdateProjectValidation.cs" />
-    <Compile Include="Migrations\201906180546315_UpdateProjectValidation.Designer.cs">
-      <DependentUpon>201906180546315_UpdateProjectValidation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906180631455_UpdateValidationTest.cs" />
-    <Compile Include="Migrations\201906180631455_UpdateValidationTest.Designer.cs">
-      <DependentUpon>201906180631455_UpdateValidationTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906181605555_UpdateComboToHaveID.cs" />
-    <Compile Include="Migrations\201906181605555_UpdateComboToHaveID.Designer.cs">
-      <DependentUpon>201906181605555_UpdateComboToHaveID.cs</DependentUpon>
+    <Compile Include="Migrations\201906190610273_Update_ProjectSubtasks.cs" />
+    <Compile Include="Migrations\201906190610273_Update_ProjectSubtasks.Designer.cs">
+      <DependentUpon>201906190610273_Update_ProjectSubtasks.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PM202DbContext.cs" />
@@ -98,32 +66,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905310702225_InitialDatabase.resx">
-      <DependentUpon>201905310702225_InitialDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906040930327_AddedSystemList.resx">
-      <DependentUpon>201906040930327_AddedSystemList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906041238096_AddedSubTasks.resx">
-      <DependentUpon>201906041238096_AddedSubTasks.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906100917555_rename StatusId.resx">
-      <DependentUpon>201906100917555_rename StatusId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906160806596_1.resx">
-      <DependentUpon>201906160806596_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906160937177_AddOrderToComboLookups.resx">
-      <DependentUpon>201906160937177_AddOrderToComboLookups.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906180546315_UpdateProjectValidation.resx">
-      <DependentUpon>201906180546315_UpdateProjectValidation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906180631455_UpdateValidationTest.resx">
-      <DependentUpon>201906180631455_UpdateValidationTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906181605555_UpdateComboToHaveID.resx">
-      <DependentUpon>201906181605555_UpdateComboToHaveID.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201906190610273_Update_ProjectSubtasks.resx">
+      <DependentUpon>201906190610273_Update_ProjectSubtasks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
