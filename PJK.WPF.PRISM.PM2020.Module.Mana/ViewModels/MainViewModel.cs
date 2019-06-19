@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using PJK.WPF.PRISM.PM2020.DataAccess;
@@ -164,9 +165,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             await LoadStatusLookupAsync();
             await LoadSystemListLookupAsync();
 
-
-
-
         }
 
         private async Task LoadSystemListLookupAsync()
@@ -214,9 +212,46 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
                 SelectedProject = new ProjectWrapper(lookup);
             }
 
+
+            IntialiseProjectSubtasks(SelectedProject.Model.ProjectSubtasks);
+
+
+
             SaveDetailCommand.RaiseCanExecuteChanged();
         }
 
+        private void IntialiseProjectSubtasks(ICollection<ProjectSubtask> projectSubtasks)
+        {
+           foreach(var wrapper in ProjectSubtasks)
+            {
+                wrapper.PropertyChanged -= MyProjectSubtaskWrapper_PropertyChanged;
+            }
+            ProjectSubtasks.Clear();
+            foreach(var subtask in projectSubtasks)
+            {
+                var myProjectSubtaskWrapper = new ProjectSubtaskWrapper(subtask);
+                ProjectSubtasks.Add(myProjectSubtaskWrapper);
+                myProjectSubtaskWrapper.PropertyChanged += MyProjectSubtaskWrapper_PropertyChanged;
+            }
+
+
+
+        }
+
+        private void MyProjectSubtaskWrapper_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+           if(!HasChanges)
+            {
+                HasChanges = _projectRepository.HasChanges();
+
+            }
+           if(e.PropertyName == nameof(ProjectSubtaskWrapper.HasErrors))
+            {
+                SaveDetailCommand.RaiseCanExecuteChanged();
+            }
+
+
+        }
 
         public ProjectDetailViewModel ProjectDetailViewModel
         {
@@ -315,6 +350,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             }
         }
 
-
+        public ProjectSubtaskWrapper ProjectSubtaskWrapper_PropertyChanged { get; private set; }
     }
 }
