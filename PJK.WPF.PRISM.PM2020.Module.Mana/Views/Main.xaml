@@ -155,11 +155,11 @@
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Subtasks"/>
                                         <DataGrid Width="300" 
-                                                ItemsSource="{Binding SelectedProject.Model.Subtasks}"
+                                                ItemsSource="{Binding SelectedProject.Model.ProjectSubtasks}"
                                                 SelectedItem="{Binding SelectedSubtask, Mode=TwoWay}"
                                                 AutoGenerateColumns="False">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Width="290" Header="Subtask" Binding="{Binding SubTask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <DataGridTextColumn Width="290" Header="Subtask" Binding="{Binding SelectedProject.Model.ProjectSubTasks.Subtask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </StackPanel>

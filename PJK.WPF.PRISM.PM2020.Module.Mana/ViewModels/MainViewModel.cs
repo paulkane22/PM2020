@@ -99,10 +99,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             }
         }
 
-        private void OnEditDetailExecute()
+        private async void OnEditDetailExecute()
         {
             if(SelectedProject != null)
             {
+                await LoadDetailByIdAsync(SelectedProject.Id);
+                
                 InEditMode = true;
                 ShowPopup = true;
             }
@@ -233,8 +235,6 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
                 ProjectSubtasks.Add(myProjectSubtaskWrapper);
                 myProjectSubtaskWrapper.PropertyChanged += MyProjectSubtaskWrapper_PropertyChanged;
             }
-
-
 
         }
 
