@@ -122,7 +122,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         public bool HasChanges
         {
             get { return _hasChanges; }
-            set { SetProperty(ref _hasChanges, value); }
+            set { SetProperty(ref _hasChanges, value);
+
+                SaveDetailCommand.RaiseCanExecuteChanged();
+            }
         }
 
         public bool InEditMode
@@ -236,8 +239,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
                 }
                 await _projectRepository.SaveAsync();
                 HasChanges = _projectRepository.HasChanges();
+                SelectedProject = null;
                 ShowPopup = false;
                 await LoadAsync();
+
             }
         }
 
@@ -246,6 +251,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             // return true;
             return SelectedProject != null 
                 && !SelectedProject.HasErrors
+                && HasChanges 
                 && ProjectSubtasks.All(ps => !ps.HasErrors)
                 ;
         }
@@ -316,6 +322,17 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             {
                 var lookup = await _projectRepository.GetByIdAsync(id);
                 SelectedProject = new ProjectWrapper(lookup);
+                SelectedProject.PropertyChanged += (s, e) =>
+                {
+                    if (!HasChanges)
+                    {
+                        HasChanges = _projectRepository.HasChanges();
+                    }
+                    if (e.PropertyName == nameof(SelectedProject.HasErrors))
+                    {
+                        SaveDetailCommand.RaiseCanExecuteChanged();
+                    }
+                };
             }
 
 
