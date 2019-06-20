@@ -3,28 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True" 
-             Width="350"
-             Height="300"
+             Width="600"
+             Height="600"
             x:Name="About"
-             WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize">
+             WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize"
+             AllowsTransparency="True" OpacityMask="White" Background="Transparent">
 
-    <Border BorderBrush="#FFCC0000" BorderThickness="1">
+    <Border BorderBrush="#54C9E8" BorderThickness="0">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="215" />
-                <RowDefinition Height="44" />
+                <RowDefinition Height="400" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Row="0" Source="/PJK.WPF.PRISM.PM2020;component/Images/mana_logo_128.png" Margin="82,38,83,23" />
+            <Image Grid.Row="0" Source="/PJK.WPF.PRISM.PM2020;component/Images/LOGO.png" Margin="0" />
 
-            <Border Grid.Row="1"  Margin="10,0,20,0" >
+            <!--<Border Grid.Row="1"  Margin="10,0,20,0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Label Content="{Binding Message}" Foreground="#FF990000"></Label>
+                    <Label Content="{Binding Message}" Foreground="#FF54C9E8" Background="White"></Label>
                 </StackPanel>
-            </Border>
+            </Border>-->
 
             <Border Grid.Row="2"  Margin="10,0,10,0" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

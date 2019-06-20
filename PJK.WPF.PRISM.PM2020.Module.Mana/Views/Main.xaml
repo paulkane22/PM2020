@@ -154,7 +154,7 @@
                                         <DataGrid Width="300" 
                                                 ItemsSource="{Binding ProjectSubtasks}"
                                                 SelectedItem="{Binding SelectedProjectSubtask, Mode=TwoWay}"
-                                                AutoGenerateColumns="False">
+                                                AutoGenerateColumns="True">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Width="290" Header="Subtask" Binding="{Binding ProjectSubTasks.Subtask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                             </DataGrid.Columns>
