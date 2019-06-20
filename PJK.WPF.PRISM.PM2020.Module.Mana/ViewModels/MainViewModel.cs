@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using PJK.WPF.PRISM.PM2020.DataAccess;
 using PJK.WPF.PRISM.PM2020.Model;
@@ -58,8 +59,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             SaveDetailCommand = new DelegateCommand(OnSaveDetailExecute, CanSaveDetailExecute);
             CancelPopupCommand = new DelegateCommand(OnCancelPopup);
             AddProjectSubtaskCommand = new DelegateCommand(OnAddProjectSubtask);
-            RemoveProjectSubtaskCommand = new DelegateCommand(OnRemoveProjectSubtaskExecute, CanRemoveSubtaskExecute);
-
+            RemoveProjectSubtaskCommand = new DelegateCommand(OnRemoveProjectSubtaskExecute, CanRemoveProjectSubtaskExecute);
 
             _eventAggregator.GetEvent<EditDetailEvent>().Subscribe(OnEditDetailExecute);
             _eventAggregator.GetEvent<AddDetailEvent>().Subscribe(OnAddDetailExecute);
@@ -71,20 +71,120 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             ComboSystemList = new ObservableCollection<LookupItem>();
             ProjectSubtasks = new ObservableCollection<ProjectSubtaskWrapper>();
 
+        }
+
+        public ObservableCollection<ProjectWrapper> Projects
+        {
+            get { return _projects; }
+            set { SetProperty(ref _projects, value); }
+        }
+
+        public ObservableCollection<LookupItem> ComboPriority { get; }
+        public ObservableCollection<LookupItem> ComboStatus { get; }
+        public ObservableCollection<LookupItem> ComboSystemList { get; }
+        public ObservableCollection<ProjectSubtaskWrapper> ProjectSubtasks { get; }
+
+        public ProjectSubtaskWrapper SelectedProjectSubtask
+        {
+            get { return _SelectedProjectSubtask; }
+            set {
+                SetProperty(ref _SelectedProjectSubtask, value);
+                RemoveProjectSubtaskCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public ProjectWrapper SelectedProject
+        {
+            get { return _selectedProject; }
+            set {
+                SetProperty(ref _selectedProject, value);
+                if(SelectedProject != null)
+                {
+                    SelectedProject.PropertyChanged += (s, e) =>
+                    {
+                        SaveDetailCommand.RaiseCanExecuteChanged();
+                    };
+                    if(SelectedProject.Comment == null)
+                    {
+                        SelectedProject.Comment = "";
+                    }
+                }
+                SaveDetailCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public bool ShowPopup
+        {
+            get { return _showPopup; }
+            set { SetProperty(ref _showPopup, value); }
+        }
+
+        public bool HasChanges
+        {
+            get { return _hasChanges; }
+            set { SetProperty(ref _hasChanges, value); }
+        }
+
+        public bool InEditMode
+        {
+            get { return _inEditMode; }
+            set
+            {
+                SetProperty(ref _inEditMode, value);
+            }
+        }
+
+
+        private async void OnAddDetailExecute()
+        {
+            await  LoadDetailByIdAsync(0);
             
+            ShowPopup = true;
+            SaveDetailCommand.RaiseCanExecuteChanged();
+        }
+
+        private Project CreateNewDetail()
+        {
+            Project myProject = new Project
+            {
+                Id = 0,
+                ProjectName = "<New Project 1>",
+                SystemId = 1,
+                Priority = 1,
+                Deadline = System.DateTime.Now,
+                StatusId = 1,
+                Complete = false,
+                Comment = "-"
+            };
+
+            return myProject;
         }
 
         private void OnAddProjectSubtask()
         {
-            throw new NotImplementedException();
+
+            var newProjectSubtask = new ProjectSubtaskWrapper(new ProjectSubtask());
+            newProjectSubtask.PropertyChanged += MyProjectSubtaskWrapper_PropertyChanged;
+
+            ProjectSubtasks.Add(newProjectSubtask);
+            SelectedProject.Model.ProjectSubtasks.Add(newProjectSubtask.Model);
+            newProjectSubtask.Subtask = ""; //trigger validation
         }
 
         private void OnRemoveProjectSubtaskExecute()
         {
-            throw new NotImplementedException();
+            SelectedProjectSubtask.PropertyChanged -= MyProjectSubtaskWrapper_PropertyChanged;
+            //SelectedProject.Model.ProjectSubtasks.Remove(SelectedProjectSubtask.Model);
+            _projectRepository.RemoveSubtask(SelectedProjectSubtask.Model);
+
+            ProjectSubtasks.Remove(SelectedProjectSubtask);
+            SelectedProjectSubtask = null;
+            HasChanges = _projectRepository.HasChanges();
+            SaveDetailCommand.RaiseCanExecuteChanged();
+
         }
 
-        private bool CanRemoveSubtaskExecute()
+        private bool CanRemoveProjectSubtaskExecute()
         {
             return _SelectedProjectSubtask != null;
         }
@@ -100,11 +200,11 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         }
 
         private async void OnEditDetailExecute()
-        {
-            if(SelectedProject != null)
+        { 
+            if (SelectedProject != null)
             {
                 await LoadDetailByIdAsync(SelectedProject.Id);
-                
+
                 InEditMode = true;
                 ShowPopup = true;
             }
@@ -127,7 +227,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
 
         private async void OnSaveDetailExecute()
         {
-            if(SelectedProject != null && !SelectedProject.HasErrors)
+            if (SelectedProject != null && !SelectedProject.HasErrors)
             {
                 // Projects.Add(SelectedProject);
                 if (!InEditMode)
@@ -144,7 +244,10 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         private bool CanSaveDetailExecute()
         {
             // return true;
-            return SelectedProject != null && !SelectedProject.HasErrors;
+            return SelectedProject != null 
+                && !SelectedProject.HasErrors
+                && ProjectSubtasks.All(ps => !ps.HasErrors)
+                ;
         }
 
         private void OnCancelPopup()
@@ -154,6 +257,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
             ShowPopup = false;
         }
 
+        #region "Load Methods"
         public async Task LoadAsync()
         {
             var lookup = await _projectRepository.GetAllAsync();
@@ -206,7 +310,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
         {
             if (id == 0)
             {
-               SelectedProject = new ProjectWrapper(CreateNewDetail());
+                SelectedProject = new ProjectWrapper(CreateNewDetail());
             }
             else
             {
@@ -221,15 +325,14 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
 
             SaveDetailCommand.RaiseCanExecuteChanged();
         }
-
         private void IntialiseProjectSubtasks(ICollection<ProjectSubtask> projectSubtasks)
         {
-           foreach(var wrapper in ProjectSubtasks)
+            foreach (var wrapper in ProjectSubtasks)
             {
                 wrapper.PropertyChanged -= MyProjectSubtaskWrapper_PropertyChanged;
             }
             ProjectSubtasks.Clear();
-            foreach(var subtask in projectSubtasks)
+            foreach (var subtask in projectSubtasks)
             {
                 var myProjectSubtaskWrapper = new ProjectSubtaskWrapper(subtask);
                 ProjectSubtasks.Add(myProjectSubtaskWrapper);
@@ -240,12 +343,12 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
 
         private void MyProjectSubtaskWrapper_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-           if(!HasChanges)
+            if (!HasChanges)
             {
                 HasChanges = _projectRepository.HasChanges();
 
             }
-           if(e.PropertyName == nameof(ProjectSubtaskWrapper.HasErrors))
+            if (e.PropertyName == nameof(ProjectSubtaskWrapper.HasErrors))
             {
                 SaveDetailCommand.RaiseCanExecuteChanged();
             }
@@ -253,103 +356,7 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.ViewModels
 
         }
 
-        public ProjectDetailViewModel ProjectDetailViewModel
-        {
-            get { return _projectDetailViewModel; }
-            set { SetProperty(ref _projectDetailViewModel, value); }
-        }
+        #endregion "Load Methods"
 
-        public ObservableCollection<ProjectWrapper> Projects
-        {
-            get { return _projects; }
-            set { SetProperty(ref _projects, value); }
-        }
-
-        public ObservableCollection<LookupItem> ComboPriority { get; }
-        public ObservableCollection<LookupItem> ComboStatus { get; }
-        public ObservableCollection<LookupItem> ComboSystemList { get; }
-        public ObservableCollection<ProjectSubtaskWrapper> ProjectSubtasks { get; }
-
-
-
-        public ProjectSubtaskWrapper PropertyName
-        {
-            get { return _SelectedProjectSubtask; }
-            set {
-                SetProperty(ref _SelectedProjectSubtask, value);
-                RemoveProjectSubtaskCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-
-
-
-        public ProjectWrapper SelectedProject
-        {
-            get { return _selectedProject; }
-            set {
-                SetProperty(ref _selectedProject, value);
-                if(SelectedProject != null)
-                {
-                    SelectedProject.PropertyChanged += (s, e) =>
-                    {
-                        SaveDetailCommand.RaiseCanExecuteChanged();
-                    };
-                    if(SelectedProject.Comment == null)
-                    {
-                        SelectedProject.Comment = "";
-                    }
-                }
-                SaveDetailCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        public bool ShowPopup
-        {
-            get { return _showPopup; }
-            set { SetProperty(ref _showPopup, value); }
-        }
-
-        public bool HasChanges
-        {
-            get { return _hasChanges; }
-            set { SetProperty(ref _hasChanges, value); }
-        }
-
-        private async void OnAddDetailExecute()
-        {
-            await  LoadDetailByIdAsync(0);
-            
-            ShowPopup = true;
-            SaveDetailCommand.RaiseCanExecuteChanged();
-        }
-
-        private Project CreateNewDetail()
-        {
-            Project myProject = new Project
-            {
-                Id = 0,
-                ProjectName = "<New Project 1>",
-                SystemId = 1,
-                Priority = 1,
-                Deadline = System.DateTime.Now,
-                StatusId = 1,
-                Complete = false,
-                Comment = "-"
-            };
-
-            return myProject;
-        }
-
-        public bool InEditMode
-        {
-            get { return _inEditMode; }
-            set
-            {
-                SetProperty(ref _inEditMode, value);
-            }
-        }
-
-        public ProjectSubtaskWrapper ProjectSubtaskWrapper_PropertyChanged { get; private set; }
     }
 }

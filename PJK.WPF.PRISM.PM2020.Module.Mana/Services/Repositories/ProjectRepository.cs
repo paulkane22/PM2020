@@ -18,5 +18,9 @@ namespace PJK.WPF.PRISM.PM2020.Module.Mana.Services.Repositories
                 .SingleAsync(f => f.Id == projectId);
         }
 
+        public void RemoveSubtask(ProjectSubtask model)
+        {
+            Context.ProjectSubtasks.Remove(model);
+        }
     }
 }

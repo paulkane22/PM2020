@@ -68,9 +68,6 @@
                 </StackPanel>
             </ScrollViewer>
 
-
-
-
             <!--<ContentControl Content="{Binding NavigationViewModel}" Margin="0" Grid.Row="2" Grid.Column="0"/>-->
 
             <wpfTool:ChildWindow Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="2"
@@ -155,13 +152,17 @@
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left">
                                         <Label HorizontalContentAlignment="Right" Width="80" Content="Subtasks"/>
                                         <DataGrid Width="300" 
-                                                ItemsSource="{Binding SelectedProject.Model.ProjectSubtasks}"
-                                                SelectedItem="{Binding SelectedSubtask, Mode=TwoWay}"
+                                                ItemsSource="{Binding ProjectSubtasks}"
+                                                SelectedItem="{Binding SelectedProjectSubtask, Mode=TwoWay}"
                                                 AutoGenerateColumns="False">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Width="290" Header="Subtask" Binding="{Binding SelectedProject.Model.ProjectSubTasks.Subtask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                <DataGridTextColumn Width="290" Header="Subtask" Binding="{Binding ProjectSubTasks.Subtask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                             </DataGrid.Columns>
                                         </DataGrid>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Button Command="{Binding AddProjectSubtaskCommand}"   Width="100" Height="30" Margin="5">Add Subtask</Button>
+                                        <Button Command="{Binding RemoveProjectSubtaskCommand}" Width="100" Height="30" Margin="2,2,0,2">Remove Subtask</Button>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0" HorizontalAlignment="Left"
